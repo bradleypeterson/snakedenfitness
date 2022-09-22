@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'community',
     'diet',
     'fitness',
+    'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
