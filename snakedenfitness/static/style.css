@@ -1,0 +1,7 @@
+.nav-link, .navbar-brand {
+    color: white !important;
+}
+
+.nav-link:hover, .navbar-brand:hover {
+    color: goldenrod !important;
+}
