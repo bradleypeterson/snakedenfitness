@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 
-# Create your views here.
+
 def diet_home(request):
     return render(request, 'diet/diet_home.html', {})
 

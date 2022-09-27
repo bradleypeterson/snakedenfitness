@@ -20,5 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('diet/', include('diet.urls')),
     path('fitness/', include('fitness.urls')),
-    path('community/', include('community.urls'))
+    path('community/', include('community.urls')),
 ]
