@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Registration{% endblock %}
+
+{% block body %}
+<h1>Register a New Account</h1>
+
+<main class="main">
+    <section class="row">
+        <form action="" method="post" novalidate autocomplete="off" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% include 'uam/_form.html' with form=user_form %}
+            {% include 'uam/_form.html' with form=profile_form %}
+            <button class="btn btn-primary mt-2" type="submit" id="id_signup">Sign up</button>
+        </form>
+    </section>
+    <section class="row mt-2">
+        <p>Already have an account? Go ahead and <a href="{% url 'login' %}" id="id_login">log in</a>!</p>
+    </section>
+</main>
+{% endblock %}
