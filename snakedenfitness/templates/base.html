@@ -16,8 +16,25 @@
             <a href="{% url 'fitness_home' %}" class="nav-item nav-link">Fitness</a>
             <a href="{% url 'community_home' %}" class="nav-item nav-link">Community</a>
 
-            <!-- once auth is finished, change "account" to "log in" if not logged in -->
-            <a href="{% url 'register' %}" class="nav-item nav-link"><i class="bi bi-person" style="color: white;"> Account </i></a>
+            <!-- Come back; change this element on log-in -->
+            <!-- <a href="{% url 'register' %}" class="nav-item nav-link"><i class="bi bi-person" style="color: white;"> Account </i></a> -->
+
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-person" style="color: white;"> Account </i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                    {% if user.is_authenticated %}
+                        <a class="dropdown-item " href="{% url 'profile' %}" > Profile </a>
+                        <a class="dropdown-item " href="{% url 'logout' %}" > Log-out </a>
+                    {% else %}
+                        <a class="dropdown-item " href="{% url 'login' %}"> Log-in </a>
+                        <a class="dropdown-item " href="{% url 'register' %}" > Register </a>
+                    {% endif %}
+                </div>
+            </div>
+
         </div>
     </nav>
 
