@@ -32,6 +32,3 @@ class DietitianProfile(models.Model):
     bio = models.TextField(max_length=500, blank=True)
     # image = models.ImageField(default="/defaults/profile.png", upload_to="profiles")
     # client = models.ManyToManyField()
-
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
