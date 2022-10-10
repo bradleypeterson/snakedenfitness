@@ -6,8 +6,22 @@
 <!--TODO: process the meal information -->
 <form action="/process_meal_form/" method="post">
     {% csrf_token %}
-    <pre>{{ form }}</pre>
-    <input type="submit" value="SUBMIT">
+    <div style="margin-left: 20px;">
+        <br>
+        <div>Meal Name: {{ form.name }}</div>
+        <br>
+        <div>Meal Type: {{ form.meal_type }}</div>
+        <br>
+        <div>Calories: {{ form.calories }}</div>
+        <br>
+        <div>Carbs: {{ form.carbs }}</div>
+        <br>
+        <div>Sugars: {{ form.sugars }}</div>
+        <br>
+        <div>Protein: {{ form.protein }}</div>
+        <br>
+        <input type="submit" value="SUBMIT">
+    </div>
 </form>
 
 {% endblock %}
