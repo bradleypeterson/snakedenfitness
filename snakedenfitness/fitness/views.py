@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 
 from .forms import WorkoutForm
+from .models import Workout
 
 # Create your views here.
 def fitness_home(request):
@@ -19,7 +20,14 @@ def workout_form(request):
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
-            # ...
+            obj = Workout()
+            obj.workout_type = form.cleaned_data['workout_type']
+            obj.muscle_group = form.cleaned_data['muscle_group']
+            obj.exercise_name = form.cleaned_data['exercise_name']
+            obj.reps = form.cleaned_data['reps']
+            obj.sets = form.cleaned_data['sets']
+            obj.weight = form.cleaned_data['weight']
+            obj.save()
             # redirect to a new URL:
             return HttpResponseRedirect('fitness/workout_form/')
 
