@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 
 #from .forms import NameForm
 from .forms import MealForm
+from .models import Meal
 
 def diet_home(request):
     return render(request, 'diet/diet_home.html', {})
@@ -19,7 +20,14 @@ def meal_form(request):
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
-            # ...
+            obj = Meal()
+            obj.name = form.cleaned_data['name']
+            obj.meal_type = form.cleaned_data['meal_type']
+            obj.calories = form.cleaned_data['calories']
+            obj.carbs = form.cleaned_data['carbs']
+            obj.sugars = form.cleaned_data['sugars']
+            obj.protein = form.cleaned_data['protein']
+            obj.save()
             # redirect to a new URL:
             return HttpResponseRedirect('diet/meal_form/')
 
