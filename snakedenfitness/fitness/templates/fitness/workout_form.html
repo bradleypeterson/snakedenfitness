@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block body %}
+ <h1>Enter Workout Information</h1>
+
+<!--TODO: process the workout information -->
+<form action="/process_workout_form/" method="post">
+    {% csrf_token %}
+    <pre>{{ form }}</pre>
+    <input type="submit" value="SUBMIT">
+</form>
+
+{% endblock %}
