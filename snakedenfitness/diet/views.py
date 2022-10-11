@@ -5,9 +5,10 @@ from django.contrib.auth.models import User
 def diet_home(request):
     return render(request, 'diet/diet_home.html', {})
 
-
-def dietitian_home(request):
-    return render(request, 'diet/dietitian_home.html', {})
+# can restrict view here with permissions
+# @permission_required('x.y') or PermissionRequiredMixin
+def dietician_home(request):
+    return render(request, 'diet/dietician_home.html', {})
 
 
 def update_profile(request, user_id):
