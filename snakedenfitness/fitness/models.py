@@ -29,3 +29,11 @@ class Workout(models.Model):
     reps = models.IntegerField()
     sets = models.IntegerField()
     weight = models.IntegerField()
+
+# add onto data models:
+# class xyz(models.Model):
+#   user = models.ForeignKey(User)
+#   class Meta:
+#     permissions = (
+#                    ("view_reports", "can view xyz"),
+#                   )

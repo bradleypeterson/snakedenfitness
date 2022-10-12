@@ -5,13 +5,25 @@
 {% block body %}
 {% load crispy_forms_tags %}
 
-<div class="container py-5">
+<!-- <div class="container py-5">
     <h1>Register</h1>
     <form method="POST">
         {% csrf_token %}
         {{form|crispy}}
         <button class="btn btn-primary" type="submit">Register</button>
     </form>
+</div> -->
+
+
+<div class="container py-5" style="max-width: 50%;">
+    <h1>Register</h1>
+    <form enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        {{ user_form|crispy}}
+        {{ profile_form|crispy }}
+
+        <button type="submit">Save changes</button>
+      </form>
 </div>
 
 
