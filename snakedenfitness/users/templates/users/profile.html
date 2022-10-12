@@ -2,10 +2,11 @@
 
 {% block body %}
 
-<h1>This is your account profile. If you are logged in, your username is {{user.username}}</h1>
-
-<h1>if not, then you shouldnt be able to read this</h1>
-
+<h1>Welcome {{user.username}}</h1>
+<ul>
+    <li>Name: {{ user.get_full_name }}</li>
+    <li>Birth Date: {{ user.profile.birth_date }}</li>
+</ul>
 
 
 
