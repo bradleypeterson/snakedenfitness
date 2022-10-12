@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth import views as authViews
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.urls import path, include
 from users import views as userViews
 from . import views
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index, name = 'index'),
@@ -30,5 +32,10 @@ urlpatterns = [
     path('register/', userViews.register, name='register'),
     path('login/', authViews.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', authViews.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
-    path('profile/', userViews.profile , name='profile')
-]
+    path('profile/', userViews.profile , name='profile'),
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# urlpatterns = patterns('',
+#    url(r'^create_user/$',(CreateView.as_view(model=CustomUser, get_success_url =lambda: reverse('create_user'),
+#     form_class=UserCreationForm, template_name="create_user.html")), name='create_user'),
+# )

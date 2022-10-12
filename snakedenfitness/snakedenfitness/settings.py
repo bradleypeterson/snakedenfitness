@@ -92,6 +92,10 @@ DATABASES = {
     }
 }
 
+# AUTH_USER_MODEL= []
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'C:/Users/Terra/Desktop/School/Weber 2022-/CS4760/snakedenfitness/snakedenfitness/users')
+MEDIA_URL = '/users/'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

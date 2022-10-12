@@ -1,6 +1,5 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
 from .models import User, Profile
 
 # class RegistrationForm(UserCreationForm):
@@ -12,17 +11,17 @@ from .models import User, Profile
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
-    email = forms.CharField(widget=forms.EmailInput)
+    # email = forms.CharField(widget=forms.EmailInput)
     # email = forms.EmailField(required=True)
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name')
+        fields = ('username', 'email', 'first_name', 'last_name')
 
 class ProfileForm(forms.ModelForm):
     bio = forms.CharField(widget=forms.Textarea)
     class Meta:
         model = Profile
-        fields = ('birth_date', 'role', 'avatar')
+        fields = ('birth_date','bio', 'role', 'avatar')
 
 
     def __init__(self, *args, **kwargs):
