@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import permission_required
+
 
 from .forms import WorkoutForm
 from .models import Workout
@@ -8,7 +10,8 @@ from .models import Workout
 def fitness_home(request):
     return render(request, 'fitness/fitness_home.html', {})
 
-
+# can restrict view here with permissions
+# @permission_required('x.y') or PermissionRequiredMixin
 def trainer_home(request):
     return render(request, 'fitness/trainer_home.html', {})
 
