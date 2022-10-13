@@ -1,5 +1,6 @@
 from django import forms
 
+
 class MealForm(forms.Form):
     MEAL_TYPES = [
         ('breakfast', 'Breakfast'),

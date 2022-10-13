@@ -44,7 +44,6 @@ class Meal(models.Model):
         ('snack', 'Snack'),
     ]
 
-    # TODO: user_id FK
     name = models.CharField(max_length=100)
     meal_type = models.CharField(max_length=50, choices=MEAL_TYPES)
     calories = models.IntegerField()

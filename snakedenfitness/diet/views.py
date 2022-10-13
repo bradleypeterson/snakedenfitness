@@ -6,11 +6,14 @@ from django.http import HttpResponseRedirect
 from .forms import MealForm
 from .models import Meal
 
+
 def diet_home(request):
     return render(request, 'diet/diet_home.html', {})
 
+
 def dietitian_home(request):
     return render(request, 'diet/dietitian_home.html', {})
+
 
 def meal_form(request):
     # if this is a POST request we need to process the form data
@@ -36,6 +39,7 @@ def meal_form(request):
         form = MealForm()
 
     return render(request, 'diet/meal_form.html', {'form': form})
+
 
 def update_profile(request, user_id):
     user = User.objects.get(pk=user_id)
