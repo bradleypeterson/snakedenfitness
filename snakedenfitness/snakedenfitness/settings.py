@@ -36,13 +36,20 @@ INSTALLED_APPS = [
     'community',
     'diet',
     'fitness',
+    'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_REDIRECT_URL = 'profile'
+LOGIN_URL = 'login'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -53,6 +60,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
 
 ROOT_URLCONF = 'snakedenfitness.urls'
 
@@ -85,6 +94,10 @@ DATABASES = {
     }
 }
 
+# AUTH_USER_MODEL= []
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'C:/Users/Terra/Desktop/School/Weber 2022-/CS4760/snakedenfitness/snakedenfitness/users')
+MEDIA_URL = '/users/'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

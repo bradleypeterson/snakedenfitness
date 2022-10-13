@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block body %}
+ <h1>Enter Workout Information</h1>
+ <h3>
+  <a href="{% url 'fitness_home' %}" style="text-decoration: none; color: limegreen;">Back</a>
+ </h3>
+<!--TODO: process the workout information -->
+<form action="/fitness/" method="post">
+    {% csrf_token %}
+    <div style="margin-left: 20px;">
+        <br>
+            <div>Workout Type: {{ form.workout_type }}</div>
+        <br>
+            <div>Muscle Group: {{ form.muscle_group }}</div>
+        <br>
+            <div>Exercise Name: {{ form.exercise_name }}</div>
+        <br>
+            <div>Reps: {{ form.reps }}</div>
+        <br>
+            <div>Sets: {{ form.sets }}</div>
+        <br>
+            <div>Weight: {{ form.weight }}</div>
+        <br>
+        <input type="submit" value="SUBMIT">
+    </div>
+</form>
+
+{% endblock %}

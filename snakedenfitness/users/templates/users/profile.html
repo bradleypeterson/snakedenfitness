@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h1>Welcome {{user.username}}</h1>
+<ul>
+    <li>Name: {{ user.get_full_name }}</li>
+    <li>Birth Date: {{ user.profile.birth_date }}</li>
+    <li>Bio: {{ user.profile.bio }}</li>
+</ul>
+
+
+
+ {% endblock %}

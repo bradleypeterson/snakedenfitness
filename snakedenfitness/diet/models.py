@@ -32,3 +32,21 @@ class DietitianProfile(models.Model):
     bio = models.TextField(max_length=500, blank=True)
     # image = models.ImageField(default="/defaults/profile.png", upload_to="profiles")
     # client = models.ManyToManyField()
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
+class Meal(models.Model):
+    MEAL_TYPES = [
+        ('breakfast', 'Breakfast'),
+        ('lunch', 'Lunch'),
+        ('dinner', 'Dinner'),
+        ('snack', 'Snack'),
+    ]
+
+    name = models.CharField(max_length=100)
+    meal_type = models.CharField(max_length=50, choices=MEAL_TYPES)
+    calories = models.IntegerField()
+    carbs = models.IntegerField()
+    sugars = models.IntegerField()
+    protein = models.IntegerField()
