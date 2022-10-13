@@ -23,6 +23,7 @@ class Workout(models.Model):
         ('legs', 'Legs'),
     ]
 
+    # TODO: user_id FK
     workout_type = models.CharField(max_length=50)
     muscle_group = models.CharField(max_length=50)
     exercise_name = models.CharField(max_length=50)
