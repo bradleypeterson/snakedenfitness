@@ -3,13 +3,13 @@
 {% block body %}
 {% load crispy_forms_tags %}
 
-<div class="container py-5" style="max-width: 300px">
-<div class="container py-5" style="max-width: 90%;" >
-    <h1 style="margin-left: 40px;">Log-in</h1>
+<div class="container py-5" style="max-width: 25%">
+<div class="container py-5" >
+    <h1 style="margin-left: 175px;">Login</h1>
     <form method="POST">
         {% csrf_token %}
         {{form|crispy}}
-        <button class="btn btn-primary" style="margin-left: 65px; margin-top: 30px" type="submit">Sign In</button>
+        <button class="btn btn-primary" style="margin-left: 190px; margin-top: 15px" type="submit">Login</button>
     </form>
     <div class="d-flex align-items-center justify-content-center pb-4" style="margin-top: 15px">
          <p class="mb-0 me-2">Don't have an account?</p>

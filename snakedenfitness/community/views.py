@@ -7,3 +7,9 @@ def community_home(request):
 
 def new_post(request):
     return render(request, 'community/new_post.html', {})
+
+def groups(request):
+    return render(request, 'community/groups.html', {})
+
+def edit_groups(request):
+    return render(request, 'community/edit_groups.html', {})
