@@ -1,14 +1,44 @@
 {% extends 'base.html' %}
 
 {% block body %}
- <h1>Enter Meal Information</h1>
- <h3>
-  <a href="{% url 'diet_home' %}" style="text-decoration: none; color: limegreen;">Back</a>
- </h3>
+<div class="container p-0" style="margin-top: 25px; max-width: 25%;">
+ <h1 style="text-align: center">Enter Meal Information</h1>
 <!--TODO: process the meal information -->
-<form action="/diet/" method="post">
+<form action="/diet/" method="post" style="margin-top: 25px">
     {% csrf_token %}
     <div style="margin-left: 20px;">
+          <div class="form-group">
+            <label for="postTitle">Meal Name</label>
+            <input type="text" class="form-control" id="postTitle" placeholder="Meal Name"> {{ form.name }} </input>
+
+            <div class="dropdown">
+              <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Meal Type
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item">{{ form.meal_type }}</a>
+              </div>
+            </div>
+
+              <label for="postTitle">Calories</label>
+            <input type="text" class="form-control" id="postTitle" placeholder="Calories"> {{ form.calories }} </input>
+              <label for="postTitle">Carbs</label>
+            <input type="text" class="form-control" id="postTitle" placeholder="Carbs"> {{ form.carbs }} </input>
+              <label for="postTitle">Sugars</label>
+            <input type="text" class="form-control" id="postTitle" placeholder="Sugars"> {{ form.sugars }} </input>
+              <label for="postTitle">Protein</label>
+            <input type="text" class="form-control" id="postTitle" placeholder="Protein"> {{ form.protein }} </input>
+  </div>
+
+        <input type="submit" class="btn btn-primary" style="margin-top: 15px; margin-left: 165px; text-align: center" value="Submit">
+        <a href="{% url 'diet_home' %}" class="btn btn-danger" style="margin-top: 15px;">Back</a>
+    </div>
+</form>
+</div>
+
+
+
+
         <br>
         <div>Meal Name: {{ form.name }}</div>
         <br>
@@ -22,8 +52,5 @@
         <br>
         <div>Protein: {{ form.protein }}</div>
         <br>
-        <input type="submit" value="SUBMIT">
-    </div>
-</form>
-
 {% endblock %}
+
