@@ -5,3 +5,5 @@ from django.shortcuts import render
 def community_home(request):
     return render(request, 'community/community_home.html', {})
 
+def new_post(request):
+    return render(request, 'community/new_post.html', {})
