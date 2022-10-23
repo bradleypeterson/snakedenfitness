@@ -32,7 +32,7 @@ def meal_form(request):
             obj.protein = form.cleaned_data['protein']
             obj.save()
             # redirect to a new URL:
-            return HttpResponseRedirect('diet/meal_form/')
+            return HttpResponseRedirect('/diet/')
 
     # if a GET (or any other method) we'll create a blank form
     else:
