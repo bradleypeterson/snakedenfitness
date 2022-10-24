@@ -30,6 +30,7 @@ def meal_form(request):
             obj.carbs = form.cleaned_data['carbs']
             obj.sugars = form.cleaned_data['sugars']
             obj.protein = form.cleaned_data['protein']
+            obj.user = User(request.user.id)
             obj.save()
             # redirect to a new URL:
             return HttpResponseRedirect('/diet/')

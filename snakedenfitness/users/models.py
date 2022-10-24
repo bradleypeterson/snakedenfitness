@@ -13,6 +13,7 @@ from django.dispatch import receiver
 # class User(AbstractUser):
 #     pass
 
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     birth_date = models.DateField(blank=True, default='1960-01-01')
@@ -30,6 +31,7 @@ class Profile(models.Model):
     )
 
     role = models.SmallIntegerField(choices=ROLE_CHOICES, blank=True, null=False, default = 0)
+
 
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
