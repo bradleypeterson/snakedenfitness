@@ -7,29 +7,6 @@
 <form action="/diet/" method="post" style="margin-top: 25px">
     {% csrf_token %}
     {{ form.as_p }}
-    <div style="margin-left: 20px;">
-          <div class="form-group">
-            <label for="postTitle">Meal Name</label>
-            <input type="text"  name="name" maxlength="100" required="" id="id_name" placeholder="Meal Name"> {{ form.as_p }}</input>
-
-            <div class="dropdown">
-              <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Meal Type
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item">{{ form.meal_type }}</a>
-              </div>
-            </div>
-
-              <label for="postTitle">Calories</label>
-            <input type="text" class="form-control" id="postTitle" placeholder="Calories"> {{ form.calories }} </input>
-              <label for="postTitle">Carbs</label>
-            <input type="text" class="form-control" id="postTitle" placeholder="Carbs"> {{ form.carbs }} </input>
-              <label for="postTitle">Sugars</label>
-            <input type="text" class="form-control" id="postTitle" placeholder="Sugars"> {{ form.sugars }} </input>
-              <label for="postTitle">Protein</label>
-            <input type="text" class="form-control" id="postTitle" placeholder="Protein"> {{ form.protein }} </input>
-  </div>
 
         <input type="submit" class="btn btn-primary" style="margin-top: 15px; margin-left: 165px; text-align: center" value="Submit">
         <a href="{% url 'diet_home' %}" class="btn btn-danger" style="margin-top: 15px;">Back</a>
@@ -37,18 +14,5 @@
 </form>
 </div>
 
-        <br>
-        <div>Meal Name: {{ form.name }}</div>
-        <br>
-        <div>Meal Type: {{ form.meal_type }}</div>
-        <br>
-        <div>Calories: {{ form.calories }}</div>
-        <br>
-        <div>Carbs: {{ form.carbs }}</div>
-        <br>
-        <div>Sugars: {{ form.sugars }}</div>
-        <br>
-        <div>Protein: {{ form.protein }}</div>
-        <br>
 {% endblock %}
 
