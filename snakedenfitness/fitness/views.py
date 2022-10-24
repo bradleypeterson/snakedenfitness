@@ -34,6 +34,7 @@ def workout_form(request):
             obj.reps = form.cleaned_data['reps']
             obj.sets = form.cleaned_data['sets']
             obj.weight = form.cleaned_data['weight']
+            obj.user = User(request.user.id)
             obj.save()
             # redirect to a new URL:
             return HttpResponseRedirect('/fitness/')
