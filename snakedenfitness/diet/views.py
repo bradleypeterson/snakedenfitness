@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
@@ -14,7 +15,7 @@ def diet_home(request):
 def dietitian_home(request):
     return render(request, 'diet/dietitian_home.html', {})
 
-
+@login_required
 def meal_form(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':

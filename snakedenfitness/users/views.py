@@ -10,8 +10,8 @@ from .forms import UserForm, ProfileForm
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
 
-#from ..diet.models import Meal
-#from ..fitness.models import Workout
+from diet.models import Meal
+from fitness.models import Workout
 
 
 # Create your views here.
@@ -91,6 +91,10 @@ def update_profile(request):
 
 
 @login_required
-def view_user_meal_data(request):
-    #meals = Meal.objects.filter(request.user)
-    return
+def user_meal_data(request):
+    meals = Meal.objects.filter(request.user)
+
+
+@login_required
+def user_workout_data(request):
+    workouts = Workout.objects.filter(request.user)

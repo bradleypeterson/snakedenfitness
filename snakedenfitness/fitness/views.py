@@ -1,8 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import permission_required
-
+from django.contrib.auth.decorators import permission_required, login_required
 
 from .forms import WorkoutForm
 from .models import Workout
@@ -18,7 +17,7 @@ def fitness_home(request):
 def trainer_home(request):
     return render(request, 'fitness/trainer_home.html', {})
 
-
+@login_required
 def workout_form(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
