@@ -1,5 +1,53 @@
 {% extends 'base.html' %}
 
 {% block body %}
- <h1>Fitness Home</h1>
+<<<<<<< HEAD
+<h1 style="margin-left: 900PX; margin-top: 50px">Fitness</h1>
+
+<div class="container p-0">
+<div class="row pb-3">
+     <div class="col-md-4 text-center h6">
+         <button class="btn btn-success" type="submit">New</button>
+         <button class="btn btn-info" type="submit">Request Trainer</button>
+     </div>
+    <div class="col-md-8"></div>
+</div>
+
+<div class="row pb-1">
+        <div class="col-md-3 text-center h4">
+            Workout Type
+        </div>
+        <div class="col-md-3 text-center h4">
+            Muscle Group
+        </div>
+        <div class="col-md-3 text-center h4">
+            Exercise Name
+        </div>
+        <div class="col-md-3 text-center h4">
+        </div>
+</div>
+
+<div class="row pb-1">
+        <div class="col-md-3 text-center h6">
+            Strength
+        </div>
+        <div class="col-md-3 text-center h6">
+            Legs
+        </div>
+        <div class="col-md-3 text-center h6">
+            Leg Curls
+        </div>
+        <div class="col-md-3 text-center h6">
+            <button class="btn btn-warning" type="submit" style="color: white">View/Edit</button>
+            <button class="btn btn-danger" type="submit">Delete</button>
+        </div>
+</div>
+</div>
 {% endblock %}
+=======
+ <h1>Fitness Home</h1>
+ <h3>
+  <a href="{% url 'workout_form' %}" style="text-decoration: none; color: limegreen;">Workout Form</a>
+ </h3>
+{% endblock %}
+>>>>>>> 43e0ce6a349bcbaeb3f009db9db238ffe8ccda8c
