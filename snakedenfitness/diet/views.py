@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 
 #from .forms import NameForm
-from .forms import MealForm
-from .models import Meal
+from .forms import MealForm2
+from .models import Meals
 
 def diet_home(request):
     return render(request, 'diet/diet_home.html', {})
@@ -16,11 +16,11 @@ def meal_form(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = MealForm(request.POST)
+        form = MealForm2(request.POST)
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
-            obj = Meal()
+            obj = Meals()
             obj.name = form.cleaned_data['name']
             obj.meal_type = form.cleaned_data['meal_type']
             obj.calories = form.cleaned_data['calories']
@@ -33,7 +33,7 @@ def meal_form(request):
 
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = MealForm()
+        form = MealForm2()
 
     return render(request, 'diet/meal_form.html', {'form': form})
 

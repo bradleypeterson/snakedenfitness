@@ -6,10 +6,11 @@
 <!--TODO: process the meal information -->
 <form action="/diet/" method="post" style="margin-top: 25px">
     {% csrf_token %}
+    {{ form.as_p }}
     <div style="margin-left: 20px;">
           <div class="form-group">
             <label for="postTitle">Meal Name</label>
-            <input type="text" class="form-control" id="postTitle" placeholder="Meal Name"> {{ form.name }} </input>
+            <input type="text"  name="name" maxlength="100" required="" id="id_name" placeholder="Meal Name"> {{ form.as_p }}</input>
 
             <div class="dropdown">
               <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -35,9 +36,6 @@
     </div>
 </form>
 </div>
-
-
-
 
         <br>
         <div>Meal Name: {{ form.name }}</div>
