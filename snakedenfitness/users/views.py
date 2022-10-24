@@ -92,9 +92,11 @@ def update_profile(request):
 
 @login_required
 def user_meal_data(request):
-    meals = Meal.objects.filter(request.user)
+    meals = Meal.objects.filter(user=request.user)
+    return render(request, 'users/meal_log.html', {'meals': meals})
 
 
 @login_required
 def user_workout_data(request):
-    workouts = Workout.objects.filter(request.user)
+    workouts = Workout.objects.filter(user=request.user)
+    return render(request, 'users/workout_log.html', {'workouts': workouts})
