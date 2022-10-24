@@ -33,6 +33,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'community',
     'diet',
     'fitness',
@@ -81,7 +82,16 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'snakedenfitness.wsgi.application'
+#WSGI_APPLICATION = 'snakedenfitness.wsgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 
 # Database
@@ -136,3 +146,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+ASGI_APPLICATION = 'snakedenfitness.asgi.application'
