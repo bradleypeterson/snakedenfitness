@@ -36,7 +36,7 @@ class DietitianProfile(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
-class Meals(models.Model):
+class Meal(models.Model):
     MEAL_TYPES = [
         ('breakfast', 'Breakfast'),
         ('lunch', 'Lunch'),
