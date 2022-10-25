@@ -88,15 +88,3 @@ def update_profile(request):
         'user_form': user_form,
         'profile_form': profile_form
     })
-
-
-@login_required
-def user_meal_data(request):
-    meals = Meal.objects.filter(user=request.user)
-    return render(request, 'users/meal_log.html', {'meals': meals})
-
-
-@login_required
-def user_workout_data(request):
-    workouts = Workout.objects.filter(user=request.user)
-    return render(request, 'users/workout_log.html', {'workouts': workouts})

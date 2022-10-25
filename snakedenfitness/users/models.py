@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from django import template
 from django.db import models
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.base_user import BaseUserManager
@@ -32,6 +33,15 @@ class Profile(models.Model):
 
     role = models.SmallIntegerField(choices=ROLE_CHOICES, blank=True, null=False, default = 0)
 
+    # class Meta:
+    #     permissions = (
+    #         'is_trainer',
+    #         'is_dietician',
+    #         'is_client'
+    #     )
+
+
+
 
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
@@ -39,6 +49,14 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
         Profile.objects.create(user=instance)
     instance.profile.save()
 
+register = template.Library()
+
+@register.filter(name="has_role")
+def has_group(user, group_name):
+    group =  Group.objects.get(name=group_name)
+    return group in user.groups.all()
+
+############################# Excess code graveyard
 # @receiver(post_save, sender=User)
 # def create_user_profile(sender, instance, created, **kwargs):
 #     if created:

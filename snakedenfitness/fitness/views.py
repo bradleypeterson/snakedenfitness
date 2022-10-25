@@ -49,3 +49,9 @@ def update_profile(request, user_id):
     user = User.objects.get(pk=user_id)
     user.profile.bio = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...'
     user.save()
+
+
+@login_required
+def user_workout_data(request):
+    workouts = Workout.objects.filter(user=request.user)
+    return render(request, 'fitness/workout_log.html', {'workouts': workouts})

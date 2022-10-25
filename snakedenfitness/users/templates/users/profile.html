@@ -7,4 +7,20 @@
         <li>Birth Date: {{ user.profile.birth_date }}</li>
         <li>Bio: {{ user.profile.bio }}</li>
     </ul>
+
+    {% if user.is_authenticated %}
+        <p>you are authenticated</p>
+    {% endif %}
+
+    {% if user.profile.role == 2 %}
+        <p>you are a Trainer</p>
+
+    {% elif user.profile.role == 1 %}
+        <p>you are a Dietician</p>
+
+    {% elif user.profile.role == 0 %}
+        <p>you are a Client</p>
+    {% endif %}
+
+
 {% endblock %}

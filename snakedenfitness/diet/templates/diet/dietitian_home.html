@@ -6,4 +6,19 @@
 <ul>
     <li>Username: {{ user.username }}</li>
 </ul>
+
+
+{% if user.is_authenticated %}
+    <p>you are authenticated</p>
+{% endif %}
+{% if user.profile.role == 1 %}
+    <p>you are a Dietitian</p>
+{% endif %}
+
+<a href="{% url 'trainer_meal_data' %}" class="link"> Meal logs </a>
+
+
+
+
+
 {% endblock %}

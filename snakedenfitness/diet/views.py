@@ -47,3 +47,14 @@ def update_profile(request, user_id):
     user = User.objects.get(pk=user_id)
     user.profile.bio = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...'
     user.save()
+
+
+@login_required
+def user_meal_data(request):
+    meals = Meal.objects.filter(user=request.user)
+    return render(request, 'diet/meal_log.html', {'meals': meals})
+
+@login_required
+def trainer_meal_data(request):
+    meals = Meal.objects.all()
+    return render(request, 'diet/pro_meal_log.html', {'meals': meals})
