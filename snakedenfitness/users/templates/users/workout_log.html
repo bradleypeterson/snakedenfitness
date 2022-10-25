@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1>Workout log for {{ user.username }}</h1>
+{% for workout in workouts %}
+<h3>{{ workout.exercise_name }}</h3>
+{% endfor %}
+{% endblock %}

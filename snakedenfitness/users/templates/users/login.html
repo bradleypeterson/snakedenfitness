@@ -1,17 +1,8 @@
-
-
 {% extends 'base.html' %}
-
 {% block body %}
 {% load crispy_forms_tags %}
-
-<<<<<<< HEAD
-<div class="container py-5" style="max-width: 300px">
-    <h1 style="margin-left: 75px">Sign In</h1>
-=======
 <div class="container py-5" style="max-width: 50%;" >
     <h1>Log-in</h1>
->>>>>>> 43e0ce6a349bcbaeb3f009db9db238ffe8ccda8c
     <form method="POST">
         {% csrf_token %}
         {{form|crispy}}
@@ -22,6 +13,4 @@
         <a href="{% url 'register' %}"> Sign Up Here</a>
     </div>
 </div>
-
-
 {% endblock %}

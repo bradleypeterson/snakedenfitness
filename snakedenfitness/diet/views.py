@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
@@ -6,12 +7,15 @@ from django.http import HttpResponseRedirect
 from .forms import MealForm
 from .models import Meal
 
+
 def diet_home(request):
     return render(request, 'diet/diet_home.html', {})
+
 
 def dietitian_home(request):
     return render(request, 'diet/dietitian_home.html', {})
 
+@login_required
 def meal_form(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
@@ -27,15 +31,17 @@ def meal_form(request):
             obj.carbs = form.cleaned_data['carbs']
             obj.sugars = form.cleaned_data['sugars']
             obj.protein = form.cleaned_data['protein']
+            obj.user = User(request.user.id)
             obj.save()
             # redirect to a new URL:
-            return HttpResponseRedirect('diet/meal_form/')
+            return HttpResponseRedirect('/diet/')
 
     # if a GET (or any other method) we'll create a blank form
     else:
         form = MealForm()
 
     return render(request, 'diet/meal_form.html', {'form': form})
+
 
 def update_profile(request, user_id):
     user = User.objects.get(pk=user_id)

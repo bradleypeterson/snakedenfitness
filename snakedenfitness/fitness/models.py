@@ -3,10 +3,12 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+
 # Create your models here.
 class TrainerProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=500, blank=True)
+
 
 class Workout(models.Model):
     WORKOUT_TYPE = [
@@ -23,17 +25,11 @@ class Workout(models.Model):
         ('legs', 'Legs'),
     ]
 
-    workout_type = models.CharField(max_length=50)
-    muscle_group = models.CharField(max_length=50)
+    workout_type = models.CharField(max_length=50, choices=WORKOUT_TYPE)
+    muscle_group = models.CharField(max_length=50, choices=MUSCLE_GROUP)
     exercise_name = models.CharField(max_length=50)
     reps = models.IntegerField()
     sets = models.IntegerField()
     weight = models.IntegerField()
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-# add onto data models:
-# class xyz(models.Model):
-#   user = models.ForeignKey(User)
-#   class Meta:
-#     permissions = (
-#                    ("view_reports", "can view xyz"),
-#                   )

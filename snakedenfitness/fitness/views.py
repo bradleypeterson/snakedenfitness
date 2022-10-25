@@ -1,20 +1,23 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import permission_required
-
+from django.contrib.auth.decorators import permission_required, login_required
 
 from .forms import WorkoutForm
 from .models import Workout
 
+
 # Create your views here.
 def fitness_home(request):
     return render(request, 'fitness/fitness_home.html', {})
+
 
 # can restrict view here with permissions
 # @permission_required('x.y') or PermissionRequiredMixin
 def trainer_home(request):
     return render(request, 'fitness/trainer_home.html', {})
 
+@login_required
 def workout_form(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
@@ -30,9 +33,10 @@ def workout_form(request):
             obj.reps = form.cleaned_data['reps']
             obj.sets = form.cleaned_data['sets']
             obj.weight = form.cleaned_data['weight']
+            obj.user = User(request.user.id)
             obj.save()
             # redirect to a new URL:
-            return HttpResponseRedirect('fitness/workout_form/')
+            return HttpResponseRedirect('/fitness/')
 
     # if a GET (or any other method) we'll create a blank form
     else:

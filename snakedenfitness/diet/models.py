@@ -36,6 +36,7 @@ class DietitianProfile(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
+
 class Meal(models.Model):
     MEAL_TYPES = [
         ('breakfast', 'Breakfast'),
@@ -50,3 +51,4 @@ class Meal(models.Model):
     carbs = models.IntegerField()
     sugars = models.IntegerField()
     protein = models.IntegerField()
+    user = models.OneToOneField(User, on_delete=models.CASCADE)

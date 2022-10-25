@@ -5,8 +5,7 @@
  <h3>
   <a href="{% url 'diet_home' %}" style="text-decoration: none; color: limegreen;">Back</a>
  </h3>
-<!--TODO: process the meal information -->
-<form action="/diet/" method="post">
+<form action="/diet/meal_form/" method="post">
     {% csrf_token %}
     <div style="margin-left: 20px;">
         <br>
@@ -22,7 +21,7 @@
         <br>
         <div>Protein: {{ form.protein }}</div>
         <br>
-        <input type="submit" value="SUBMIT">
+        <button class="btn btn-primary" type="submit">Submit</button>
     </div>
 </form>
 
