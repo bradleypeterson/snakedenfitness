@@ -1,5 +1,43 @@
 {% extends 'base.html' %}
 
 {% block body %}
- <h1>Community Home</h1>
+<h1 style="text-align: center; margin-top: 50px">Community</h1>
+
+<div class="container p-0" style="margin-left: 375px">
+<div class="row py-3">
+     <div class="col-md-4 text-center h6">
+            <button class="btn btn-success" type="submit" style="margin-left: 30px">New Group</button>
+     </div>
+    <div class="col-md-8"></div>
+</div>
+
+<div class="row pb-1" style="text-align: center">
+        <div class="col-md-6 text-center h4" >
+            My Groups
+        </div>
+        <div class="col-md-3 text-center h4">
+            Group Requests
+        </div>
+</div>
+
+
+<div class="row pb-1">
+        <div class="col-md-6 text-center h6" style=" margin-top: 20px">
+            Workout Mania
+            <a href="{% url 'groups' %}">
+            <button class="btn btn-warning" style="color: white; margin-left: 20px;" type="submit">View</button>
+            </a>
+        </div>
+
+        <div class="col-md-3 text-center h6" style=" margin-top: 20px">
+            Cool Group
+            <a href="{% url 'groups' %}">
+            <button class="btn btn-success" style="color: white; margin-left: 20px;" type="submit">Accept</button>
+            <button class="btn btn-danger" style="color: white; margin-left: 10px;" type="submit">Decline</button>
+            </a>
+        </div>
+</div>
+</div>
+</div>
 {% endblock %}
+

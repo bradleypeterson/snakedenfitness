@@ -1,29 +1,17 @@
 {% extends 'base.html' %}
 
 {% block body %}
- <h1>Enter Meal Information</h1>
- <h3>
-  <a href="{% url 'diet_home' %}" style="text-decoration: none; color: limegreen;">Back</a>
- </h3>
+<div class="container p-0" style="margin-top: 25px; max-width: 25%;">
+    <h1 class="text-center pt-2">Enter Meal Information</h1>
 <!--TODO: process the meal information -->
-<form action="/diet/" method="post">
-    {% csrf_token %}
-    <div style="margin-left: 20px;">
-        <br>
-        <div>Meal Name: {{ form.name }}</div>
-        <br>
-        <div>Meal Type: {{ form.meal_type }}</div>
-        <br>
-        <div>Calories: {{ form.calories }}</div>
-        <br>
-        <div>Carbs: {{ form.carbs }}</div>
-        <br>
-        <div>Sugars: {{ form.sugars }}</div>
-        <br>
-        <div>Protein: {{ form.protein }}</div>
-        <br>
-        <input type="submit" value="SUBMIT">
-    </div>
-</form>
+    <form action="/diet/" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
 
+        <div class="d-flex justify-content-center py-3">
+                <button class="btn btn-primary mx-1" type="submit" value="SUBMIT">Submit</button>
+                <a href="{% url 'diet_home' %}" class="btn btn-danger mx-1">Cancel</a>
+        </div>
+    </form>
+</div>
 {% endblock %}

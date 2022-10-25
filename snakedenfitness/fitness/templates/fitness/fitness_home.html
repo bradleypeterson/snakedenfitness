@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<<<<<<< HEAD
 <h1 style="margin-left: 900PX; margin-top: 50px">Fitness</h1>
 
 <div class="container p-0">
 <div class="row pb-3">
      <div class="col-md-4 text-center h6">
+         <a href="{% url 'workout_form' %}">
          <button class="btn btn-success" type="submit">New</button>
-         <button class="btn btn-info" type="submit">Request Trainer</button>
+         </a>
+         <a href="{% url 'request_trainer' %}">
+         <button class="btn btn-info" type="submit">Request Trainer</button></a>
      </div>
     <div class="col-md-8"></div>
 </div>
@@ -43,11 +45,6 @@
         </div>
 </div>
 </div>
+
 {% endblock %}
-=======
- <h1>Fitness Home</h1>
- <h3>
-  <a href="{% url 'workout_form' %}" style="text-decoration: none; color: limegreen;">Workout Form</a>
- </h3>
-{% endblock %}
->>>>>>> 43e0ce6a349bcbaeb3f009db9db238ffe8ccda8c
+
