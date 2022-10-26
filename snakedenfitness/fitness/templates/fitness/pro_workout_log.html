@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+<h1>Workout logs available: </h1>
+
+<div class="container">
+    {% for workout in workouts %}
+        <h3>{{ workout.user }} :</h3>
+        <h5>{{ workout.name }}</h5>
+        <h5>reps: {{ workout.reps }}</h5>
+        <h5>sets: {{ workout.sets }}</h5>
+        <h5>weight: {{ workout.weight }}</h5>
+    {% endfor %}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

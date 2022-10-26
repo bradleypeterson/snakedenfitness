@@ -51,12 +51,12 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
 
 register = template.Library()
 
-@register.filter(name="has_role")
+@register.filter(name="has_group")
 def has_group(user, group_name):
     group =  Group.objects.get(name=group_name)
     return group in user.groups.all()
 
-############################# Excess code graveyard
+############################# Excess code graveyard #############################
 # @receiver(post_save, sender=User)
 # def create_user_profile(sender, instance, created, **kwargs):
 #     if created:

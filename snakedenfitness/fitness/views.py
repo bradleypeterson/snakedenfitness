@@ -55,3 +55,8 @@ def update_profile(request, user_id):
 def user_workout_data(request):
     workouts = Workout.objects.filter(user=request.user)
     return render(request, 'fitness/workout_log.html', {'workouts': workouts})
+
+@login_required
+def trainer_workout_data(request):
+    workouts = Workout.objects.all()
+    return render(request, 'fitness/pro_workout_log.html', {'workouts': workouts})
