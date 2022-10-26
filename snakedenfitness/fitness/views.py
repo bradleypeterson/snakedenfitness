@@ -8,12 +8,16 @@ from .models import Workout
 
 
 # Create your views here.
+
+@login_required
 def fitness_home(request):
     return render(request, 'fitness/fitness_home.html', {})
 
 
 # can restrict view here with permissions
 # @permission_required('x.y') or PermissionRequiredMixin
+
+@login_required
 def trainer_home(request):
     return render(request, 'fitness/trainer_home.html', {})
 
@@ -45,6 +49,7 @@ def workout_form(request):
     return render(request, 'fitness/workout_form.html', {'form': form})
 
 
+@login_required
 def update_profile(request, user_id):
     user = User.objects.get(pk=user_id)
     user.profile.bio = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...'

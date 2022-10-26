@@ -8,10 +8,12 @@ from .forms import MealForm
 from .models import Meal
 
 
+@login_required
 def diet_home(request):
     return render(request, 'diet/diet_home.html', {})
 
 
+@login_required
 def dietitian_home(request):
     return render(request, 'diet/dietitian_home.html', {})
 
@@ -43,6 +45,7 @@ def meal_form(request):
     return render(request, 'diet/meal_form.html', {'form': form})
 
 
+@login_required
 def update_profile(request, user_id):
     user = User.objects.get(pk=user_id)
     user.profile.bio = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...'
