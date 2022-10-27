@@ -51,4 +51,4 @@ class Meal(models.Model):
     carbs = models.IntegerField()
     sugars = models.IntegerField()
     protein = models.IntegerField()
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

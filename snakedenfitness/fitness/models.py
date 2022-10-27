@@ -31,5 +31,5 @@ class Workout(models.Model):
     reps = models.IntegerField()
     sets = models.IntegerField()
     weight = models.IntegerField()
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
