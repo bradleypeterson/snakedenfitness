@@ -1,49 +1,52 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<h1 style="margin-left: 900PX; margin-top: 50px">Diet</h1>
+    <h1 style="text-align: center; margin-top: 50px">Diet</h1>
+    <div class="container p-0">
+        <div class="row py-3">
+            <div class="col-md-12 text-center h6">
+                <a href="{% url 'meal_form' %}">
+                    <button class="btn btn-success" type="submit">New</button>
+                </a>
+                <a href="{% url 'request_dietician' %}">
+                    <button class="btn btn-info" type="submit">Request Dietician</button>
+                </a>
+                <h6 class="btn btn-light" style="margin-left: 750px">Today's Calories: 1800</h6>
+            </div>
+        </div>
 
-<div class="container p-0">
-<div class="row py-3">
-     <div class="col-md-4 text-center h6">
-         <button class="btn btn-success" type="submit">New</button>
-         <button class="btn btn-info" type="submit">Request Dietician</button>
-     </div>
-    <div class="col-md-8"></div>
-</div>
+        <div class="row pb-1">
+            <div class="col-md-3 text-center h4">
+                Meal Name
+            </div>
+            <div class="col-md-3 text-center h4">
+                Meal Type
+            </div>
+            <div class="col-md-3 text-center h4">
+                Calories
+            </div>
+            <div class="col-md-3 text-center h4">
+                Actions
+            </div>
+        </div>
 
-<div class="row pb-1">
-        <div class="col-md-3 text-center h4">
-            Meal Name
+        <div class="row pb-1">
+            <div class="col-md-3 text-center h6">
+                Granola
+            </div>
+            <div class="col-md-3 text-center h6">
+                Snack
+            </div>
+            <div class="col-md-3 text-center h6">
+                100
+            </div>
+            <div class="col-md-3 text-center h6">
+                <button class="btn btn-warning" style="color: white" type="submit">View/Edit</button>
+                <button class="btn btn-danger" type="submit">Delete</button>
+            </div>
         </div>
-        <div class="col-md-3 text-center h4">
-            Meal Type
-        </div>
-        <div class="col-md-3 text-center h4">
-            Calories
-        </div>
-        <div class="col-md-3 text-center h4">
-            Actions
-        </div>
-</div>
-
-<div class="row pb-1">
-        <div class="col-md-3 text-center h6">
-            Granola
-        </div>
-        <div class="col-md-3 text-center h6">
-            Snack
-        </div>
-        <div class="col-md-3 text-center h6">
-            100
-        </div>
-        <div class="col-md-3 text-center h6">
-            <button class="btn btn-warning" style="color: white" type="submit">View/Edit</button>
-            <button class="btn btn-danger" type="submit">Delete</button>
-        </div>
-</div>
-</div>
- <h3>
-  <a href="{% url 'meal_form' %}" style="text-decoration: none; color: limegreen;">Meal Form</a>
- </h3>
+    </div>
+    <h3>
+        <a href="{% url 'meal_form' %}" style="text-decoration: none; color: limegreen;">Meal Form</a>
+    </h3>
 {% endblock %}

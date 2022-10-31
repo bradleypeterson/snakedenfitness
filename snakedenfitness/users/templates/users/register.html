@@ -1,15 +1,19 @@
 {% extends 'base.html' %}
 
 {% block body %}
-{% load crispy_forms_tags %}
-<div class="container py-5" style="max-width: 50%;">
-    <h1>Register</h1>
-    <form enctype="multipart/form-data" method="POST">
-        {% csrf_token %}
-        {{ user_form|crispy}}
-        {{ profile_form|crispy }}
+    {% load crispy_forms_tags %}
+    <div class="container py-5" style="max-width: 50%;">
+        <h1 style="text-align: center;">Register</h1>
+        <form enctype="multipart/form-data" method="POST">
+            {% csrf_token %}
+            {{ user_form|crispy }}
+            {{ profile_form|crispy }}
 
-        <button type="submit">Save changes</button>
-      </form>
-</div>
+        </form>
+        <button type="submit" class="btn btn-primary" style="margin-top: 15px; margin-left: 175px">Register</button>
+        <div class="d-flex align-items-center justify-content-center pb-4" style="margin-top: 15px">
+            <p class="mb-0 me-2">Already have an account?</p>
+            <a href="{% url 'login' %}"> Login Here</a>
+        </div>
+    </div>
 {% endblock %}
