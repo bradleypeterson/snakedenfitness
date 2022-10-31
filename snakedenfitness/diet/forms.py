@@ -1,5 +1,6 @@
 from django import forms
 
+
 class MealForm(forms.Form):
     MEAL_TYPES = [
         ('breakfast', 'Breakfast'),
@@ -14,3 +15,4 @@ class MealForm(forms.Form):
     carbs = forms.IntegerField()
     sugars = forms.IntegerField()
     protein = forms.IntegerField()
+
