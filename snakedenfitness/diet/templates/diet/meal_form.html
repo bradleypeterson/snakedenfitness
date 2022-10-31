@@ -1,17 +1,15 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<div class="container p-0" style="margin-top: 25px; max-width: 25%;">
-    <h1 class="text-center pt-2">Enter Meal Information</h1>
-<!--TODO: process the meal information -->
-    <form action="/diet/" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-
-        <div class="d-flex justify-content-center py-3">
+    <div class="container p-0" style="margin-top: 25px; max-width: 25%;">
+        <h1 class="text-center pt-2">Enter Meal Information</h1>
+        <form action="/diet/" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="d-flex justify-content-center py-3">
                 <button class="btn btn-primary mx-1" type="submit" value="SUBMIT">Submit</button>
                 <a href="{% url 'diet_home' %}" class="btn btn-danger mx-1">Cancel</a>
-        </div>
-    </form>
-</div>
+            </div>
+        </form>
+    </div>
 {% endblock %}

@@ -1,5 +1,6 @@
 from django import forms
 
+
 class WorkoutForm(forms.Form):
     WORKOUT_TYPE = [
         ('cardio', 'Cardio'),
