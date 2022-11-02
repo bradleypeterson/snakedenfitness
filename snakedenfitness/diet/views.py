@@ -50,3 +50,9 @@ def update_profile(request, user_id):
 
 def request_dietician(request):
     return render(request, 'diet/request_dietician.html', {})
+
+def delete_meal(request):
+    return render(request, 'diet/delete_meal.html', {})
+
+def edit_meal(request):
+    return render(request, 'diet/edit_meal.html', {})

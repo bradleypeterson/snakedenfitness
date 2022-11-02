@@ -1,7 +1,9 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import permission_required, login_required
+from django import forms
+from django.forms import ModelForm
 
 from .forms import WorkoutForm
 from .models import Workout
@@ -52,3 +54,9 @@ def update_profile(request, user_id):
 
 def request_trainer(request):
     return render(request, 'fitness/request_trainer.html', {})
+
+def delete_workout(request):
+    return render(request, 'fitness/delete_workout.html', {})
+
+def edit_workout(request):
+    return render(request, 'fitness/edit_workout.html', {})

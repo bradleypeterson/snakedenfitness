@@ -39,12 +39,13 @@
                 Leg Curls
             </div>
             <div class="col-md-3 text-center h6">
-                <button class="btn btn-warning" type="submit" style="color: white">View/Edit</button>
-                <button class="btn btn-danger" type="submit">Delete</button>
+                <a href="{% url 'edit_workout'%}">
+                    <button class="btn btn-warning" type="submit" style="color: white">Edit</button>
+                </a>
+                <a href="{% url 'delete_workout' %}">
+                   <button class="btn btn-danger" type="submit">Delete</button>
+                </a>
             </div>
         </div>
     </div>
-    <h3>
-        <a href="{% url 'workout_form' %}" style="text-decoration: none; color: limegreen;">Workout Form</a>
-    </h3>
 {% endblock %}

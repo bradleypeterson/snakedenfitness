@@ -41,12 +41,13 @@
                 100
             </div>
             <div class="col-md-3 text-center h6">
-                <button class="btn btn-warning" style="color: white" type="submit">View/Edit</button>
-                <button class="btn btn-danger" type="submit">Delete</button>
+                <a href="{% url 'edit_meal' %}">
+                <button class="btn btn-warning" style="color: white" type="submit">Edit</button>
+                </a>
+                <a href="{% url 'delete_meal' %}">
+                   <button class="btn btn-danger" type="submit">Delete</button>
+                </a>
             </div>
         </div>
     </div>
-    <h3>
-        <a href="{% url 'meal_form' %}" style="text-decoration: none; color: limegreen;">Meal Form</a>
-    </h3>
 {% endblock %}
