@@ -3,7 +3,7 @@
 {% block body %}
     <div class="container p-0" style="margin-top: 25px; max-width: 25%;">
         <h1 class="text-center pt-2">Enter Meal Information</h1>
-        <form action="/diet/" method="post">
+        <form action="/diet/meal_form/" method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <div class="d-flex justify-content-center py-3">

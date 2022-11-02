@@ -26,7 +26,7 @@ def meal_form(request):
         if form.is_valid():
             # process the data in form.cleaned_data as required
             obj = Meal()
-            obj.name = form.cleaned_data['name']
+            obj.meal_name = form.cleaned_data['meal_name']
             obj.meal_type = form.cleaned_data['meal_type']
             obj.calories = form.cleaned_data['calories']
             obj.carbs = form.cleaned_data['carbs']

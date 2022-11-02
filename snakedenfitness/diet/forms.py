@@ -9,7 +9,7 @@ class MealForm(forms.Form):
         ('snack', 'Snack'),
     ]
 
-    name = forms.CharField(max_length=100)
+    meal_name = forms.CharField(max_length=100)
     meal_type = forms.CharField(label='Select meal type', widget=forms.Select(choices=MEAL_TYPES))
     calories = forms.IntegerField()
     carbs = forms.IntegerField()
