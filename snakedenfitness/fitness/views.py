@@ -8,11 +8,11 @@ from django.forms import ModelForm
 from .forms import WorkoutForm
 from .models import Workout
 
-
 # Create your views here.
 def fitness_home(request):
-    return render(request, 'fitness/fitness_home.html', {})
+    obj = Workout.objects.all()
 
+    return render(request, 'fitness/fitness_home.html', {'objs': obj})
 
 # can restrict view here with permissions
 # @permission_required('x.y') or PermissionRequiredMixin
@@ -22,6 +22,7 @@ def trainer_home(request):
 @login_required
 def workout_form(request):
     # if this is a POST request we need to process the form data
+
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = WorkoutForm(request.POST)
@@ -37,7 +38,7 @@ def workout_form(request):
             obj.weight = form.cleaned_data['weight']
             obj.user = User(request.user.id)
             obj.save()
-            # redirect to a new URL:
+
             return HttpResponseRedirect('/fitness/')
 
     # if a GET (or any other method) we'll create a blank form
@@ -45,7 +46,6 @@ def workout_form(request):
         form = WorkoutForm()
 
     return render(request, 'fitness/workout_form.html', {'form': form})
-
 
 def update_profile(request, user_id):
     user = User.objects.get(pk=user_id)
@@ -60,3 +60,4 @@ def delete_workout(request):
 
 def edit_workout(request):
     return render(request, 'fitness/edit_workout.html', {})
+

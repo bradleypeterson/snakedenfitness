@@ -9,11 +9,13 @@ from .models import Meal
 
 
 def diet_home(request):
-    return render(request, 'diet/diet_home.html', {})
+    obj = Meal.objects.all()
+    return render(request, 'diet/diet_home.html', {'obj': obj})
 
 
 def dietitian_home(request):
     return render(request, 'diet/dietitian_home.html', {})
+
 
 @login_required
 def meal_form(request):
@@ -25,7 +27,7 @@ def meal_form(request):
         if form.is_valid():
             # process the data in form.cleaned_data as required
             obj = Meal()
-            obj.name = form.cleaned_data['name']
+            obj.meal_name = form.cleaned_data['meal_name']
             obj.meal_type = form.cleaned_data['meal_type']
             obj.calories = form.cleaned_data['calories']
             obj.carbs = form.cleaned_data['carbs']
@@ -35,7 +37,6 @@ def meal_form(request):
             obj.save()
             # redirect to a new URL:
             return HttpResponseRedirect('/diet/')
-
     # if a GET (or any other method) we'll create a blank form
     else:
         form = MealForm()
@@ -47,6 +48,7 @@ def update_profile(request, user_id):
     user = User.objects.get(pk=user_id)
     user.profile.bio = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...'
     user.save()
+
 
 def request_dietician(request):
     return render(request, 'diet/request_dietician.html', {})

@@ -14,7 +14,6 @@
                 <h6 class="btn btn-light" style="margin-left: 750px">Today's Calories: 1800</h6>
             </div>
         </div>
-
         <div class="row pb-1">
             <div class="col-md-3 text-center h4">
                 Meal Name
@@ -29,7 +28,6 @@
                 Actions
             </div>
         </div>
-
         <div class="row pb-1">
             <div class="col-md-3 text-center h6">
                 Granola
@@ -49,5 +47,16 @@
                 </a>
             </div>
         </div>
+        {% for item in obj %}
+        <tr>
+            <td>{{ item.meal_name }}</td>
+            <td>{{ item.meal_type }}</td>
+            <td>{{ item.calories }}</td>
+            <td>{{ item.carbs }}</td>
+            <td>{{ item.sugars }}</td>
+            <td>{{ item.protein }}</td>
+            <td>{{ item.user }}</td>
+        </tr>
+       {% endfor %}
     </div>
 {% endblock %}

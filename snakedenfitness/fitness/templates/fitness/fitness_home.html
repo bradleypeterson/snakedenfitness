@@ -47,5 +47,16 @@
                 </a>
             </div>
         </div>
+                {% for item in objs %}
+        <tr>
+            <td>{{ item.workout_type }}</td>
+            <td>{{ item.muscle_group }}</td>
+            <td>{{ item.exercise_name }}</td>
+            <td>{{ item.reps }}</td>
+            <td>{{ item.sets }}</td>
+            <td>{{ item.weight }}</td>
+            <td>{{ item.user }}</td>
+        </tr>
+       {% endfor %}
     </div>
 {% endblock %}
