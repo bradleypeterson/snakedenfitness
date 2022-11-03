@@ -47,16 +47,54 @@
                 </a>
             </div>
         </div>
-        {% for item in obj %}
-        <tr>
-            <td>{{ item.meal_name }}</td>
-            <td>{{ item.meal_type }}</td>
-            <td>{{ item.calories }}</td>
-            <td>{{ item.carbs }}</td>
-            <td>{{ item.sugars }}</td>
-            <td>{{ item.protein }}</td>
-            <td>{{ item.user }}</td>
-        </tr>
-       {% endfor %}
+
+        <div>
+            <h1>Name</h1>
+             {% for item in obj %}
+            <tr>{{ item.meal_name }}</tr>
+            {% endfor %}
+        </div>
+
+        <div>
+            <h1>Type</h1>
+             {% for item in obj %}
+            <tr>{{ item.meal_type }}</tr>
+            {% endfor %}
+        </div>
+
+        <div>
+            <h1>Calories</h1>
+             {% for item in obj %}
+            <tr>{{ item.calories }}</tr>
+            {% endfor %}
+        </div>
+
+        <div>
+            <h1>Carbs</h1>
+             {% for item in obj %}
+            <tr>{{ item.carbs }}</tr>
+            {% endfor %}
+        </div>
+
+        <div>
+            <h1>Sugars</h1>
+             {% for item in obj %}
+            <tr>{{ item.sugars }}</tr>
+            {% endfor %}
+        </div>
+
+        <div>
+            <h1>Protein</h1>
+             {% for item in obj %}
+            <tr>{{ item.protein }}</tr>
+            {% endfor %}
+        </div>
+
+        <div>
+            <h1>User</h1>
+             {% for item in obj %}
+            <tr>{{ item.user }}</tr>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
