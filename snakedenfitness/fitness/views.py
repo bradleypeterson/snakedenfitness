@@ -55,7 +55,7 @@ def update_profile(request, user_id):
 def request_trainer(request):
     return render(request, 'fitness/request_trainer.html', {})
 
-def delete_workout(request):
+def delete_workout(request, id):
     return render(request, 'fitness/delete_workout.html', {})
 
 def edit_workout(request):

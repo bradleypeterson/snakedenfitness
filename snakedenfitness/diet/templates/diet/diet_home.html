@@ -3,40 +3,73 @@
 {% block body %}
     <h1 style="text-align: center; margin-top: 50px">Diet</h1>
     <div class="container p-0">
-        <div class="row py-3">
+        <div class="row pb-1">
             <div class="col-md-12 text-center h6">
                 <a href="{% url 'meal_form' %}">
-                    <button class="btn btn-success" type="submit">New</button>
+                    <button class="btn btn-success" type="submit" style="margin-left: 0">New</button>
                 </a>
                 <a href="{% url 'request_dietician' %}">
                     <button class="btn btn-info" type="submit">Request Dietician</button>
                 </a>
-                <h6 class="btn btn-light" style="margin-left: 750px">Today's Calories: 1800</h6>
+                <h6 class="btn btn-light" style="margin-left: 825px">Today's Calories: 1800</h6>
             </div>
         </div>
         <div class="row pb-1">
-            <div class="col-md-3 text-center h4">
+            <div class="col-md-2 text-center h4">
                 Meal Name
             </div>
-            <div class="col-md-3 text-center h4">
+            <div class="col-md-2 text-center h4">
                 Meal Type
             </div>
-            <div class="col-md-3 text-center h4">
-                Calories
+            <div class="col-md-2 text-center h4">
+                Protein
             </div>
-            <div class="col-md-3 text-center h4">
-                Actions
+            <div class="col-md-2 text-center h4">
+                Carbs
+            </div>
+            <div class="col-md-2 text-center h4">
+                Sugars
+            </div>
+            <div class="col-md-2 text-center h4">
+                Calories
             </div>
         </div>
         <div class="row pb-1">
-            <div class="col-md-3 text-center h6">
-                Granola
+            <div class="col-md-2 text-center h6">
+                {% for item in obj %}
+                    <tr>{{ item.meal_name }}</tr>
+                    <tr><br><br></tr>
+                {% endfor %}
             </div>
-            <div class="col-md-3 text-center h6">
-                Snack
+            <div class="col-md-2 text-center h6">
+                {% for item in obj %}
+                    <tr>{{ item.meal_type }}</tr>
+                    <tr><br><br></tr>
+                {% endfor %}
             </div>
-            <div class="col-md-3 text-center h6">
-                100
+            <div class="col-md-2 text-center h6">
+                {% for item in obj %}
+                    <tr>{{ item.carbs }}</tr>
+                    <tr><br><br></tr>
+                {% endfor %}
+            </div>
+            <div class="col-md-2 text-center h6">
+                {% for item in obj %}
+                    <tr>{{ item.sugars }}</tr>
+                    <tr><br><br></tr>
+                {% endfor %}
+            </div>
+            <div class="col-md-2 text-center h6">
+                {% for item in obj %}
+                    <tr>{{ item.protein }}</tr>
+                    <tr><br><br></tr>
+                {% endfor %}
+            </div>
+            <div class="col-md-2 text-center h6">
+                {% for item in obj %}
+                    <tr>{{ item.calories }}</tr>
+                    <tr><br><br></tr>
+                {% endfor %}
             </div>
             <div class="col-md-3 text-center h6">
                 <a href="{% url 'edit_meal' %}">
@@ -46,55 +79,6 @@
                    <button class="btn btn-danger" type="submit">Delete</button>
                 </a>
             </div>
-        </div>
-
-        <div>
-            <h1>Name</h1>
-             {% for item in obj %}
-            <tr>{{ item.meal_name }}</tr>
-            {% endfor %}
-        </div>
-
-        <div>
-            <h1>Type</h1>
-             {% for item in obj %}
-            <tr>{{ item.meal_type }}</tr>
-            {% endfor %}
-        </div>
-
-        <div>
-            <h1>Calories</h1>
-             {% for item in obj %}
-            <tr>{{ item.calories }}</tr>
-            {% endfor %}
-        </div>
-
-        <div>
-            <h1>Carbs</h1>
-             {% for item in obj %}
-            <tr>{{ item.carbs }}</tr>
-            {% endfor %}
-        </div>
-
-        <div>
-            <h1>Sugars</h1>
-             {% for item in obj %}
-            <tr>{{ item.sugars }}</tr>
-            {% endfor %}
-        </div>
-
-        <div>
-            <h1>Protein</h1>
-             {% for item in obj %}
-            <tr>{{ item.protein }}</tr>
-            {% endfor %}
-        </div>
-
-        <div>
-            <h1>User</h1>
-             {% for item in obj %}
-            <tr>{{ item.user }}</tr>
-            {% endfor %}
         </div>
     </div>
 {% endblock %}

@@ -3,10 +3,10 @@ from django import forms
 
 class MealForm(forms.Form):
     MEAL_TYPES = [
-        ('breakfast', 'Breakfast'),
-        ('lunch', 'Lunch'),
-        ('dinner', 'Dinner'),
-        ('snack', 'Snack'),
+        ('Breakfast', 'Breakfast'),
+        ('Lunch', 'Lunch'),
+        ('Dinner', 'Dinner'),
+        ('Snack', 'Snack'),
     ]
 
     meal_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control huge', 'placeholder': 'Meal Name'}))
@@ -15,6 +15,4 @@ class MealForm(forms.Form):
     carbs = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control huge', 'placeholder': 'Carbs'}))
     sugars = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control huge', 'placeholder': 'Sugars'}))
     protein = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control huge', 'placeholder': 'Protein'}))
-
-
 

@@ -4,39 +4,85 @@
     <h1 style="margin-left: 900PX; margin-top: 50px">Fitness</h1>
     <div class="container p-0">
         <div class="row pb-3">
-            <div class="col-md-4 text-center h6">
+            <div class="col-md-12 text-center h6">
                 <a href="{% url 'workout_form' %}">
                     <button class="btn btn-success" type="submit">New</button>
                 </a>
                 <a href="{% url 'request_trainer' %}">
                     <button class="btn btn-info" type="submit">Request Trainer</button>
                 </a>
+                <h6 class="btn btn-light" style="margin-left: 1025px; background-color: white; border-color: white"></h6>
             </div>
-            <div class="col-md-8"></div>
         </div>
 
         <div class="row pb-1">
-            <div class="col-md-3 text-center h4">
+            <div class="col-md-2 text-center h4">
                 Workout Type
             </div>
-            <div class="col-md-3 text-center h4">
+            <div class="col-md-2 text-center h4">
                 Muscle Group
             </div>
-            <div class="col-md-3 text-center h4">
+            <div class="col-md-2 text-center h4">
                 Exercise Name
             </div>
-            <div class="col-md-3 text-center h4">
+            <div class="col-md-2 text-center h4">
+                Reps
+            </div>
+            <div class="col-md-2 text-center h4">
+                Set
+            </div>
+            <div class="col-md-2 text-center h4">
+                Weight
             </div>
         </div>
         <div class="row pb-1">
-            <div class="col-md-3 text-center h6">
-                Strength
+            <div class="col-md-2 text-center h6">
+                {% for item in objs %}
+                <tr>
+                    <td>{{ item.workout_type }}</td>
+                    <tr><br><br></tr>
+                </tr>
+                {% endfor %}
             </div>
-            <div class="col-md-3 text-center h6">
-                Legs
+            <div class="col-md-2 text-center h6">
+                {% for item in objs %}
+                <tr>
+                    <td>{{ item.muscle_group }}</td>
+                    <tr><br><br></tr>
+                </tr>
+                {% endfor %}
             </div>
-            <div class="col-md-3 text-center h6">
-                Leg Curls
+            <div class="col-md-2 text-center h6">
+                {% for item in objs %}
+                <tr>
+                    <td>{{ item.exercise_name }}</td>
+                    <tr><br><br></tr>
+                </tr>
+                {% endfor %}
+            </div>
+            <div class="col-md-2 text-center h6">
+                {% for item in objs %}
+                <tr>
+                    <td>{{ item.reps }}</td>
+                    <tr><br><br></tr>
+                </tr>
+                {% endfor %}
+            </div>
+            <div class="col-md-2 text-center h6">
+                {% for item in objs %}
+                <tr>
+                    <td>{{ item.sets }}</td>
+                    <tr><br><br></tr>
+                </tr>
+                {% endfor %}
+            </div>
+            <div class="col-md-2 text-center h6">
+                {% for item in objs %}
+                <tr>
+                    <td>{{ item.weight }}</td>
+                    <tr><br><br></tr>
+                </tr>
+                {% endfor %}
             </div>
             <div class="col-md-3 text-center h6">
                 <a href="{% url 'edit_workout'%}">
@@ -47,16 +93,5 @@
                 </a>
             </div>
         </div>
-                {% for item in objs %}
-        <tr>
-            <td>{{ item.workout_type }}</td>
-            <td>{{ item.muscle_group }}</td>
-            <td>{{ item.exercise_name }}</td>
-            <td>{{ item.reps }}</td>
-            <td>{{ item.sets }}</td>
-            <td>{{ item.weight }}</td>
-            <td>{{ item.user }}</td>
-        </tr>
-       {% endfor %}
     </div>
 {% endblock %}
