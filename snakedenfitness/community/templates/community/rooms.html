@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row h1 my-3">
+        <div class="text-center">Community</div>
+    </div>
+    <div class="row py-2">
+        <div class="col-2">
+            <a href="{% url 'groupForm' %}" class="btn btn-success px-3">New Group</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 text-center">
+            My Groups
+        </div>
+        <div class="col-6 text-center">
+            Group Requests
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+        {% for room in rooms %}
+            <div class="row border rounded p-2 m-2">
+                <div class="col-md-6 h3 d-flex justify-content-center">{{ room.name }}</div>
+                <div class="col-md-6 d-flex justify-content-center">
+                    <a href="{% url 'room' room.slug %}" class="btn btn-warning px-3">View</a>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+        <div class="col-6">
+            <div class="row border p-2 m-2">
+                <div class="col-md-6 h3 d-flex justify-content-center">Invite 1</div>
+                <div class="col-md-6 d-flex justify-content-center">
+                    <a href="#" class="btn btn-success px-3 mx-1">Accept</a>
+                    <a href="#" class="btn btn-danger px-3 mx-1">Decline</a>
+                </div>
+            </div>
+            <div class="row border p-2 m-2">
+                <div class="col-md-6 h3 d-flex justify-content-center">Invite 1</div>
+                <div class="col-md-6 d-flex justify-content-center">
+                    <a href="#" class="btn btn-success px-3 mx-1">Accept</a>
+                    <a href="#" class="btn btn-danger px-3 mx-1">Decline</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
