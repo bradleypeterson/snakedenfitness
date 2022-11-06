@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1>Workout log for {{ user.username }}</h1>
+    <h2>PR for: </h2>
+    {% for workout in workouts %}
+        <h3>{{ workout.exercise_name }}</h3>
+        <h3>{{ workout.workout_type }}</h3>
+        <h3>{{ workout.muscle_group }}</h3>
+        <h3>{{ workout.reps }}</h3>
+        <h3>{{ workout.sets }}</h3>
+        <h3>{{ workout.weight }}</h3>
+    {% endfor %}
+{% endblock %}

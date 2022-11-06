@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/722931f5-f95d-499b-b091-a79ec6c5e49b/resourceGroups/appsvc_linux_centralus_basic/providers/Microsoft.Web/sites/snakedenfitness",
+    "appService.deploySubpath": "."
+}

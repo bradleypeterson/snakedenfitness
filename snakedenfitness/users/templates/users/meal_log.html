@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1>Meal log for {{ user.username }}</h1>
+    {% for meal in meals %}
+        <h3>{{ meal.meal_name }}</h3>
+        <h3>{{ meal.meal_type }}</h3>
+        <h3>{{ meal.calories }}</h3>
+        <h3>{{ meal.carbs }}</h3>
+        <h3>{{ meal.sugars }}</h3>
+        <h3>{{ meal.protein }}</h3>
+    {% endfor %}
+{% endblock %}
