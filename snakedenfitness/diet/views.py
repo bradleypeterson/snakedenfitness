@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 
@@ -9,13 +9,11 @@ from .models import Meal
 
 
 def diet_home(request):
-    obj = Meal.objects.all()
-    return render(request, 'diet/diet_home.html', {'obj': obj})
-
+    meal = Meal.objects.all()
+    return render(request, 'diet/diet_home.html', {'meal': meal})
 
 def dietitian_home(request):
     return render(request, 'diet/dietitian_home.html', {})
-
 
 @login_required
 def meal_form(request):
@@ -53,8 +51,19 @@ def update_profile(request, user_id):
 def request_dietician(request):
     return render(request, 'diet/request_dietician.html', {})
 
-def delete_meal(request):
-    return render(request, 'diet/delete_meal.html', {})
+def delete_meal(request, meal_id):
+    meal = Meal.objects.get(pk=meal_id)
+    meal.delete()
+    return redirect('diet_home.html')
+    #return render(request, 'diet/delete_meal.html', {'meal' : meal})
 
-def edit_meal(request):
-    return render(request, 'diet/edit_meal.html', {})
+@login_required
+def edit_meal(request, meal_id):
+    meal = Meal.objects.get(pk=meal_id)
+    form = MealForm(request.POST or None)
+
+    if form.is_valid():
+        form.save()
+        return redirect('diet_home.html')
+
+    return render(request, 'diet/edit_meal.html', {'meal': meal, 'form': form})

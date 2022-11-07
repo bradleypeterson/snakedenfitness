@@ -1,4 +1,16 @@
 {% extends 'base.html' %}
+
 {% block body %}
-<h1>hi edit meal</h1>
-{%  endblock %}
+{{ meal }}
+ <div class="container p-0" style="margin-top: 25px; max-width: 25%;">
+        <h1 style="text-align: center">Edit Meal Information</h1>
+        <form action="/diet/edit_meal/" method="post" style="margin-top: 25px">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <input type="submit" class="btn btn-primary"
+                   style="margin-top: 15px; margin-left: 165px; text-align: center" value="Submit">
+            <a href="{% url 'diet_home' %}" class="btn btn-danger" style="margin-top: 15px;">Cancel</a>
+        </form>
+    </div>
+{% endblock %}
