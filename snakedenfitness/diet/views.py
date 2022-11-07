@@ -54,7 +54,8 @@ def request_dietician(request):
 def delete_meal(request, id):
         meal = Meal.objects.get(pk=id)
         meal.delete()
-        return redirect('diet_home.html')
+        return redirect('diet_home')
+
 
 @login_required
 def edit_meal(request, id):
@@ -63,6 +64,6 @@ def edit_meal(request, id):
 
     if form.is_valid():
         form.save()
-        return redirect('diet_home.html')
+        return redirect('diet_home')
 
     return render(request, 'diet/edit_meal.html', {'meal': meal, 'form': form})
