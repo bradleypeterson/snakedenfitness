@@ -52,14 +52,14 @@ def request_dietician(request):
     return render(request, 'diet/request_dietician.html', {})
 
 def delete_meal(request, id):
-    meal = Meal.objects.get(pk=id)
-    meal.delete()
-    return redirect('diet_home.html')
+        meal = Meal.objects.get(pk=id)
+        meal.delete()
+        return redirect('diet_home.html')
 
 @login_required
 def edit_meal(request, id):
     meal = Meal.objects.get(pk=id)
-    form = MealForm(request.POST or None, instance=meal)
+    form = MealForm(request.POST or None)
 
     if form.is_valid():
         form.save()
