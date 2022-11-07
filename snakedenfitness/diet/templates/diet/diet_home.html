@@ -30,10 +30,10 @@
                     <li>Protein: {{ meal.protein }}</li>
                   </ul>
                 </p>
-                  <a href="{% url 'edit_meal' meal_id %}">
+                  <a href="{% url 'edit_meal' id %}">
                       <button>Edit</button>
                   </a>
-                  <a href="{% url 'delete_meal' meal_id %}">
+                  <a href="{% url 'delete_meal' id %}">
                       <button>Delete</button>
                   </a>
               </div>

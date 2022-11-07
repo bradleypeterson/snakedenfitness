@@ -51,16 +51,15 @@ def update_profile(request, user_id):
 def request_dietician(request):
     return render(request, 'diet/request_dietician.html', {})
 
-def delete_meal(request, meal_id):
-    meal = Meal.objects.get(pk=meal_id)
+def delete_meal(request, id):
+    meal = Meal.objects.get(pk=id)
     meal.delete()
     return redirect('diet_home.html')
-    #return render(request, 'diet/delete_meal.html', {'meal' : meal})
 
 @login_required
-def edit_meal(request, meal_id):
-    meal = Meal.objects.get(pk=meal_id)
-    form = MealForm(request.POST or None)
+def edit_meal(request, id):
+    meal = Meal.objects.get(pk=id)
+    form = MealForm(request.POST or None, instance=meal)
 
     if form.is_valid():
         form.save()
