@@ -3,12 +3,11 @@
 {% block body %}
  <div class="container p-0" style="margin-top: 25px; max-width: 25%;">
         <h1 style="text-align: center">Edit Workout Information</h1>
-        <form action="/fitness/edit_workout/" method="post" style="margin-top: 25px">
+        <form form method="POST" style="margin-top: 25px">
             {% csrf_token %}
             {{ form.as_p }}
 
-            <input type="submit" class="btn btn-primary"
-                   style="margin-top: 15px; margin-left: 165px; text-align: center" value="Submit">
+            <input type="submit" class="btn btn-primary" value="Submit">
             <a href="{% url 'fitness_home' %}" class="btn btn-danger" style="margin-top: 15px;">Cancel</a>
         </form>
     </div>
