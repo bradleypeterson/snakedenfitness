@@ -1,18 +1,32 @@
 from django import forms
+from django.forms import ModelForm
+from .models import Meal
 
+class MealForm(ModelForm):
+    class Meta:
+        model = Meal
+        fields = ('meal_name', 'meal_type', 'calories', 'carbs', 'sugars', 'protein')
+        MEAL_TYPES = [
+            ('Breakfast', 'Breakfast'),
+            ('Lunch', 'Lunch'),
+            ('Dinner', 'Dinner'),
+            ('Snack', 'Snack'),
+        ]
+        labels = {
+            'meal_name': '',
+            'meal_type': 'Meal Type',
+            'calories': 'Calories',
+            'carbs': 'Carbs',
+            'sugars': 'Sugars',
+            'protein': 'Protein',
+        }
+        widgets = {
+            'meal_name': forms.TextInput({'class': 'form-control', 'placeholder': 'Meal Name'}),
+            'meal_type': forms.Select(choices=MEAL_TYPES, attrs={'class': 'form-select huge'}),
+            'calories': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Calories'}),
+            'carbs': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Carbs'}),
+            'sugars':forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Sugars'}),
+            'protein': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Protein'}),
+        }
 
-class MealForm(forms.Form):
-    MEAL_TYPES = [
-        ('Breakfast', 'Breakfast'),
-        ('Lunch', 'Lunch'),
-        ('Dinner', 'Dinner'),
-        ('Snack', 'Snack'),
-    ]
-
-    meal_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control huge', 'placeholder': 'Meal Name'}))
-    meal_type = forms.CharField(label='Select meal type', widget=forms.Select(choices=MEAL_TYPES, attrs={'class': 'form-select huge'}))
-    calories = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control huge', 'placeholder': 'Calories'}))
-    carbs = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control huge', 'placeholder': 'Carbs'}))
-    sugars = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control huge', 'placeholder': 'Sugars'}))
-    protein = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control huge', 'placeholder': 'Protein'}))
 

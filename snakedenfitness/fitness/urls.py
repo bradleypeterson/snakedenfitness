@@ -6,6 +6,6 @@ urlpatterns = [
     path('trainer/', views.trainer_home, name="trainer_home"),
     path('workout_form/', views.workout_form, name="workout_form"),
     path('request_trainer/', views.request_trainer, name="request_trainer"),
-    path('delete_workout/', views.delete_workout, name="delete_workout"),
-    path('edit_workout/', views.edit_workout, name="edit_workout"),
+    path('delete_workout/<int:id>', views.delete_workout, name="delete_workout"),
+    path('edit_workout/<int:id>', views.edit_workout, name="edit_workout"),
 ]

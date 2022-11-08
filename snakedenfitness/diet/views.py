@@ -56,11 +56,10 @@ def delete_meal(request, id):
         meal.delete()
         return redirect('diet_home')
 
-
 @login_required
 def edit_meal(request, id):
     meal = Meal.objects.get(pk=id)
-    form = MealForm(request.POST or None)
+    form = MealForm(request.POST or None, instance=meal)
 
     if form.is_valid():
         form.save()

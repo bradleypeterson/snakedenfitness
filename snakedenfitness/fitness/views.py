@@ -10,9 +10,9 @@ from .models import Workout
 
 # Create your views here.
 def fitness_home(request):
-    obj = Workout.objects.all()
+    workout = Workout.objects.all()
 
-    return render(request, 'fitness/fitness_home.html', {'objs': obj})
+    return render(request, 'fitness/fitness_home.html', {'workout': workout})
 
 # can restrict view here with permissions
 # @permission_required('x.y') or PermissionRequiredMixin
@@ -56,8 +56,21 @@ def request_trainer(request):
     return render(request, 'fitness/request_trainer.html', {})
 
 def delete_workout(request, id):
+    workout = Workout.objects.get(pk=id)
+    workout.delete()
+    return redirect('fitness_home')
     return render(request, 'fitness/delete_workout.html', {})
 
 def edit_workout(request):
     return render(request, 'fitness/edit_workout.html', {})
 
+@login_required
+def edit_workout(request, id):
+    workout = Workout.objects.get(pk=id)
+    form = WorkoutForm(request.POST or None, instance=workout)
+
+    if form.is_valid():
+        form.save()
+        return redirect('fitness_home')
+
+    return render(request, 'fitness/edit_workout.html', {'workout': workout, 'form': form})
