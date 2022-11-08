@@ -4,7 +4,7 @@
     <h1 style="margin-left: 900PX; margin-top: 50px">Fitness</h1>
     <div class="container p-0">
         <div class="row pb-3">
-            <div class="col-md-12 text-center h6">
+            <div class="col-md-12 text-center h6" style="margin-left: 100px">
                 <a href="{% url 'workout_form' %}">
                     <button class="btn btn-success" type="submit">New</button>
                 </a>
@@ -15,22 +15,24 @@
             </div>
         </div>
         {% for workout in workout %}
-            <div class="card">
+            <div class="card" style="width: 50%; text-align: center; margin-left: 350px; margin-top: 10px">
               <div class="card-header">
-                {{ workout.exercise_name }}
+                  <h4>{{ workout.exercise_name }}</h4>
               </div>
               <div class="card-body">
+                  <h5>Workout Information</h5>
                 <p class="card-text">
-                    <li>Workout Type: {{ workout.workout_type }}</li>
-                    <li>Muscle Group: {{ workout.muscle_group }}</li>
-                    <li>Reps: {{ workout.reps }}</li>
-                    <li>Sets: {{ workout.sets }}</li>
+                    <li style="list-style-type: none"><strong>Workout Type:</strong> {{ workout.workout_type }}</li>
+                    <li style="list-style-type: none"><strong>Muscle Group:</strong> {{ workout.muscle_group }}</li>
+                    <li style="list-style-type: none"><strong>Reps:</strong> {{ workout.reps }}</li>
+                    <li style="list-style-type: none"><strong>Sets:</strong> {{ workout.sets }}</li>
+                    <li style="list-style-type: none"><strong>Weight:</strong> {{ workout.weight }}</li>
                 </p>
                   <a href="{% url 'edit_workout' workout.id %}">
-                      <button>Edit</button>
+                      <button class="btn btn-warning" style="color: white">Edit</button>
                   </a>
                   <a href="{% url 'delete_workout' workout.id %}">
-                      <button>Delete</button>
+                      <button class="btn btn-danger">Delete</button>
                   </a>
               </div>
             </div>

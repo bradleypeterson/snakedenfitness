@@ -25,7 +25,7 @@ class MealForm(ModelForm):
             'meal_type': forms.Select(choices=MEAL_TYPES, attrs={'class': 'form-select huge'}),
             'calories': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Calories'}),
             'carbs': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Carbs'}),
-            'sugars':forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Sugars'}),
+            'sugars': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Sugars'}),
             'protein': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Protein'}),
         }
 

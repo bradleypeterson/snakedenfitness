@@ -28,10 +28,10 @@ class WorkoutForm(ModelForm):
         'weight': 'Weight',
     }
     widgets = {
-        'workout_type': forms.Select(choices=WORKOUT_TYPE, attrs={'class': 'form-select'}),
-        'muscle_group':forms.Select(choices=MUSCLE_GROUP, attrs={'class': 'form-select'}),
-        'exercise_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Exercise Name'}),
-        'reps': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Reps'}),
-        'sets': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Sets'}),
-        'weight': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Weight'}),
+        'workout_type': forms.Select(choices=WORKOUT_TYPE, attrs={'class': 'form-select huge'}),
+        'muscle_group': forms.Select(choices=MUSCLE_GROUP, attrs={'class': 'form-select huge'}),
+        'exercise_name': forms.TextInput(attrs={'class': 'form-control huge', 'placeholder': 'Exercise Name'}),
+        'reps': forms.TextInput(attrs={'class': 'form-control huge', 'placeholder': 'Reps'}),
+        'sets': forms.TextInput(attrs={'class': 'form-control huge', 'placeholder': 'Sets'}),
+        'weight': forms.TextInput(attrs={'class': 'form-control huge', 'placeholder': 'Weight'}),
     }

@@ -4,41 +4,40 @@
     <h1 style="text-align: center; margin-top: 50px">Diet</h1>
     <div class="container p-0">
         <div class="row pb-1">
-            <div class="col-md-12 text-center h6">
+            <div class="col-md-12 text-center h6" >
                 <a href="{% url 'meal_form' %}">
                     <button class="btn btn-success" type="submit" style="margin-left: 0">New</button>
                 </a>
                 <a href="{% url 'request_dietician' %}">
                     <button class="btn btn-info" type="submit" style="color: white">Request Dietician</button>
                 </a>
-                <h6 class="btn btn-light" style="margin-left: 825px">Today's Calories: 1800</h6>
+                <h6 class="btn btn-light" style="margin-left: 650px">Today's Calories: 1800</h6>
             </div>
         </div>
 
         {% for meal in meal %}
-            <div class="card">
+            <div class="card" style="width: 50%; text-align: center; margin-left: 350px; margin-top: 10px">
               <div class="card-header">
-                {{ meal.meal_name }}
+                  <h4>{{ meal.meal_name }}</h4>
               </div>
               <div class="card-body">
-                <h5 class="card-title">{{ meal.meal_type }}</h5>
+                  <h5>Meal Information</h5>
                 <p class="card-text">
-                  <ul>
-                    <li>Calories: {{ meal.calories }}</li>
-                    <li>Carbs: {{ meal.carbs }}</li>
-                    <li>Sugars: {{ meal.sugars }}</li>
-                    <li>Protein: {{ meal.protein }}</li>
-                  </ul>
+                    <li style="list-style-type: none"><strong>Meal Type:</strong> {{ meal.meal_type }}</li>
+                    <li style="list-style-type: none"><strong>Calories:</strong> {{ meal.calories }}</li>
+                    <li style="list-style-type: none"><strong>Carbs:</strong> {{ meal.carbs }}</li>
+                    <li style="list-style-type: none"><strong>Sugars:</strong> {{ meal.sugars }}</li>
+                    <li style="list-style-type: none"><strong>Protein:</strong> {{ meal.protein }}</li>
                 </p>
                   <a href="{% url 'edit_meal' meal.id %}">
-                      <button>Edit</button>
+                      <button class="btn btn-warning" style="color: white">Edit</button>
                   </a>
                   <a href="{% url 'delete_meal' meal.id %}">
-                      <button>Delete</button>
+                      <button class="btn btn-danger">Delete</button>
                   </a>
               </div>
             </div>
-        <br><br>
-    {% endfor %}
+            <br><br>
+        {% endfor %}
 </div>
 {% endblock %}
