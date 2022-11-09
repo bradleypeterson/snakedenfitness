@@ -4,14 +4,14 @@
     <h1>Workout log for {{ user.username }}</h1>
     {% for workout in workouts %}
         <h3>{{ workout.exercise_name }}</h3>
-        <h3>{{ workout.workout_type }}</h3>
-        <h3>{{ workout.muscle_group }}</h3>
-        <h3>{{ workout.reps }}</h3>
-        <h3>{{ workout.sets }}</h3>
+        <h6>{{ workout.workout_type }}</h6>
+        <h6>{{ workout.muscle_group }}</h6>
+        <h6>Reps: {{ workout.reps }}</h6>
+        <h6>Sets: {{ workout.sets }}</h6>
             {% if workout.weight in prs %}
-                <h3 style="color: red;">{{ workout.weight }}</h3>
+                <h6 style="color: red;">Weight: {{ workout.weight }} (PR)</h6>
         {% else %}
-            <h3>{{ workout.weight }}</h3>
+            <h6>Weight: {{ workout.weight }}</h6>
         {% endif %}
         <br>
     {% endfor %}
