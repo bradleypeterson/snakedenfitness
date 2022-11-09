@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import transaction
+from django.db.models import Max
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -99,4 +100,13 @@ def user_meal_data(request):
 @login_required
 def user_workout_data(request):
     workouts = Workout.objects.filter(user=request.user)
-    return render(request, 'users/workout_log.html', {'workouts': workouts})
+
+    prs = []
+    muscle_group = ['arms', 'back', 'shoulders', 'core', 'legs']
+    for muscle in muscle_group:
+        workout1 = Workout.objects.filter(user=request.user, muscle_group=muscle)
+        pr1 = workout1.order_by('-weight').first()
+        if pr1 is not None:
+            prs.append(pr1.weight)
+
+    return render(request, 'users/workout_log.html', {'workouts': workouts, 'prs': prs})
