@@ -30,20 +30,15 @@
         {% endfor %}
         </div>
         <div class="col-6">
+        {% for invite in invites %}
             <div class="row border p-2 m-2">
-                <div class="col-md-6 h3 d-flex justify-content-center">Invite 1</div>
+                <div class="col-md-6 h3 d-flex justify-content-center">{{ invite.group }}</div>
                 <div class="col-md-6 d-flex justify-content-center">
-                    <a href="#" class="btn btn-success px-3 mx-1">Accept</a>
-                    <a href="#" class="btn btn-danger px-3 mx-1">Decline</a>
+                    <a href="{% url 'acceptInvite' invite.group invite.id %}" class="btn btn-success px-3 mx-1">Accept</a>
+                    <a href="{% url 'declineInvite' invite.id %}" class="btn btn-danger px-3 mx-1">Decline</a>
                 </div>
             </div>
-            <div class="row border p-2 m-2">
-                <div class="col-md-6 h3 d-flex justify-content-center">Invite 1</div>
-                <div class="col-md-6 d-flex justify-content-center">
-                    <a href="#" class="btn btn-success px-3 mx-1">Accept</a>
-                    <a href="#" class="btn btn-danger px-3 mx-1">Decline</a>
-                </div>
-            </div>
+        {% endfor %}
         </div>
     </div>
 </div>

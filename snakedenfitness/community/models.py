@@ -20,3 +20,9 @@ class Message(models.Model):
 
     class Meta:
         ordering = ('date_added',)
+
+
+class Invitation(models.Model):
+    sender = models.CharField(max_length=255)
+    receiver = models.CharField(max_length=255)
+    group = models.CharField(max_length=255)
