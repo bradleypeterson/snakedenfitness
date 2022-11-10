@@ -14,7 +14,7 @@
         <div class="navbar">
             <a href="{% url 'diet_home' %}" class="nav-item nav-link">Diet</a>
             <a href="{% url 'fitness_home' %}" class="nav-item nav-link">Fitness</a>
-            <a href="{% url 'community_home' %}" class="nav-item nav-link">Community</a>
+            <a href="{% url 'rooms' %}" class="nav-item nav-link">Community</a>
 
             <!-- Come back; change this element on log-in -->
             <!-- <a href="{% url 'register' %}" class="nav-item nav-link"><i class="bi bi-person" style="color: white;"> Account </i></a> -->
@@ -45,8 +45,16 @@
         {% endfor %}
     {% endif %}
 
-    {% block body %}
+    {% block title %}
+    {% endblock %}
 
+    {% block body %}
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+
+    {% block scripts %}
     {% endblock %}
 </body>
 </html>
