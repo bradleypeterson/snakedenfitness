@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+
+        <label for="group_name" class="pt-1">Group Name:</label>
+        <input type="text" class="" id="group_name" name="group_name">
+
+<!--        <label for="group_description" class="pt-1">Group Description:</label>-->
+<!--        <textarea class="" id="group_description" name="group_description"></textarea>-->
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}

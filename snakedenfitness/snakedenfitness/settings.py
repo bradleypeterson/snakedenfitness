@@ -27,12 +27,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+#Adding a trusted domain
+CSRF_TRUSTED_ORIGINS = ['https://*.azurewebsites.net', 'https://*.127.0.0.1']
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'community',
     'diet',
     'fitness',
@@ -81,7 +84,16 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'snakedenfitness.wsgi.application'
+#WSGI_APPLICATION = 'snakedenfitness.wsgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 
 # Database
@@ -96,8 +108,8 @@ DATABASES = {
 
 # AUTH_USER_MODEL= []
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'C:/Users/Terra/Desktop/School/Weber 2022-/CS4760/snakedenfitness/snakedenfitness/users')
-MEDIA_URL = '/users/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -140,3 +152,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+ASGI_APPLICATION = 'snakedenfitness.asgi.application'
