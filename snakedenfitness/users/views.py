@@ -12,22 +12,11 @@ from django.contrib.auth.hashers import make_password
 
 from diet.models import Meal
 from fitness.models import Workout
+from users.models import Profile, User, clientTrainer
 
 
 # Create your views here.
 def register(request):
-    # if request.method == 'POST':
-    #     form = RegistrationForm(request.POST)
-    #     if form.is_valid():
-    #         form.save()
-    #         username = form.cleaned_data.get('username')
-    #         messages.success(request, f'User {username} successfully created')
-    #         return redirect('login')
-
-    # else:
-    #     form = RegistrationForm()
-
-    # return render(request, 'users/register.html', {'form':form})
     if request.method == 'POST':
         user_form = UserForm(request.POST)
         profile_form = ProfileForm(request.POST)
@@ -65,8 +54,10 @@ def register(request):
 
 @login_required
 def profile(request):
-
-    return render(request, 'users/profile.html', {})
+    CTtable = clientTrainer.objects.filter(client = request.user)
+    if request.user.profile.role == 2:
+        CTtable = clientTrainer.objects.filter(trainer = request.user)
+    return render(request, 'users/profile.html', {'CTtable' : CTtable})
 
 
 @login_required

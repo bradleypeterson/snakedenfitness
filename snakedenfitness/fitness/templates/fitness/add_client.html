@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+<h1>Trainers available: </h1>
+
+<div class="container">
+    {% for trainer in trainerU %}
+        <h3>{{ trainer }} :</h3>
+        <h5>{{ trainer.get_full_name }} .</h5>
+    {% endfor %}
+
+    <p>__________________________________________________________ </p>
+
+    {% for c in client %}
+    <h3> {{ c.client}} == Client</h3>
+    <h3> {{ c.trainer}} == Trainer</h3>
+
+    {% endfor %}
+    <p> ______________________________________________________________</p>
+
+    {% for trainer in Xtrain %}
+    <h3>{{ trainer.user }} : {{ trainer.bio }}</h3>
+    <h3> {{ trainer.role}} </h3>
+    <h3>{{ trainer.get_full_name }}</h3>
+    <h3>{{ trainer.assigned_trainer}} a</h3>
+
+    {% endfor %}
+
+    <p> ______________________________________________________________</p>
+
+
+    <img src="C:\Users\Terra\Desktop\School\Weber 2022-\CS4760\snakedenfitness\snakedenfitness\users\avatars\generic-avatar.png">
+    <img src="https://github.com/bradleypeterson/snakedenfitness/blob/9730341d44b82ddb4a7311332b3902f99df6e180/snakedenfitness/users/avatars/generic-avatar.png">
+    <img src="C:\Users\Terra\Desktop\School\Weber 2022-\CS4760\snakedenfitness\snakedenfitness\fitness\templates\fitness\generic-avatar.png">
+    <img src="generic-avatar.png">
+
+
+
+
+</div>
+
+{% endblock %}

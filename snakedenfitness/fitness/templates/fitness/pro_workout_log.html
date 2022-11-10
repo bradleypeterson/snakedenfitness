@@ -6,23 +6,50 @@
 <h1>Workout logs available: </h1>
 
 <div class="container">
-    {% for workout in workouts %}
+    {% comment %} {% for workout in workouts %}
         <h3>{{ workout.user }} :</h3>
         <h5>{{ workout.name }}</h5>
         <h5>reps: {{ workout.reps }}</h5>
         <h5>sets: {{ workout.sets }}</h5>
         <h5>weight: {{ workout.weight }}</h5>
     {% endfor %}
+
+    <p>__________________________________________________________ </p>
+
+    {% for CT in CTtable %}
+        <h3>{{ CT }} :</h3>
+        <h5>client: {{ CT.client }}</h5>
+        <h5>trainer: {{ CT.trainer}}</h5>
+    {% endfor %} {% endcomment %}
+
+    {% comment %} <p>__________________________________________________________ </p> {% endcomment %}
+
+    {% for workout in workouts %}
+
+        {% for CT in CTtable %}
+        {% comment %} <h3>{{ CT }} :</h3>
+        <h5>client: {{ CT.client }}</h5>
+        <h5>trainer: {{ CT.trainer}}</h5> {% endcomment %}
+
+        {% if workout.user == CT.client  %}
+            <p>you ( {{user}} ) are ASSIGNED TRAINER for {{ CT.client }} </p>
+            <h3>{{ workout.user }} :</h3>
+            <h5>{{ workout.name }}</h5>
+
+            <div>Workout Type: {{ workout.workout_type }}</div>
+            <div>Muscle Group: {{ workout.muscle_group }}</div>
+            <div>Exercise Name: {{ workout.exercise_name }}</div>
+            <div>Reps: {{ workout.reps }}</div>
+            <div>Sets: {{ workout.sets }}</div>
+            <div>Weight: {{ workout.weight }}</div>
+
+        <p>__________________________________________________________ </p>
+
+        {% endif %}
+        {% endfor %}
+
+    {% endfor %}
+
 </div>
-
-
-
-
-
-
-
-
-
-
 
 {% endblock %}

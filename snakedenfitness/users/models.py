@@ -16,10 +16,15 @@ from django.dispatch import receiver
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(User,
+                                on_delete=models.CASCADE,
+                                primary_key=True)
     birth_date = models.DateField(blank=True, default='1960-01-01')
     bio = models.TextField(max_length=500, blank=True)
-    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True, default='avatars/generic-avatar.png')
+    avatar = models.ImageField(upload_to='avatars/',
+                               null=True,
+                               blank=True,
+                               default='avatars/generic-avatar.png')
 
     CLIENT = 0
     DIETICIAN = 1
@@ -40,9 +45,6 @@ class Profile(models.Model):
     #         'is_client'
     #     )
 
-
-
-
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -55,6 +57,20 @@ register = template.Library()
 def has_group(user, group_name):
     group =  Group.objects.get(name=group_name)
     return group in user.groups.all()
+
+
+class clientTrainer(models.Model):
+    client = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        unique=True,
+        related_name='assigned_client')
+
+    trainer = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='assigned_trainer')
+
 
 ############################# Excess code graveyard #############################
 # @receiver(post_save, sender=User)
