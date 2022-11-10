@@ -33,3 +33,4 @@ class Workout(models.Model):
     weight = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+
