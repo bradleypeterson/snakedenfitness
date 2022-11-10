@@ -2,17 +2,20 @@
 
 {% block body %}
     <h1>Workout log for {{ user.username }}</h1>
+    <div style="display: grid; grid-template-columns: auto auto auto;; padding: 10px;">
     {% for workout in workouts %}
-        <h3>{{ workout.exercise_name }}</h3>
-        <h6>{{ workout.workout_type }}</h6>
-        <h6>{{ workout.muscle_group }}</h6>
-        <h6>Reps: {{ workout.reps }}</h6>
-        <h6>Sets: {{ workout.sets }}</h6>
-            {% if workout.weight in prs %}
-                <h6 style="color: red;">Weight: {{ workout.weight }} (PR)</h6>
-        {% else %}
-            <h6>Weight: {{ workout.weight }}</h6>
-        {% endif %}
-        <br>
+        <div style="margin-bottom: 20px;">
+            <div style="font-weight: bold;">{{ workout.exercise_name }}</div>
+            <div>Type: {{ workout.workout_type }}</div>
+            <div>Muscle Group: {{ workout.muscle_group }}</div>
+            <div>Reps: {{ workout.reps }}</div>
+            <div>Sets: {{ workout.sets }}</div>
+                {% if workout.weight in prs %}
+                    <div style="color: red;">Weight: {{ workout.weight }} (PR)</div>
+            {% else %}
+                <div>Weight: {{ workout.weight }}</div>
+            {% endif %}
+        </div>
     {% endfor %}
+    </div>
 {% endblock %}
