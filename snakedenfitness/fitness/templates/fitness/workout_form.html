@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <div class="container p-0" style="margin-top: 25px; max-width: 25%;">
+ <div class="container p-0" style="margin-top: 25px; max-width: 25%;">
         <h1 style="text-align: center">Enter Workout Information</h1>
         <form action="/fitness/workout_form/" method="post" style="margin-top: 25px">
             {% csrf_token %}
