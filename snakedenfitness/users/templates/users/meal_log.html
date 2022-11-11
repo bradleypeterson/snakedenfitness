@@ -2,12 +2,16 @@
 
 {% block body %}
     <h1>Meal log for {{ user.username }}</h1>
+    <div style="display: grid; grid-template-columns: auto auto auto;; padding: 10px;">
     {% for meal in meals %}
-        <h3>{{ meal.meal_name }}</h3>
-        <h3>{{ meal.meal_type }}</h3>
-        <h3>{{ meal.calories }}</h3>
-        <h3>{{ meal.carbs }}</h3>
-        <h3>{{ meal.sugars }}</h3>
-        <h3>{{ meal.protein }}</h3>
+        <div style="margin-bottom: 20px;">
+            <div style="font-weight: bold;">{{ meal.meal_name }}</div>
+            <div>{{ meal.meal_type }}</div>
+            <div>Calories: {{ meal.calories }}</div>
+            <div>Carbs: {{ meal.carbs }}</div>
+            <div>Sugars: {{ meal.sugars }}</div>
+            <div>Protein: {{ meal.protein }}</div>
+        </div>
     {% endfor %}
+    </div>
 {% endblock %}
