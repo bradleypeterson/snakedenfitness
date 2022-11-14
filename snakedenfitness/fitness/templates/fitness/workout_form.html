@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <div class="container p-0" style="margin-top: 25px; max-width: 25%;">
+ <div class="container p-0" style="margin-top: 25px; max-width: 25%;">
         <h1 style="text-align: center">Enter Workout Information</h1>
         <form action="/fitness/workout_form/" method="post" style="margin-top: 25px">
             {% csrf_token %}
@@ -9,7 +9,7 @@
 
             <input type="submit" class="btn btn-primary"
                    style="margin-top: 15px; margin-left: 165px; text-align: center" value="Submit">
-            <a href="{% url 'fitness_home' %}" class="btn btn-danger" style="margin-top: 15px;">Back</a>
+            <a href="{% url 'fitness_home' %}" class="btn btn-danger" style="margin-top: 15px;">Cancel</a>
         </form>
     </div>
 {% endblock %}
