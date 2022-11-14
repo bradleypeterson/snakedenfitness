@@ -17,6 +17,8 @@ def dietitian_home(request):
 
 @login_required
 def meal_form(request):
+    total = MealForm.calories
+
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -39,7 +41,12 @@ def meal_form(request):
     else:
         form = MealForm()
 
-    return render(request, 'diet/meal_form.html', {'form': form})
+    context = {
+        'form': form,
+        'total': total,
+    }
+
+    return render(request, 'diet/meal_form.html', context)
 
 
 def update_profile(request, user_id):

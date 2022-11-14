@@ -61,9 +61,6 @@ def delete_workout(request, id):
     return redirect('fitness_home')
     return render(request, 'fitness/delete_workout.html', {})
 
-def edit_workout(request):
-    return render(request, 'fitness/edit_workout.html', {})
-
 @login_required
 def edit_workout(request, id):
     workout = Workout.objects.get(pk=id)
