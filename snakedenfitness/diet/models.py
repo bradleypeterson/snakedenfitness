@@ -39,10 +39,10 @@ class DietitianProfile(models.Model):
 
 class Meal(models.Model):
     MEAL_TYPES = [
-        ('breakfast', 'Breakfast'),
-        ('lunch', 'Lunch'),
-        ('dinner', 'Dinner'),
-        ('snack', 'Snack'),
+        ('Breakfast', 'Breakfast'),
+        ('Lunch', 'Lunch'),
+        ('Dinner', 'Dinner'),
+        ('Snack', 'Snack'),
     ]
 
     meal_name = models.CharField(max_length=100)

@@ -4,47 +4,39 @@
     <h1 style="margin-left: 900PX; margin-top: 50px">Fitness</h1>
     <div class="container p-0">
         <div class="row pb-3">
-            <div class="col-md-4 text-center h6">
+            <div class="col-md-12 text-center h6" style="margin-left: 100px">
                 <a href="{% url 'workout_form' %}">
                     <button class="btn btn-success" type="submit">New</button>
                 </a>
                 <a href="{% url 'request_trainer' %}">
-                    <button class="btn btn-info" type="submit">Request Trainer</button>
+                    <button class="btn btn-info" type="submit" style="color: white">Request Trainer</button>
                 </a>
-            </div>
-            <div class="col-md-8"></div>
-        </div>
-
-        <div class="row pb-1">
-            <div class="col-md-3 text-center h4">
-                Workout Type
-            </div>
-            <div class="col-md-3 text-center h4">
-                Muscle Group
-            </div>
-            <div class="col-md-3 text-center h4">
-                Exercise Name
-            </div>
-            <div class="col-md-3 text-center h4">
+                <h6 class="btn btn-light" style="margin-left: 1025px; background-color: white; border-color: white"></h6>
             </div>
         </div>
-        <div class="row pb-1">
-            <div class="col-md-3 text-center h6">
-                Strength
+        {% for workout in workout %}
+            <div class="card" style="width: 50%; text-align: center; margin-left: 350px; margin-top: 10px">
+              <div class="card-header">
+                  <h4>{{ workout.exercise_name }}</h4>
+              </div>
+              <div class="card-body">
+                  <h5>Workout Information</h5>
+                <p class="card-text">
+                    <li style="list-style-type: none"><strong>Workout Type:</strong> {{ workout.workout_type }}</li>
+                    <li style="list-style-type: none"><strong>Muscle Group:</strong> {{ workout.muscle_group }}</li>
+                    <li style="list-style-type: none"><strong>Reps:</strong> {{ workout.reps }}</li>
+                    <li style="list-style-type: none"><strong>Sets:</strong> {{ workout.sets }}</li>
+                    <li style="list-style-type: none"><strong>Weight:</strong> {{ workout.weight }}</li>
+                </p>
+                  <a href="{% url 'edit_workout' workout.id %}">
+                      <button class="btn btn-warning" style="color: white">Edit</button>
+                  </a>
+                  <a href="{% url 'delete_workout' workout.id %}">
+                      <button class="btn btn-danger">Delete</button>
+                  </a>
+              </div>
             </div>
-            <div class="col-md-3 text-center h6">
-                Legs
-            </div>
-            <div class="col-md-3 text-center h6">
-                Leg Curls
-            </div>
-            <div class="col-md-3 text-center h6">
-                <button class="btn btn-warning" type="submit" style="color: white">View/Edit</button>
-                <button class="btn btn-danger" type="submit">Delete</button>
-            </div>
-        </div>
-    </div>
-    <h3>
-        <a href="{% url 'workout_form' %}" style="text-decoration: none; color: limegreen;">Workout Form</a>
-    </h3>
+        <br><br>
+    {% endfor %}
+</div>
 {% endblock %}

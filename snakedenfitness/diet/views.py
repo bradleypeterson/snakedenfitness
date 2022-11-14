@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 
@@ -9,15 +9,16 @@ from .models import Meal
 
 
 def diet_home(request):
-    return render(request, 'diet/diet_home.html', {})
-
+    meal = Meal.objects.all()
+    return render(request, 'diet/diet_home.html', {'meal': meal})
 
 def dietitian_home(request):
     return render(request, 'diet/dietitian_home.html', {})
 
-
 @login_required
 def meal_form(request):
+    total = MealForm.calories
+
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -36,12 +37,16 @@ def meal_form(request):
             obj.save()
             # redirect to a new URL:
             return HttpResponseRedirect('/diet/')
-
     # if a GET (or any other method) we'll create a blank form
     else:
         form = MealForm()
 
-    return render(request, 'diet/meal_form.html', {'form': form})
+    context = {
+        'form': form,
+        'total': total,
+    }
+
+    return render(request, 'diet/meal_form.html', context)
 
 
 def update_profile(request, user_id):
@@ -52,3 +57,19 @@ def update_profile(request, user_id):
 
 def request_dietician(request):
     return render(request, 'diet/request_dietician.html', {})
+
+def delete_meal(request, id):
+        meal = Meal.objects.get(pk=id)
+        meal.delete()
+        return redirect('diet_home')
+
+@login_required
+def edit_meal(request, id):
+    meal = Meal.objects.get(pk=id)
+    form = MealForm(request.POST or None, instance=meal)
+
+    if form.is_valid():
+        form.save()
+        return redirect('diet_home')
+
+    return render(request, 'diet/edit_meal.html', {'meal': meal, 'form': form})

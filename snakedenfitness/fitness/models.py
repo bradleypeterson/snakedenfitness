@@ -12,17 +12,17 @@ class TrainerProfile(models.Model):
 
 class Workout(models.Model):
     WORKOUT_TYPE = [
-        ('cardio', 'Cardio'),
-        ('strength', 'Strength'),
-        ('endurance', 'Endurance'),
+        ('Cardio', 'Cardio'),
+        ('Strength', 'Strength'),
+        ('Endurance', 'Endurance'),
     ]
 
     MUSCLE_GROUP = [
-        ('arms', 'Arms'),
-        ('shoulders', 'Shoulders'),
-        ('back', 'Back'),
-        ('core', 'Core'),
-        ('legs', 'Legs'),
+        ('Arms', 'Arms'),
+        ('Shoulders', 'Shoulders'),
+        ('Back', 'Back'),
+        ('Core', 'Core'),
+        ('Legs', 'Legs'),
     ]
 
     workout_type = models.CharField(max_length=50, choices=WORKOUT_TYPE)
@@ -32,5 +32,4 @@ class Workout(models.Model):
     sets = models.IntegerField()
     weight = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-
 
