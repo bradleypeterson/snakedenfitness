@@ -31,10 +31,5 @@ class Workout(models.Model):
     reps = models.IntegerField()
     sets = models.IntegerField()
     weight = models.IntegerField()
-<<<<<<< HEAD
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-=======
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-
->>>>>>> 8be6abf39c121e9cfdc6444a245a4072bd375c27
