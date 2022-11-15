@@ -35,12 +35,12 @@ def register(request):
 
         if user_form.is_valid() and profile_form.is_valid():
 
-            passw = user_form.save(commit = False)
+            passw = user_form.save(commit=False)
             passw.set_password(user_form.cleaned_data['password'])
 
             user = user_form.save()
 
-            profile = profile_form.save(commit = False)
+            profile = profile_form.save(commit=False)
             profile.user = user
             img = request.FILES['avatar']
             profile.avatar = img
@@ -66,7 +66,6 @@ def register(request):
 
 @login_required
 def profile(request):
-
     return render(request, 'users/profile.html', {})
 
 
