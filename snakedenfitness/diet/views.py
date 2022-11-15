@@ -17,7 +17,9 @@ def dietitian_home(request):
 
 @login_required
 def meal_form(request):
-    total = MealForm.calories
+    # This needs to be fixed. Was crashing Meal Form
+    #total = MealForm.calories
+    total = 0
 
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
