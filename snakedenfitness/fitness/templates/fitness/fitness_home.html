@@ -1,21 +1,16 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <h1 style="margin-left: 900PX; margin-top: 50px">Fitness</h1>
+    <h1 class="text-center mt-5">Fitness</h1>
     <div class="container p-0">
-        <div class="row pb-3">
-            <div class="col-md-12 text-center h6" style="margin-left: 100px">
-                <a href="{% url 'workout_form' %}">
-                    <button class="btn btn-success" type="submit">New</button>
-                </a>
-                <a href="{% url 'request_trainer' %}">
-                    <button class="btn btn-info" type="submit" style="color: white">Request Trainer</button>
-                </a>
-                <h6 class="btn btn-light" style="margin-left: 1025px; background-color: white; border-color: white"></h6>
+        <div class="row pb-1">
+            <div class="col-md-12 h6">
+                <a href="{% url 'workout_form' %}"><button class="btn btn-success text-light" type="submit">New</button></a>
+                <a href="{% url 'request_trainer' %}"><button class="btn btn-info text-light" type="submit">Request Trainer</button></a>
             </div>
         </div>
         {% for workout in workout %}
-            <div class="card" style="width: 50%; text-align: center; margin-left: 350px; margin-top: 10px">
+            <div class="card">
               <div class="card-header">
                   <h4>{{ workout.exercise_name }}</h4>
               </div>
