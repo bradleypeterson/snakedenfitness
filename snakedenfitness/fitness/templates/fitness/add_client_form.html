@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block body %}
+{% load crispy_forms_tags %}
+
+<div class="container py-5" style="max-width: 50%;" >
+    <h1>Add trainer</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{form|crispy}}
+{% comment %}
+        {{form.client}}
+        {{form.trainer}} {% endcomment %}
+
+        <button class="btn btn-primary" style="margin-left: 100px; margin-top: 30px" type="submit">Confirm</button>
+    </form>
+
+</div>
+
+<div class="container py-5" style="max-width: 50%;" >
+
+    <h2> <u>Available Trainers:</u> </h2>
+
+    {% for trainer in listTrainers %}
+        <h3> <b>{{ trainer.user }}</b> : {{ trainer.user.get_full_name }}</h3>
+        <p> {{ trainer.bio }}</p>
+
+        <p> ______________________________________________________________</p>
+    {% endfor %}
+
+    {% endblock %}
+</div>

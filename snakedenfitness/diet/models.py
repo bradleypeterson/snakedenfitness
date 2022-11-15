@@ -1,4 +1,5 @@
 from django.db import models
+from django import template
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -52,3 +53,9 @@ class Meal(models.Model):
     sugars = models.IntegerField()
     protein = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+register = template.Library()
+
+@register.simple_tag
+def meals_by_user():
+    pass

@@ -1,6 +1,7 @@
 from django import forms
 from .models import Workout
 from django.forms import ModelForm
+from users.models import clientTrainer
 
 
 class WorkoutForm(ModelForm):
@@ -35,3 +36,14 @@ class WorkoutForm(ModelForm):
         'sets': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Sets'}),
         'weight': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Weight'}),
     }
+
+class clientTrainerForm(forms.ModelForm):
+    # client = forms.ChoiceField(widget=forms.ChoiceField)
+    class Meta:
+        model = clientTrainer
+        fields = ('client', 'trainer')
+
+    def __init__(self, *args, **kwargs):
+        super(clientTrainerForm, self).__init__(*args, **kwargs)
+        self.fields['client'].widget.attrs['readonly'] = True
+        pass
