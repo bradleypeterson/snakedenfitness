@@ -66,7 +66,12 @@ def register(request):
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html', {})
+    #print(f"REQUEST: {request.user.profile.avatar}")
+    avatar_loc = request.user.profile.avatar.url
+    split_avatar = avatar_loc.replace("avatars/", "")
+    profile_avatar = split_avatar.replace("/media/", "")
+    #print(f"PROFILE AVATAR: {profile_avatar}")
+    return render(request, 'users/profile.html', {'profile_avatar': profile_avatar})
 
 
 @login_required
