@@ -11,7 +11,7 @@
                 <a href="{% url 'request_dietician' %}">
                     <button class="btn btn-info" type="submit" style="color: white">Request Dietician</button>
                 </a>
-                <h6 class="btn btn-light" style="margin-left: 650px">Today's Calories: {{total}}</h6>
+                <h6 class="btn btn-light" style="margin-left: 650px">Today's Calories: {{ total_sum }}</h6>
             </div>
         </div>
 
@@ -23,6 +23,7 @@
               <div class="card-body">
                   <h5>Meal Information</h5>
                 <p class="card-text">
+                    <li style="list-style-type: none"><strong>Date:</strong> {{ meal.created_at }}</li>
                     <li style="list-style-type: none"><strong>Meal Type:</strong> {{ meal.meal_type }}</li>
                     <li style="list-style-type: none"><strong>Calories:</strong> {{ meal.calories }}</li>
                     <li style="list-style-type: none"><strong>Carbs:</strong> {{ meal.carbs }}</li>
@@ -39,5 +40,30 @@
             </div>
             <br><br>
         {% endfor %}
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'My Food Summary'],
+          ['Carbs',      2],
+          ['Sugars',  2],
+          ['Protein', 2],
+        ]);
+
+        var options = {
+          title: 'My Food Summary'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+     <div id="piechart" style="width: 900px; height: 500px; padding: 25px;"></div>
 </div>
 {% endblock %}
