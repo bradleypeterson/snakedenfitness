@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block body %}
+
 <h1>Trainer Home</h1>
 <h2>Name: {{ user.get_full_name }}</h2>
 <h3>Username: {{ user.username }}</h3>
@@ -35,4 +36,29 @@
 </div>
 </div>
 </div>
+<div class="container p-0">
+
+    <h2>Name: {{ user.get_full_name }}</h2>
+    <h3>Username: {{ user.username }}</h3>
+
+    {% if user.is_authenticated %}
+        <p>you are authenticated</p>
+    {% endif %}
+    {% if user.profile.role == 2 %}
+        <p>you are a Trainer</p>
+    {% endif %}
+
+    <h4> Your clients:  </h4>
+        {% for trainer in CTtable %}
+            <div> {{ trainer.client }} </div>
+
+            <a class="btn btn-sm btn-warning" href="{% url 'delete_client_form' trainer.id %}">Remove Client</a>
+
+            <p></p>
+        {% endfor %}
+
+        <br>
+        <a href="{% url 'trainer_workout_data' %}" class="btn btn-success"> Workout logs </a>
+</div>
+
 {% endblock %}

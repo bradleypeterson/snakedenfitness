@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <h1 style="text-align: center; margin-top: 50px">Diet</h1>
+    <h1 class="text-center mt-5">Diet</h1>
     <div class="container p-0">
         <div class="row pb-1">
             <div class="col-md-12 text-center h6" >
@@ -16,7 +16,7 @@
         </div>
 
         {% for meal in meal %}
-            <div class="card" style="width: 50%; text-align: center; margin-left: 350px; margin-top: 10px">
+            <div class="card">
               <div class="card-header">
                   <h4>{{ meal.meal_name }}</h4>
               </div>
@@ -31,10 +31,10 @@
                     <li style="list-style-type: none"><strong>Protein:</strong> {{ meal.protein }}</li>
                 </p>
                   <a href="{% url 'edit_meal' meal.id %}">
-                      <button class="btn btn-warning" style="color: white">Edit</button>
+                      <button class="btn btn-warning text-light">Edit</button>
                   </a>
                   <a href="{% url 'delete_meal' meal.id %}">
-                      <button class="btn btn-danger">Delete</button>
+                      <button class="btn btn-danger text-light">Delete</button>
                   </a>
               </div>
             </div>

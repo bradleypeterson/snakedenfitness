@@ -9,4 +9,5 @@ urlpatterns = [
     path('delete_meal/<int:id>', views.delete_meal, name="delete_meal"),
     path('edit_meal/<int:id>', views.edit_meal, name="edit_meal"),
     path('calories/', views.diet_home, name="calories"),
-]
+    path('meal_log/', views.user_meal_data, name="user_meal_data"),
+    path('trainer_meal_log/', views.trainer_meal_data, name="trainer_meal_data"),
