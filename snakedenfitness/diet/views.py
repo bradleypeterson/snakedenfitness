@@ -10,19 +10,23 @@ from .models import Meal
 
 
 def diet_home(request):
-    year = datetime.now().strftime('%y')
-    month = datetime.now().strftime('%m')
-    day = datetime.now().strftime('%d')
-    filter = Meal.objects.filter(created_at__year=year, created_at__month=month, created_at__day=day)
+    today = datetime.today()
+
+    year = today.year
+    month = today.month
+    day = today.day
+
+    filter = Meal.objects.filter(created_at__year=year,
+                               created_at__month=month, created_at__day=day)
 
     meal = Meal.objects.all()
 
     total_sum = 0
 
-    for filter in meal:
-        total_sum += filter.calories
+    for item in filter:
+        total_sum += item.calories
 
-    return render(request, 'diet/diet_home.html', {'meal': meal, 'total_sum': total_sum})
+    return render(request, 'diet/diet_home.html', {'meal': meal, 'total_sum': total_sum, 'filter': filter})
 
 def dietitian_home(request):
     return render(request, 'diet/dietitian_home.html', {})

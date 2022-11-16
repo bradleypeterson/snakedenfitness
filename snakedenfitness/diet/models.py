@@ -52,11 +52,4 @@ class Meal(models.Model):
     sugars = models.IntegerField()
     protein = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-class Revenue(models.Model):
-    MonthlyRevenue = models.CharField(max_length=50)
-    Month = models.CharField(max_length=50)
-
-    def __unicode__(self):
-        return u'%s %s' % (self.MonthlyRevenue, self.Month)
+    created_at = models.DateTimeField()
