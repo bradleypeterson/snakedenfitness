@@ -11,3 +11,4 @@ urlpatterns = [
     path('calories/', views.diet_home, name="calories"),
     path('meal_log/', views.user_meal_data, name="user_meal_data"),
     path('trainer_meal_log/', views.trainer_meal_data, name="trainer_meal_data"),
+]

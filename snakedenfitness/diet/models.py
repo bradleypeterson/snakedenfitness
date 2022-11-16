@@ -53,8 +53,7 @@ class Meal(models.Model):
     sugars = models.IntegerField()
     protein = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    created_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
 
 register = template.Library()
