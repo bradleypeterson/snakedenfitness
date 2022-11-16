@@ -10,6 +10,15 @@ $ virtualenv venv
 $ source venv/bin/activate
 $ cd snakedenfitness/
 $ pip install -r requirements.txt
+$ python -m pip install channels_redis
+$ python -m pip install -U channels["daphne"]
+
+Install Docker:
+https://www.docker.com/products/docker-desktop/
+
+$ docker run -p 6379:6379 -d redis:5
+$ python manage.py makemigrations community
+$ python manage.py sqlmigrate community (migration number ex: 0001)
 $ python manage.py migrate
 $ python manage.py runserver
 ```
