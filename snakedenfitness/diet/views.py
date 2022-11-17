@@ -8,10 +8,12 @@ from .forms import MealForm
 from .models import Meal
 
 
+@login_required
 def diet_home(request):
     meal = Meal.objects.all()
     return render(request, 'diet/diet_home.html', {'meal': meal})
 
+@login_required
 def dietitian_home(request):
     return render(request, 'diet/dietitian_home.html', {})
 
@@ -51,6 +53,7 @@ def meal_form(request):
     return render(request, 'diet/meal_form.html', context)
 
 
+@login_required
 def update_profile(request, user_id):
     user = User.objects.get(pk=user_id)
     user.profile.bio = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...'
@@ -75,3 +78,13 @@ def edit_meal(request, id):
         return redirect('diet_home')
 
     return render(request, 'diet/edit_meal.html', {'meal': meal, 'form': form})
+
+@login_required
+def user_meal_data(request):
+    meals = Meal.objects.filter(user=request.user)
+    return render(request, 'diet/meal_log.html', {'meals': meals})
+
+@login_required
+def trainer_meal_data(request):
+    meals = Meal.objects.all()
+    return render(request, 'diet/pro_meal_log.html', {'meals': meals})

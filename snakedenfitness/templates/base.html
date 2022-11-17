@@ -12,9 +12,44 @@
     <nav class="navbar navbar-dark bg-dark">
         <a href="{% url 'index'%} " class="navbar-brand px-2">SNAKEDEN</a>
         <div class="navbar">
-            <a href="{% url 'diet_home' %}" class="nav-item nav-link">Diet</a>
-            <a href="{% url 'fitness_home' %}" class="nav-item nav-link">Fitness</a>
-            <a href="{% url 'rooms' %}" class="nav-item nav-link">Community</a>
+
+            {% if user.is_authenticated %}
+                {% if user.profile.role == 2 %}
+                    <a href="{% url 'trainer_home' %}" class="nav-item nav-link"> Trainer Home </a>
+                {% elif user.profile.role == 1 %}
+                    <a href="{% url 'dietitian_home' %}" class="nav-item nav-link"> Dietician Home </a>
+                {% else %}
+                    <a href="{% url 'rooms' %}" class="nav-item nav-link">Community</a>
+
+                    <div class="dropdown">
+                        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
+                            <i style="color: white;"> Fitness </i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                            <a href="{% url 'fitness_home' %}" class="dropdown-item "> Fitness home </a>
+                            <a href="{% url 'user_workout_data' %}" class="dropdown-item "> Workout data </a>
+                            <a href="{% url 'workout_form' %}" class="dropdown-item "> Log new workout </a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
+                            <i style="color: white;"> Diet </i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                            <a href="{% url 'diet_home' %}" class="dropdown-item "> Diet home </a>
+                            <a href="{% url 'user_meal_data' %}" class="dropdown-item "> Meal data </a>
+                            <a href="{% url 'meal_form' %}" class="dropdown-item "> Log new meal </a>
+                        </div>
+                    </div>
+
+
+
+                    {% endif %}
+            {% endif %}
+
 
             <!-- Come back; change this element on log-in -->
             <!-- <a href="{% url 'register' %}" class="nav-item nav-link"><i class="bi bi-person" style="color: white;"> Account </i></a> -->

@@ -34,8 +34,6 @@ urlpatterns = [
     path('login/', authViews.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', authViews.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('profile/', userViews.profile, name='profile'),
-    path('meal_log/', userViews.user_meal_data, name='user_meal_data'),
-    path('workout_log/', userViews.user_workout_data, name='user_workout_data'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import User, Profile
+from .models import User, Profile, clientTrainer
 
 # class RegistrationForm(UserCreationForm):
 #     email = forms.EmailField(required=True)
@@ -31,3 +31,9 @@ class ProfileForm(forms.ModelForm):
         super(ProfileForm, self).__init__(*args, **kwargs)
         # self.fields['bio'].widget.attrs['style'] = 'width:400px; height:40px;'
         pass
+
+    # def clean_client(self):
+    #     if self.instance:
+    #         return self.instance.client
+    #     else:
+    #         return self.fields['client']
