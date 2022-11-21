@@ -1,13 +1,14 @@
 from django import forms
 from .models import Workout
 from django.forms import ModelForm
-from users.models import clientTrainer
+from users.models import clientTrainer, Profile, User
 
 
 class WorkoutForm(ModelForm):
     class Meta:
         model = Workout
         fields = ('workout_type', 'muscle_group', 'exercise_name', 'reps', 'sets', 'weight')
+
     WORKOUT_TYPE = [
         ('Cardio', 'Cardio'),
         ('Strength', 'Strength'),
@@ -38,7 +39,6 @@ class WorkoutForm(ModelForm):
     }
 
 class clientTrainerForm(forms.ModelForm):
-    # client = forms.ChoiceField(widget=forms.ChoiceField)
     class Meta:
         model = clientTrainer
         fields = ('client', 'trainer')

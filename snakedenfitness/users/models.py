@@ -59,18 +59,31 @@ def has_group(user, group_name):
     return group in user.groups.all()
 
 
+
 class clientTrainer(models.Model):
     client = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         unique=True,
-        related_name='assigned_client')
+        related_name='T_assigned_client')
 
     trainer = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='assigned_trainer')
+        related_name='T_assigned_trainer')
 
+
+class clientDieter(models.Model):
+    client = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        unique=True,
+        related_name='D_assigned_client')
+
+    dieter = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='D_assigned_dietician')
 
 ############################# Excess code graveyard #############################
 # @receiver(post_save, sender=User)

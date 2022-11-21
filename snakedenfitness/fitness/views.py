@@ -60,7 +60,6 @@ def workout_form(request):
 
     return render(request, 'fitness/workout_form.html', {'form': form})
 
-
 @login_required
 def update_profile(request, user_id):
     user = User.objects.get(pk=user_id)
@@ -99,8 +98,7 @@ def trainer_workout_data(request):
 
     return render(request, 'fitness/pro_workout_log.html', {'workouts': workouts, 'CTtable': CTtable})
 
-
-
+######## Client-Professional Relationship
 @login_required
 def add_client(request):
     trainerU = UUser.objects.all()
@@ -123,10 +121,12 @@ def clientTrainer_form(request):
     if request.method == 'POST':
         CTForm = clientTrainerForm(request.POST, initial={'client': request.user})
         CTForm.fields['client'].disabled = True
+        CTForm.fields['trainer'].queryset = User.objects.filter(profile__in=listTrainers)
+        # CTForm.fields['trainer'].queryset = listTrainers
 
         if CTForm.is_valid():
             CTForm.save()
-            messages.success(request, (' Trainer added'))
+            messages.success(request, (' Trainer added '))
             return redirect('/fitness/')
         else:
             messages.error(request, ('Error'))
@@ -134,6 +134,7 @@ def clientTrainer_form(request):
     else:
        CTForm = clientTrainerForm(initial={'client': request.user})
        CTForm.fields['client'].disabled = True
+       CTForm.fields['trainer'].queryset = User.objects.filter(profile__in=listTrainers)
 
     return render(request, 'fitness/add_client_form.html', {
         'form': CTForm,
@@ -156,6 +157,9 @@ def clientTrainer_update(request):
         CTForm = clientTrainerForm(request.POST, instance=listTrainersClients)
         CTForm.fields['client'].disabled = True
 
+        CTForm.fields['trainer'].queryset = User.objects.filter(profile__in=listTrainers)
+
+
         if CTForm.is_valid():
             CTForm.save()
             messages.success(request, ('Trainer updated'))
@@ -166,6 +170,7 @@ def clientTrainer_update(request):
     else:
        CTForm = clientTrainerForm(instance=listTrainersClients)
        CTForm.fields['client'].disabled = True
+       CTForm.fields['trainer'].queryset = User.objects.filter(profile__in=listTrainers)
 
     return render(request, 'fitness/update_client_form.html', {
         'form': CTForm,
@@ -178,8 +183,6 @@ def clientTrainer_update(request):
 def clientTrainer_delete(request, client_id):
 
     cliTrain = CT.objects.get(id=client_id)
-
-
     listTrainersClients = CT.objects.get(trainer=request.user, client=cliTrain.client)
 
 

@@ -2,7 +2,7 @@
 
 {% block body %}
     <h1 class="text-center mt-5">Fitness</h1>
-    <div class="container p-0">
+    {% comment %} <div class="container p-0">
         <div class="row pb-1">
             <div class="col-md-12 h6">
                 <a href="{% url 'workout_form' %}"><button class="btn btn-success text-light" type="submit">New</button></a>
@@ -32,8 +32,8 @@
               </div>
             </div>
         <br><br>
-    {% endfor %}
-</div>
+        {% endfor %}
+    </div> {% endcomment %}
 
 <div class="container p-0">
     <div class="row pb-3">

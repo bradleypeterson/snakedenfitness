@@ -5,9 +5,9 @@ from django.dispatch import receiver
 
 
 # Create your models here.
-class TrainerProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(max_length=500, blank=True)
+# class TrainerProfile(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     bio = models.TextField(max_length=500, blank=True)
 
 
 class Workout(models.Model):
