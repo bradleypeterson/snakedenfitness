@@ -1,50 +1,39 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <h1 style="text-align: center; margin-top: 50px">Diet</h1>
+    <h1 class="text-center mt-5">Diet</h1>
     <div class="container p-0">
-        <div class="row py-3">
-            <div class="col-md-12 text-center h6">
-                <a href="{% url 'meal_form' %}">
-                    <button class="btn btn-success" type="submit">New</button>
-                </a>
-                <a href="{% url 'request_dietician' %}">
-                    <button class="btn btn-info" type="submit">Request Dietician</button>
-                </a>
-                <h6 class="btn btn-light" style="margin-left: 750px">Today's Calories: 1800</h6>
-            </div>
-        </div>
         <div class="row pb-1">
-            <div class="col-md-3 text-center h4">
-                Meal Name
-            </div>
-            <div class="col-md-3 text-center h4">
-                Meal Type
-            </div>
-            <div class="col-md-3 text-center h4">
-                Calories
-            </div>
-            <div class="col-md-3 text-center h4">
-                Actions
+            <div class="col-md-12 h6" >
+                <a href="{% url 'meal_form' %}"><button class="btn btn-success text-light" type="submit">New</button></a>
+                <a href="{% url 'request_dietician' %}"><button class="btn btn-info text-light" type="submit">Request Dietician</button></a>
+                <h6 class="d-inline btn justify-content-end bg-light">Today's Calories: {{ total }}</h6>
             </div>
         </div>
-        <div class="row pb-1">
-            <div class="col-md-3 text-center h6">
-                Granola
+
+        {% for meal in meal %}
+            <div class="card">
+              <div class="card-header">
+                  <h4>{{ meal.meal_name }}</h4>
+              </div>
+              <div class="card-body">
+                  <h5>Meal Information</h5>
+                <p class="card-text">
+                    <li style="list-style-type: none"><strong>Meal Type:</strong> {{ meal.meal_type }}</li>
+                    <li style="list-style-type: none"><strong>Calories:</strong> {{ meal.calories }}</li>
+                    <li style="list-style-type: none"><strong>Carbs:</strong> {{ meal.carbs }}</li>
+                    <li style="list-style-type: none"><strong>Sugars:</strong> {{ meal.sugars }}</li>
+                    <li style="list-style-type: none"><strong>Protein:</strong> {{ meal.protein }}</li>
+                </p>
+                  <a href="{% url 'edit_meal' meal.id %}">
+                      <button class="btn btn-warning text-light">Edit</button>
+                  </a>
+                  <a href="{% url 'delete_meal' meal.id %}">
+                      <button class="btn btn-danger text-light">Delete</button>
+                  </a>
+              </div>
             </div>
-            <div class="col-md-3 text-center h6">
-                Snack
-            </div>
-            <div class="col-md-3 text-center h6">
-                100
-            </div>
-            <div class="col-md-3 text-center h6">
-                <button class="btn btn-warning" style="color: white" type="submit">View/Edit</button>
-                <button class="btn btn-danger" type="submit">Delete</button>
-            </div>
-        </div>
-    </div>
-    <h3>
-        <a href="{% url 'meal_form' %}" style="text-decoration: none; color: limegreen;">Meal Form</a>
-    </h3>
+            <br><br>
+        {% endfor %}
+</div>
 {% endblock %}

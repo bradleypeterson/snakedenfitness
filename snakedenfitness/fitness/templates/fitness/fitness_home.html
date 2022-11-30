@@ -1,50 +1,60 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <h1 style="margin-left: 900PX; margin-top: 50px">Fitness</h1>
+    <h1 class="text-center mt-5">Fitness</h1>
     <div class="container p-0">
-        <div class="row pb-3">
-            <div class="col-md-4 text-center h6">
-                <a href="{% url 'workout_form' %}">
-                    <button class="btn btn-success" type="submit">New</button>
-                </a>
-                <a href="{% url 'request_trainer' %}">
-                    <button class="btn btn-info" type="submit">Request Trainer</button>
-                </a>
+        <div class="row pb-1">
+            <div class="col-md-12 h6">
+                <button class="btn btn-success text-light" href="{% url 'workout_form' %}" type="submit">New</button>
+                <button class="btn btn-info text-light" href="{% url 'request_trainer' %}" type="submit">Request Trainer</button>
             </div>
-            <div class="col-md-8"></div>
         </div>
+        {% for workout in workout %}
+            <div class="card">
+              <div class="card-header">
+                  <h4>{{ workout.exercise_name }}</h4>
+              </div>
+              <div class="card-body">
+                  <h5>Workout Information</h5>
+                <p class="card-text">
+                    <li style="list-style-type: none"><strong>Workout Type:</strong> {{ workout.workout_type }}</li>
+                    <li style="list-style-type: none"><strong>Muscle Group:</strong> {{ workout.muscle_group }}</li>
+                    <li style="list-style-type: none"><strong>Reps:</strong> {{ workout.reps }}</li>
+                    <li style="list-style-type: none"><strong>Sets:</strong> {{ workout.sets }}</li>
+                    <li style="list-style-type: none"><strong>Weight:</strong> {{ workout.weight }}</li>
+                </p>
+                  <a href="{% url 'edit_workout' workout.id %}">
+                      <button class="btn btn-warning text-light">Edit</button>
+                  </a>
+                  <a href="{% url 'delete_workout' workout.id %}">
+                      <button class="btn btn-danger">Delete</button>
+                  </a>
+              </div>
+            </div>
+        <br><br>
+    {% endfor %}
+</div>
 
-        <div class="row pb-1">
-            <div class="col-md-3 text-center h4">
-                Workout Type
-            </div>
-            <div class="col-md-3 text-center h4">
-                Muscle Group
-            </div>
-            <div class="col-md-3 text-center h4">
-                Exercise Name
-            </div>
-            <div class="col-md-3 text-center h4">
-            </div>
+<div class="container p-0">
+    <div class="row pb-3">
+        <div class="col-md-4 text-center h6">
+            <button class="btn btn-success" type="">New</button>
+            {% comment %} <a class="btn btn-info" href="{% url 'add_client_form' %}">Request Trainer</a> {% endcomment %}
+            {% comment %} <a href="{% url 'add_client_form' %}" class="nav-item"> Request </a> {% endcomment %}
+
+            {% if CTtable%}
+
+                <a class="btn btn-success" href="{% url 'update_client_form' %}">Change Trainer</a>
+            {% else %}
+                <a class="btn btn-success" href="{% url 'add_client_form' %}">Request Trainer</a>
+            {% endif %}
+
+            {% for trainer in CTtable %}
+                <h3> Your trainer is <b>{{ trainer.trainer }}</b> </h3>
+            {% endfor %}
+
+
         </div>
-        <div class="row pb-1">
-            <div class="col-md-3 text-center h6">
-                Strength
-            </div>
-            <div class="col-md-3 text-center h6">
-                Legs
-            </div>
-            <div class="col-md-3 text-center h6">
-                Leg Curls
-            </div>
-            <div class="col-md-3 text-center h6">
-                <button class="btn btn-warning" type="submit" style="color: white">View/Edit</button>
-                <button class="btn btn-danger" type="submit">Delete</button>
-            </div>
-        </div>
+        <div class="col-md-8"></div>
     </div>
-    <h3>
-        <a href="{% url 'workout_form' %}" style="text-decoration: none; color: limegreen;">Workout Form</a>
-    </h3>
 {% endblock %}

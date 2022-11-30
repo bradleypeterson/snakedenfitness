@@ -22,9 +22,10 @@ from users import views as userViews
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
-    path('', views.index, name = 'index'),
+    path('', views.index, name='index'),
     path('admin/', admin.site.urls),
     path('diet/', include('diet.urls')),
     path('fitness/', include('fitness.urls')),
@@ -33,11 +34,12 @@ urlpatterns = [
     path('login/', authViews.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', authViews.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('profile/', userViews.profile, name='profile'),
-    path('meal_log/', userViews.user_meal_data, name='user_meal_data'),
-    path('workout_log/', userViews.user_workout_data, name='user_workout_data'),
+    path('updateprofile/', userViews.update_profile, name='update_profile'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += staticfiles_urlpatterns()
 # urlpatterns = patterns('',
 #    url(r'^create_user/$',(CreateView.as_view(model=CustomUser, get_success_url =lambda: reverse('create_user'),
 #     form_class=UserCreationForm, template_name="create_user.html")), name='create_user'),
