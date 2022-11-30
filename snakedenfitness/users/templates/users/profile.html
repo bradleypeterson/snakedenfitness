@@ -12,6 +12,7 @@
 
     {% if user.is_authenticated %}
         <p>you are authenticated</p>
+        <a class="btn btn-warning" href="{% url 'update_profile' %}">Edit Profile</a>
     {% endif %}
 
     {% if user.profile.role == 2 %}

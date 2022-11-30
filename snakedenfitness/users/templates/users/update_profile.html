@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+    <div class="container" style="max-width: 25%">
+        <div class="h1 py-2 text-center">Edit Profile</div>
+        <form enctype="multipart/form-data" method="POST">
+            {% csrf_token %}
+            {{ user_form|crispy }}
+            {{ profile_form|crispy }}
+            <div class="text-center py-2">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
