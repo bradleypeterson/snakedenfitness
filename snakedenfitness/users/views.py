@@ -24,14 +24,14 @@ def register(request):
 
         if user_form.is_valid() and profile_form.is_valid():
 
-            passw = user_form.save(commit = False)
+            passw = user_form.save(commit=False)
             passw.set_password(user_form.cleaned_data['password'])
 
             user = user_form.save()
 
-            profile = profile_form.save(commit = False)
+            profile = profile_form.save(commit=False)
             profile.user = user
-            img = request.FILES['avatar']
+            img = request.FILES.get('avatar', 'generic-avatar.png')
             profile.avatar = img
 
             profile.save()
@@ -55,10 +55,15 @@ def register(request):
 
 @login_required
 def profile(request):
-    CTtable = clientTrainer.objects.filter(client = request.user)
+    #print(f"REQUEST: {request.user.profile.avatar}")
+    avatar_loc = request.user.profile.avatar.url
+    split_avatar = avatar_loc.replace("avatars/", "")
+    profile_avatar = split_avatar.replace("/media/", "")
+    #print(f"PROFILE AVATAR: {profile_avatar}")
+    CTtable = clientTrainer.objects.filter(client=request.user)
     if request.user.profile.role == 2:
-        CTtable = clientTrainer.objects.filter(trainer = request.user)
-    return render(request, 'users/profile.html', {'CTtable' : CTtable})
+        CTtable = clientTrainer.objects.filter(trainer=request.user)
+    return render(request, 'users/profile.html', {'CTtable': CTtable, 'profile_avatar': profile_avatar})
 
 
 @login_required
@@ -76,7 +81,7 @@ def update_profile(request):
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
-    return render(request, 'users/profile.html', {
+    return render(request, 'users/update_profile.html', {
         'user_form': user_form,
         'profile_form': profile_form
     })
