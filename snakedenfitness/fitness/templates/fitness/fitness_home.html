@@ -5,8 +5,8 @@
     <div class="container p-0">
         <div class="row pb-1">
             <div class="col-md-12 h6">
-                <a href="{% url 'workout_form' %}"><button class="btn btn-success text-light" type="submit">New</button></a>
-                <a href="{% url 'request_trainer' %}"><button class="btn btn-info text-light" type="submit">Request Trainer</button></a>
+                <button class="btn btn-success text-light" href="{% url 'workout_form' %}" type="submit">New</button>
+                <button class="btn btn-info text-light" href="{% url 'request_trainer' %}" type="submit">Request Trainer</button>
             </div>
         </div>
         {% for workout in workout %}
@@ -24,7 +24,7 @@
                     <li style="list-style-type: none"><strong>Weight:</strong> {{ workout.weight }}</li>
                 </p>
                   <a href="{% url 'edit_workout' workout.id %}">
-                      <button class="btn btn-warning" style="color: white">Edit</button>
+                      <button class="btn btn-warning text-light">Edit</button>
                   </a>
                   <a href="{% url 'delete_workout' workout.id %}">
                       <button class="btn btn-danger">Delete</button>
