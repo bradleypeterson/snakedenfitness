@@ -106,3 +106,5 @@ def user_workout_data(request):
             prs.append(pr1.weight)
 
     return render(request, 'users/workout_log.html', {'workouts': workouts, 'prs': prs})
+
+
