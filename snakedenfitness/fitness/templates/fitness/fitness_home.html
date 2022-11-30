@@ -4,7 +4,7 @@
     <h1 class="text-center mt-5">Fitness</h1>
     <div class="container p-0">
         <div class="row pb-1">
-            <div class="col-md-12 h6">
+            <div class="col-md-12 text-end">
                 <button class="btn btn-success text-light" href="{% url 'workout_form' %}" type="submit">New</button>
                 <button class="btn btn-info text-light" href="{% url 'request_trainer' %}" type="submit">Request Trainer</button>
             </div>
@@ -32,29 +32,30 @@
               </div>
             </div>
         <br><br>
-    {% endfor %}
-</div>
+        {% endfor %}
+    </div>
 
-<div class="container p-0">
-    <div class="row pb-3">
-        <div class="col-md-4 text-center h6">
-            <button class="btn btn-success" type="">New</button>
-            {% comment %} <a class="btn btn-info" href="{% url 'add_client_form' %}">Request Trainer</a> {% endcomment %}
-            {% comment %} <a href="{% url 'add_client_form' %}" class="nav-item"> Request </a> {% endcomment %}
+    <div class="container justify-content-end">
+        <div class="row pb-3">
+            <div class="col-md-12">
+                <button class="btn btn-success" type="">New</button>
+                {% comment %} <a class="btn btn-info" href="{% url 'add_client_form' %}">Request Trainer</a> {% endcomment %}
+                {% comment %} <a href="{% url 'add_client_form' %}" class="nav-item"> Request </a> {% endcomment %}
 
-            {% if CTtable%}
+                {% if CTtable%}
 
-                <a class="btn btn-success" href="{% url 'update_client_form' %}">Change Trainer</a>
-            {% else %}
-                <a class="btn btn-success" href="{% url 'add_client_form' %}">Request Trainer</a>
-            {% endif %}
+                    <a class="btn btn-success" href="{% url 'update_client_form' %}">Change Trainer</a>
+                {% else %}
+                    <a class="btn btn-success" href="{% url 'add_client_form' %}">Request Trainer</a>
+                {% endif %}
 
-            {% for trainer in CTtable %}
-                <h3> Your trainer is <b>{{ trainer.trainer }}</b> </h3>
-            {% endfor %}
+                {% for trainer in CTtable %}
+                    <h3> Your trainer is <b>{{ trainer.trainer }}</b> </h3>
+                {% endfor %}
 
 
+            </div>
+            <div class="col-md-8"></div>
         </div>
-        <div class="col-md-8"></div>
     </div>
 {% endblock %}

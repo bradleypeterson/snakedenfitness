@@ -13,25 +13,24 @@
 
         {% for meal in meal %}
             <div class="card">
-              <div class="card-header">
-                  <h4>{{ meal.meal_name }}</h4>
-              </div>
-              <div class="card-body">
-                  <h5>Meal Information</h5>
-                <p class="card-text">
-                    <li style="list-style-type: none"><strong>Meal Type:</strong> {{ meal.meal_type }}</li>
-                    <li style="list-style-type: none"><strong>Calories:</strong> {{ meal.calories }}</li>
-                    <li style="list-style-type: none"><strong>Carbs:</strong> {{ meal.carbs }}</li>
-                    <li style="list-style-type: none"><strong>Sugars:</strong> {{ meal.sugars }}</li>
-                    <li style="list-style-type: none"><strong>Protein:</strong> {{ meal.protein }}</li>
-                </p>
-                  <a href="{% url 'edit_meal' meal.id %}">
-                      <button class="btn btn-warning text-light">Edit</button>
-                  </a>
-                  <a href="{% url 'delete_meal' meal.id %}">
-                      <button class="btn btn-danger text-light">Delete</button>
-                  </a>
-              </div>
+                <div class="card-header">
+                    <h4>{{ meal.meal_name }}</h4>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <li style="list-style-type: none"><strong>Meal Type:</strong> {{ meal.meal_type }}</li>
+                        <li style="list-style-type: none"><strong>Calories:</strong> {{ meal.calories }}</li>
+                        <li style="list-style-type: none"><strong>Carbs:</strong> {{ meal.carbs }}</li>
+                        <li style="list-style-type: none"><strong>Sugars:</strong> {{ meal.sugars }}</li>
+                        <li style="list-style-type: none"><strong>Protein:</strong> {{ meal.protein }}</li>
+                    </p>
+                    <a href="{% url 'edit_meal' meal.id %}">
+                        <button class="btn btn-warning text-light">Edit</button>
+                    </a>
+                    <a href="{% url 'delete_meal' meal.id %}">
+                        <button class="btn btn-danger text-light">Delete</button>
+                    </a>
+                </div>
             </div>
             <br><br>
         {% endfor %}

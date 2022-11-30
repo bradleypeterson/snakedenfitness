@@ -1,21 +1,39 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <h1>Workout log for {{ user.username }}</h1>
-    <div style="display: grid; grid-template-columns: auto auto auto;; padding: 10px;">
-    {% for workout in workouts %}
-        <div style="margin-bottom: 20px;">
-            <div style="font-weight: bold;">{{ workout.exercise_name }}</div>
-            <div>Type: {{ workout.workout_type }}</div>
-            <div>Muscle Group: {{ workout.muscle_group }}</div>
-            <div>Reps: {{ workout.reps }}</div>
-            <div>Sets: {{ workout.sets }}</div>
-                {% if workout.weight in prs %}
-                    <div style="color: red;">Weight: {{ workout.weight }} (PR)</div>
-            {% else %}
-                <div>Weight: {{ workout.weight }}</div>
-            {% endif %}
+    <h1 class="contianer text-center mt-2">Workout log for {{ user.username }}</h1>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped text-center">
+                    <thead class="bg-dark text-light">
+                        <tr>
+                            <th scope="col">Exercise</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Muscle Group</th>
+                            <th scope="col">Sets</th>
+                            <th scope="col">Reps</th>
+                            <th scope="col">Weight</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for workout in workouts %}
+                            <tr>
+                                <td>{{ workout.exercise_name }}</td>
+                                <td>{{ workout.workout_type }}</td>
+                                <td>{{ workout.muscle_group }}</td>
+                                <td>{{ workout.sets }}</td>
+                                <td>{{ workout.reps }}</td>
+                                {% if workout.weight in prs %}
+                                    <td class="text-red">{{ workout.weight }} (PR)</td>
+                                {% else %}
+                                    <td>{{ workout.weight }}</td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-    {% endfor %}
     </div>
 {% endblock %}

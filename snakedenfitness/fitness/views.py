@@ -52,7 +52,7 @@ def workout_form(request):
             obj.user = User(request.user.id)
             obj.save()
 
-            return HttpResponseRedirect('/fitness/')
+            return HttpResponseRedirect('/fitness/workout_log/')
 
     # if a GET (or any other method) we'll create a blank form
     else:
