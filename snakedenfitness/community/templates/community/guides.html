@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1 class="text-center mt-5">Diet</h1>
+    <div class="container p-0">
+        <h4 class="text-center mt-2">Upload your workout guides and recipes here!</h4>
+
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="myfile">
+            <button type="submit">Upload</button>
+          </form>
+
+          {% if uploaded_file_url %}
+            <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+          {% endif %}
+
+          <p><a href="{% url 'rooms' %}">Return to home</a></p>
+    </div>
+{% endblock %}

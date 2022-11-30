@@ -3,6 +3,8 @@ from .models import Room, Message, User, Invitation
 from django.utils.text import slugify
 from django.contrib import messages
 from django.contrib.auth.decorators import permission_required, login_required
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 
 @login_required
 def room(request, slug):
@@ -58,3 +60,18 @@ def decline_invite(request, id):
     invite.delete()
     messages.add_message(request, messages.INFO, "Invite Declined")
     return redirect('rooms')
+
+@login_required
+def guides(request):
+    return render(request, 'community/guides.html', {})
+
+def simple_upload(request):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        return render(request, 'community/guides.html', {
+            'uploaded_file_url': uploaded_file_url
+        })
+    return render(request, 'community/guides.html')
