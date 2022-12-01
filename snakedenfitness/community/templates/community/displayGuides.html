@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1 class="text-center mt-5">Display Guides</h1>
+    <div class="container p-0">
+        <CENTER>
+        <div class="jumbotron">
+              <p class="lead">View posted material here!</p>
+              <hr class="my-4">
+              <img src="{{ user_pr.display_picture.url }}" class="image_responsive" height="100px" width="100px">
+              <p>
+                {{ user_pr.display_picture.url }}<BR>
+        </div>
+        </CENTER>
+    </div>
+{% endblock %}
