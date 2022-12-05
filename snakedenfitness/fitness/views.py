@@ -11,6 +11,10 @@ from .forms import WorkoutForm, clientTrainerForm
 from .models import Workout
 from users.models import Profile as UProfile, User as UUser, clientTrainer as CT
 
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+
+
 # Create your views here.
 def fitness_home(request):
     workout = Workout.objects.all()
@@ -52,7 +56,7 @@ def workout_form(request):
             obj.user = User(request.user.id)
             obj.save()
 
-            return HttpResponseRedirect('/fitness/')
+            return HttpResponseRedirect('/fitness/workout_log/')
 
     # if a GET (or any other method) we'll create a blank form
     else:

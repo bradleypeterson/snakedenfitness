@@ -19,12 +19,15 @@
                 {% elif user.profile.role == 1 %}
                     <a href="{% url 'dietitian_home' %}" class="nav-item nav-link"> Dietician Home </a>
                 {% else %}
-                    <a href="{% url 'rooms' %}" class="nav-item nav-link">Community</a>
+                    <div class="dropdown">
+                        <button class="btn btn-dark dropdown-toggle text-light" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">Community</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a href="{% url 'rooms' %}" class="dropdown-item">Community</a>
+                        </div>
+                    </div>
 
                     <div class="dropdown">
-                        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
-                            <i style="color: white;"> Fitness </i>
-                        </button>
+                        <button class="btn btn-dark dropdown-toggle text-light" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">Fitness</button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
                             <a href="{% url 'fitness_home' %}" class="dropdown-item "> Fitness home </a>
@@ -34,9 +37,7 @@
                     </div>
 
                     <div class="dropdown">
-                        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
-                            <i style="color: white;"> Diet </i>
-                        </button>
+                        <button class="btn btn-dark dropdown-toggle text-light" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">Diet</button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
                             <a href="{% url 'diet_home' %}" class="dropdown-item "> Diet home </a>
@@ -55,9 +56,7 @@
             <!-- <a href="{% url 'register' %}" class="nav-item nav-link"><i class="bi bi-person" style="color: white;"> Account </i></a> -->
 
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
-                    <i class="bi bi-person text-light"> Account </i>
-                </button>
+                <button class="btn btn-secondary dropdown-toggle text-light mx-3" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">Account</button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
                     {% if user.is_authenticated %}
@@ -80,16 +79,18 @@
         {% endfor %}
     {% endif %}
 
-    {% block title %}
-    {% endblock %}
+    <div class="container bg-light">
+        {% block title %}
+        {% endblock %}
 
-    {% block body %}
-    {% endblock %}
+        {% block body %}
+        {% endblock %}
 
-    {% block content %}
-    {% endblock %}
+        {% block content %}
+        {% endblock %}
 
-    {% block scripts %}
-    {% endblock %}
+        {% block scripts %}
+        {% endblock %}
+    </div>
 </body>
 </html>
