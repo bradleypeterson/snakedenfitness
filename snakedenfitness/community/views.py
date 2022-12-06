@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import permission_required, login_required
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
-from .forms import Profile_Form
+from .forms import Pic_Form
 from .models import pic
 
 @login_required
@@ -63,9 +63,7 @@ def decline_invite(request, id):
     messages.add_message(request, messages.INFO, "Invite Declined")
     return redirect('rooms')
 
-@login_required
-def displayGuides(request):
-   return render(request, 'community/displayGuides.html', {})
+
 
 def guides2(request):
     if request.method == 'POST' and request.FILES['myfile']:
@@ -78,19 +76,16 @@ def guides2(request):
         })
     return render(request, 'community/guides.html')
 
-IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
-
 def guides(request):
-    form = Profile_Form()
+    form = Pic_Form()
     if request.method == 'POST':
-        form = Profile_Form(request.POST, request.FILES)
+        form = Pic_Form(request.POST, request.FILES)
         if form.is_valid():
             user_pr = form.save(commit=False)
-            user_pr.display_picture = request.FILES['display_picture']
-            file_type = user_pr.display_picture.url.split('.')[-1]
-            file_type = file_type.lower()
+            user_pr.Upload = request.FILES['Upload']
+            #file_type = user_pr.Upload.url.split('.')[-1]
+            #file_type = file_type.lower()
             user_pr.save()
-            return render(request, 'community/guides.html', {'user_pr': user_pr})
+            return render(request, 'community/displayGuides.html', {'user_pr': user_pr})
     context = {"form": form,}
     return render(request, 'community/guides.html', context)
-

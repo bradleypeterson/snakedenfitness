@@ -24,4 +24,4 @@ class Invitation(models.Model):
     group = models.CharField(max_length=255)
 
 class pic(models.Model):
-    display_picture = models.FileField()
+    Upload = models.FileField()

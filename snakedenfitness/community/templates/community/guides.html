@@ -3,37 +3,18 @@
 {% block body %}
     <h1 class="text-center mt-5">Guides</h1>
     <div class="container p-0">
-        <h5 class="text-center mt-2">Post your workout guides, recipes, motivational quotes, etc here!</h5>
+        <h5 class="text-center mt-2 mb-4">Post your workout guides, recipes, motivational quotes, etc here!</h5>
 
                 <form class="text-center mt-2" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <table class="text-center mt-2" style="margin-left: 500px;">
                        {{ form.as_table }}
                     </table>
-                    <input type="submit" class="btn btn-primary">
-</form>
-          <p class="text-center mt-5" type="submit"><a href="{% url 'displayGuides' %}">View Posted Guides</a></p>
+                    <input type="submit" class="btn btn-primary" style="margin-top: 20px">
+                </form>
           <p class="text-center mt-3"><a href="{% url 'rooms' %}">Return to home</a></p>
 
     </div>
-
-
-
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Make Profile</title>
-    </head>
-    <body>
-        <center>
-            <div class="jumbotron">
-                <hr class="my-4">
-
-            </div>
-        </center>
-    </body>
-</html>
 {% endblock %}
 
 

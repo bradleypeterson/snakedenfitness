@@ -35,6 +35,7 @@ urlpatterns = [
     path('logout/', authViews.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('profile/', userViews.profile, name='profile'),
     path('updateprofile/', userViews.update_profile, name='update_profile'),
+    path('upload/', include('community.urls')),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

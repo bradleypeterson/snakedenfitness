@@ -7,9 +7,11 @@
         <div class="jumbotron">
               <p class="lead">View posted material here!</p>
               <hr class="my-4">
-              <img src="{{ user_pr.display_picture.url }}" class="image_responsive" height="100px" width="100px">
+              <img src="{{ user_pr.Upload.url }}" class="image_responsive" height="100px" width="100px">
               <p>
-                {{ user_pr.display_picture.url }}<BR>
+                {{ user_pr.Upload.url }}<BR>
+
+              <p class="text-center mt-3"><a href="{% url 'rooms' %}">Return to home</a></p>
         </div>
         </CENTER>
     </div>
