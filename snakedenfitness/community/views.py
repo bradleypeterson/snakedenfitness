@@ -1,3 +1,4 @@
+from django.http import HttpResponse, FileResponse
 from django.shortcuts import render, redirect
 from .models import Room, Message, User, Invitation
 from django.utils.text import slugify
@@ -63,21 +64,15 @@ def decline_invite(request, id):
     messages.add_message(request, messages.INFO, "Invite Declined")
     return redirect('rooms')
 
-
-
-def guides2(request):
-    if request.method == 'POST' and request.FILES['myfile']:
-        myfile = request.FILES['myfile']
-        fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
-        uploaded_file_url = fs.url(filename)
-        return render(request, 'community/guides.html', {
-            'uploaded_file_url': uploaded_file_url
-        })
-    return render(request, 'community/guides.html')
-
 def guides(request):
     form = Pic_Form()
+
+    #pic = request.user.pic.Upload.url
+    #split_pic = pic.replace("avatars/", "")
+    #finalPic = split_pic.replace("/media/", "")
+
+    #path that it is showing /media/avatars/media/ERD_d9DHlWj.pdf
+
     if request.method == 'POST':
         form = Pic_Form(request.POST, request.FILES)
         if form.is_valid():
