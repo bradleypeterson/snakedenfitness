@@ -59,7 +59,7 @@ def profile(request):
     avatar_loc = request.user.profile.avatar.url
     split_avatar = avatar_loc.replace("avatars/", "")
     profile_avatar = split_avatar.replace("/media/", "")
-    #print(f"PROFILE AVATAR: {profile_avatar}")
+    print(f"PROFILE AVATAR: {profile_avatar}")
     CTtable = clientTrainer.objects.filter(client=request.user)
     if request.user.profile.role == 2:
         CTtable = clientTrainer.objects.filter(trainer=request.user)
