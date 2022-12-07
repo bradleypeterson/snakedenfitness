@@ -13,6 +13,7 @@ urlpatterns = [
     path('rooms/acceptInvite/<str:group>/<int:id>', views.accept_invite, name='acceptInvite'),
     path('rooms/declineInvite/<int:id>', views.decline_invite, name='declineInvite'),
     path('rooms/guides', views.guides, name='guides'),
+    path('rooms/displayGuides', views.displayGuides, name='displayGuides'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 #if settings.DEBUG:

@@ -79,3 +79,7 @@ def guides(request):
             return render(request, 'community/displayGuides.html', {'user_pr': user_pr})
     context = {"form": form}
     return render(request, 'community/guides.html', context)
+
+@login_required
+def displayGuides(request):
+    return render(request, 'community/displayGuides.html', {})
