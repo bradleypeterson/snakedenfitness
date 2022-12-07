@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<div class="container">
+<div class="container text-center p-3">
     <form method="POST">
         {% csrf_token %}
 
-        <label for="group_name" class="pt-1">Group Name:</label>
-        <input type="text" class="" id="group_name" name="group_name" value="{{ room_obj.name }}"readonly>
+        <h3>Invite Members to {{ room_obj.name }}</h3>
 
-        <input type="text" id="members" name="members">
+        <select class="form-select form-select-sm mb-2" aria-label="Default select example" id="members" name="members">
+            <option selected>Select a Member</option>
+            {% for member in members %}
+                <option value="{{ member.username }}">{{ member.username }}</option>
+            {% endfor %}
+        </select>
 
 <!--        <label for="group_description" class="pt-1">Group Description:</label>-->
 <!--        <textarea class="" id="group_description" name="group_description"></textarea>-->
