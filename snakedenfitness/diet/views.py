@@ -12,12 +12,13 @@ from users.models import Profile as UProfile, User as UUser, clientDieter as Cli
 @login_required
 def diet_home(request):
     meal = Meal.objects.all()
-    return render(request, 'diet/diet_home.html', {'meal': meal})
+    CDtable = ClientDiet.objects.filter(client = request.user)
+    return render(request, 'diet/diet_home.html', {'meal': meal, 'CDtable' : CDtable})
 
 @login_required
 def dietitian_home(request):
-    CTtable = ClientDiet.objects.filter(dieter = request.user)
-    return render(request, 'diet/dietitian_home.html', {'CTtable' : CTtable})
+    CDtable = ClientDiet.objects.filter(dieter = request.user)
+    return render(request, 'diet/dietitian_home.html', {'CDtable' : CDtable})
 
 @login_required
 def meal_form(request):
@@ -55,12 +56,6 @@ def meal_form(request):
     return render(request, 'diet/meal_form.html', context)
 
 @login_required
-def update_profile(request, user_id):
-    user = User.objects.get(pk=user_id)
-    user.profile.bio = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...'
-    user.save()
-
-@login_required
 def delete_meal(request, id):
         meal = Meal.objects.get(pk=id)
         meal.delete()
@@ -91,16 +86,16 @@ def trainer_meal_data(request):
 ######## Client-Professional Relationship
 @login_required
 def request_dietician(request):
-    listAllUsers = UUser.objects.all()
-    listCliDies = ClientDiet.objects.all()
-    listAllDieticians = UProfile.objects.filter(role=1)
+    listAllUsers = UUser.objects.all()                                                                          # Get list of users
+    listCliDies = ClientDiet.objects.all()                                                                      # Get list of client - diet relations
+    listAllDieticians = UProfile.objects.filter(role=1)                                                         # Get list of dietitian type users
 
     if request.method == 'POST':
-        CDForm = clientDieterForm(request.POST, initial={'client' : request.user})
-        CDForm.fields['client'].disabled = True
-        CDForm.fields['dieter'].queryset = User.objects.filter(profile__in=listAllDieticians)
+        CDForm = clientDieterForm(request.POST, initial={'client' : request.user})                              # create django form for client-diet, init client field to current user
+        CDForm.fields['client'].disabled = True                                                                 # forbid user from editing client field
+        CDForm.fields['dieter'].queryset = User.objects.filter(profile__in=listAllDieticians)                   # dropdown selection of dieticians
 
-        if CDForm.is_valid():
+        if CDForm.is_valid():                                                                                   # save form on valid
                 CDForm.save()
                 messages.success(request, (' Dietitian added '))
                 return redirect('/diet/')
@@ -123,7 +118,37 @@ def request_dietician(request):
 
 @login_required
 def update_dietician(request):
-    return render(request, 'diet/request_dietician.html', {})
+    if request.user.profile.role == 1:                                                      # check if user is type dietician
+        listDietClients = ClientDiet.objects.get(trainer=request.user)
+    else:                                                                                   # else, user is client ( trainer is impossible )
+        listDietClients = ClientDiet.objects.get(client=request.user)                       # get client-diet relations for curUser
+
+    listAllDieticians = UProfile.objects.filter(role=1)                                     # Get list of dietitian type users
+
+
+    if request.method == 'POST':
+        CTForm = clientDieterForm(request.POST, instance=listDietClients)                       # create django form for client-trainer, initialize w curUser's relation
+        CTForm.fields['client'].disabled = True                                                 # forbid user from editing client field
+        CTForm.fields['dieter'].queryset = User.objects.filter(profile__in=listAllDieticians)   # dropdown selection of trainers
+
+
+        if CTForm.is_valid():                                                                   # save form on valid
+            CTForm.save()
+            messages.success(request, ('dieter updated'))
+            return redirect('/diet/')
+        else:
+            messages.error(request, ('Error'))
+
+    else:
+       CTForm = clientDieterForm(instance=listDietClients)
+       CTForm.fields['client'].disabled = True
+       CTForm.fields['dieter'].queryset = User.objects.filter(profile__in=listAllDieticians)
+
+
+    return render(request, 'diet/update_dietician.html', {
+        'form': CTForm,
+        'listDietClients' : listDietClients,
+        'listAllDieticians' : listAllDieticians})
 
 @login_required
 def delete_dietician(request, client_id):

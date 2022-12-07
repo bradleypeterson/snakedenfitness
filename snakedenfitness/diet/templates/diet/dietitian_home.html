@@ -2,11 +2,6 @@
 
 {% block body %}
 <h1>Dietitian Home</h1>
-<h2>{{ user.get_full_name }}</h2>
-<ul>
-    <li>Username: {{ user.username }}</li>
-</ul>
-
 <h1 style="text-align: center; margin-top: 50px">Clients</h1>
 
 <div class="container p-0" style="margin-left: 3px">
@@ -19,26 +14,7 @@
                 Client Requests
             </div>
     </div>
-
-
-    {% comment %} <div class="row pb-1">
-            <div class="col-md-6 text-center h6" style=" margin-top: 20px">
-                Joe Johnson
-                <button class="btn btn-warning" style="color: white; margin-left: 20px;" type="submit">View</button>
-            </div>
-
-            <div class="col-md-3 text-center h6" style=" margin-top: 20px">
-                John Joseph
-                <a href="{% url 'groups' %}">
-                <button class="btn btn-success" style="color: white; margin-left: 20px;" type="submit">Accept</button>
-                <button class="btn btn-danger" style="color: white; margin-left: 10px;" type="submit">Decline</button>
-                </a>
-            </div>
-    </div> {% endcomment %}
 </div>
-</div>
-
-
 
 <div class="container p-0">
 
@@ -54,7 +30,7 @@
         {% endif %}
 
     <h4> Your clients:  </h4>
-        {% for d in CTtable %}
+        {% for d in CDtable %}
             <div> {{ d.client }} </div>
 
             <a class="btn btn-sm btn-warning" href="{% url 'delete_diet_form' d.id %}">Remove Client</a>

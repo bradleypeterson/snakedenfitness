@@ -5,9 +5,22 @@
     <div class="container p-0">
         <div class="row pb-1">
             <div class="col-md-12 h6" >
-                <a href="{% url 'meal_form' %}"><button class="btn btn-success text-light" type="submit">New</button></a>
-                <a href="{% url 'request_dietician' %}"><button class="btn btn-info text-light" type="submit">Request Dietician</button></a>
+                <a href="{% url 'meal_form' %}"><button class="btn btn-success text-light" type="submit">Record New Meal</button></a>
                 <h6 class="d-inline btn justify-content-end bg-light">Today's Calories: {{ total }}</h6>
+            </div>
+        </div>
+        <div class="row pb-1">
+            <div class="col-md-12 h6" >
+                {% if CDtable%}
+                    <a href="{% url 'update_diet_form' %}"><button class="btn btn-info text-light" type="submit">Update Dietician</button></a>
+                    <h6 class="d-inline btn justify-content-end bg-light">
+                        {% for diet in CDtable %}
+                        Your dietician is <b>{{ diet.dieter }}</b>
+                        {% endfor %}
+                    </h6>
+                {% else %}
+                    <a href="{% url 'request_dietician' %}"><button class="btn btn-info text-light" type="submit">Request Dietician</button></a>
+                {% endif %}
             </div>
         </div>
 
@@ -36,4 +49,5 @@
             <br><br>
         {% endfor %}
 </div>
+
 {% endblock %}

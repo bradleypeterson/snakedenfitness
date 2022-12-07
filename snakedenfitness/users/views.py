@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.db import transaction
-from django.db.models import Max
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -28,21 +26,19 @@ def register(request):
             passw.set_password(user_form.cleaned_data['password'])
 
             user = user_form.save()
-
             profile = profile_form.save(commit = False)
             profile.user = user
+
             img = request.FILES['avatar']
             profile.avatar = img
 
             profile.save()
 
             username = user_form.cleaned_data.get('username')
-
             messages.success(request, f'User {username} successfully created')
             return redirect('login')
         else:
             messages.error(request, ('Error on submit'))
-
     else:
         user_form = UserForm()
         profile_form = ProfileForm()

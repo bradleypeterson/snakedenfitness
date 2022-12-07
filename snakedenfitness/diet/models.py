@@ -21,22 +21,17 @@ def validate_dob(dob):
         raise ValidationError("Must be at least 12 years old to register")
     return dob
 
+class clientDieter(models.Model):
+    client = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        unique=True,
+        related_name='assigned_diet_client')
 
-# class DietitianProfile(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     first_name = models.CharField(default="John", max_length=100)
-#     last_name = models.CharField(default="Doe", max_length=100)
-#     dob = models.DateField(
-#         verbose_name="birthdate", max_length=8, validators=[validate_dob]
-#     )
-#     email = models.EmailField(max_length=200, null=True)
-#     bio = models.TextField(max_length=500, blank=True)
-#     # image = models.ImageField(default="/defaults/profile.png", upload_to="profiles")
-#     # client = models.ManyToManyField()
-
-#     def __str__(self):
-#         return f"{self.first_name} {self.last_name}"
-
+    dieter = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name='assigned_dietician')
 
 class Meal(models.Model):
     MEAL_TYPES = [
