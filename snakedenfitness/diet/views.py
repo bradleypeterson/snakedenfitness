@@ -53,7 +53,7 @@ def meal_form(request):
             obj.user = User(request.user.id)
             obj.save()
             # redirect to a new URL:
-            return HttpResponseRedirect('/diet/')
+            return HttpResponseRedirect('/diet/meal_log/')
     # if a GET (or any other method) we'll create a blank form
     else:
         form = MealForm()
