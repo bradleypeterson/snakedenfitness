@@ -31,7 +31,6 @@ def groupForm(request):
 def edit_group(request, name):
     room_obj = Room.objects.get(name=name)
     members = User.objects.all()
-    print(members)
     if request.method == 'POST':
         member = request.POST.get('members', '')
         if User.objects.filter(username=member).exists():
