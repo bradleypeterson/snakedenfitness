@@ -6,7 +6,6 @@
         <form action="/diet/meal_form/" method="post" style="margin-top: 25px">
             {% csrf_token %}
             {{ form.as_p }}
-
             <input type="submit" class="btn btn-primary"
                    style="margin-top: 15px; margin-left: 165px; text-align: center" value="Submit">
             <a href="{% url 'diet_home' %}" class="btn btn-danger" style="margin-top: 15px;">Cancel</a>

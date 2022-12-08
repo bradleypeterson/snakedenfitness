@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from datetime import datetime, timedelta, time
 
-#from .forms import NameForm
 from .forms import MealForm
 from .models import Meal
 
@@ -29,9 +28,11 @@ def diet_home(request):
 
     return render(request, 'diet/diet_home.html', {'meal': meal, 'total_sum': total_sum, 'filter': filter})
 
+
 @login_required
 def dietitian_home(request):
     return render(request, 'diet/dietitian_home.html', {})
+
 
 @login_required
 def meal_form(request):
@@ -52,12 +53,13 @@ def meal_form(request):
             obj.user = User(request.user.id)
             obj.save()
             # redirect to a new URL:
-            return HttpResponseRedirect('/diet/')
+            return HttpResponseRedirect('/diet/meal_log/')
     # if a GET (or any other method) we'll create a blank form
     else:
         form = MealForm()
 
     return render(request, 'diet/meal_form.html', {'form': form})
+
 
 @login_required
 def update_profile(request, user_id):
@@ -65,13 +67,16 @@ def update_profile(request, user_id):
     user.profile.bio = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...'
     user.save()
 
+
 def request_dietician(request):
     return render(request, 'diet/request_dietician.html', {})
+
 
 def delete_meal(request, id):
         meal = Meal.objects.get(pk=id)
         meal.delete()
         return redirect('diet_home')
+
 
 @login_required
 def edit_meal(request, id):
@@ -84,10 +89,12 @@ def edit_meal(request, id):
 
     return render(request, 'diet/edit_meal.html', {'meal': meal, 'form': form})
 
+
 @login_required
 def user_meal_data(request):
     meals = Meal.objects.filter(user=request.user)
     return render(request, 'diet/meal_log.html', {'meals': meals})
+
 
 @login_required
 def trainer_meal_data(request):

@@ -25,16 +25,19 @@ def fitness_home(request):
 # can restrict view here with permissions
 # @permission_required('x.y') or PermissionRequiredMixin
 
+
 @login_required
 def fitness_home(request):
     CTtable = CT.objects.filter(client = request.user)
 
     return render(request, 'fitness/fitness_home.html', {'CTtable' : CTtable})
 
+
 @login_required
 def trainer_home(request):
-    CTtable = CT.objects.filter(trainer = request.user)
-    return render(request, 'fitness/trainer_home.html', {'CTtable' : CTtable})
+    CTtable = CT.objects.filter(trainer=request.user)
+    return render(request, 'fitness/trainer_home.html', {'CTtable': CTtable})
+
 
 @login_required
 def workout_form(request):
@@ -71,14 +74,17 @@ def update_profile(request, user_id):
     user.profile.bio = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...'
     user.save()
 
+
 def request_trainer(request):
     return render(request, 'fitness/request_trainer.html', {})
+
 
 def delete_workout(request, id):
     workout = Workout.objects.get(pk=id)
     workout.delete()
     return redirect('fitness_home')
     return render(request, 'fitness/delete_workout.html', {})
+
 
 @login_required
 def edit_workout(request, id):
@@ -180,18 +186,13 @@ def clientTrainer_update(request):
 
 @login_required
 def clientTrainer_delete(request, client_id):
-
     cliTrain = CT.objects.get(id=client_id)
-
-
     listTrainersClients = CT.objects.get(trainer=request.user, client=cliTrain.client)
-
 
     if request.method == 'POST':
         CTForm = clientTrainerForm(request.POST, instance=listTrainersClients)
         CTForm.fields['client'].disabled = True
         CTForm.fields['trainer'].disabled = True
-
 
         if CTForm.is_valid():
             cliTrain.delete()
