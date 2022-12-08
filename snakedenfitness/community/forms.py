@@ -5,5 +5,5 @@ class Pic_Form(forms.ModelForm):
     class Meta:
         model = pic
         fields = [
-            'Upload'
+            'Upload',
         ]
