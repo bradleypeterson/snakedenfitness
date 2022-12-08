@@ -2,13 +2,28 @@
 
 {% block body %}
     <h1 class="text-center mt-5">Fitness</h1>
+
     <div class="container p-0">
         <div class="row pb-1">
-            <div class="col-md-12 text-end">
-                <button class="btn btn-success text-light" href="{% url 'workout_form' %}" type="submit">New</button>
-                <button class="btn btn-info text-light" href="{% url 'request_trainer' %}" type="submit">Request Trainer</button>
+            <div class="col-md-12 h6">
+                <button class="btn btn-success" type="">Record New Workout</button>
+
+                {% if CTtable%}
+                    <a class="btn btn-info text-light" href="{% url 'update_client_form' %}">Change Trainer</a>
+                    <h6 class="d-inline btn justify-content-end bg-light">
+                        {% for trainer in CTtable %}
+                            Your trainer is <b>{{ trainer.trainer }}</b>
+                        {% endfor %}
+                    </h6>
+                {% else %}
+                    <a class="btn btn-info text-light" href="{% url 'add_client_form' %}">Request Trainer</a>
+                {% endif %}
             </div>
         </div>
+    </div>
+
+   <div class="container p-0">
+
         {% for workout in workout %}
             <div class="card">
               <div class="card-header">

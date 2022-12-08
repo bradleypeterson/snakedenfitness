@@ -1,8 +1,17 @@
 from django import forms
 from .models import Workout
 from django.forms import ModelForm
-from users.models import clientTrainer
+from users.models import clientTrainer, Profile, User
 
+class clientTrainerForm(forms.ModelForm):
+    class Meta:
+        model = clientTrainer
+        fields = ('client', 'trainer')
+
+    def __init__(self, *args, **kwargs):
+        super(clientTrainerForm, self).__init__(*args, **kwargs)
+        self.fields['client'].widget.attrs['readonly'] = True
+        pass
 
 class WorkoutForm(ModelForm):
     class Meta:
