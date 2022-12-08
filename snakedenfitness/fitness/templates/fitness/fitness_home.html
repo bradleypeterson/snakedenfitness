@@ -6,7 +6,7 @@
     <div class="container p-0">
         <div class="row pb-1">
             <div class="col-md-12 h6">
-                <button class="btn btn-success" type="">Record New Workout</button>
+                <a class="btn btn-success" type=""  href="{% url 'workout_form' %}">Record New Workout</a>
 
                 {% if CTtable%}
                     <a class="btn btn-info text-light" href="{% url 'update_client_form' %}">Change Trainer</a>
@@ -75,12 +75,10 @@
      <div id="piechart" style="width: 900px; height: 500px; padding: 25px;"></div>
 </div>
 
-    <div class="container justify-content-end">
+    {% comment %} <div class="container justify-content-end">
         <div class="row pb-3">
             <div class="col-md-12">
                 <button class="btn btn-success" type="">New</button>
-                {% comment %} <a class="btn btn-info" href="{% url 'add_client_form' %}">Request Trainer</a> {% endcomment %}
-                {% comment %} <a href="{% url 'add_client_form' %}" class="nav-item"> Request </a> {% endcomment %}
 
                 {% if CTtable%}
 
@@ -97,5 +95,5 @@
             </div>
             <div class="col-md-8"></div>
         </div>
-    </div>
+    </div> {% endcomment %}
 {% endblock %}
