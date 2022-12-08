@@ -11,7 +11,7 @@ from django.contrib.auth.hashers import make_password
 
 from diet.models import Meal
 from fitness.models import Workout
-from users.models import Profile, User, clientTrainer
+from users.models import Profile, User, clientTrainer, clientDieter
 
 
 # Create your views here.
@@ -52,9 +52,12 @@ def register(request):
 @login_required
 def profile(request):
     CTtable = clientTrainer.objects.filter(client = request.user)
+    CDtable = clientDieter.objects.filter(client = request.user)
     if request.user.profile.role == 2:
         CTtable = clientTrainer.objects.filter(trainer = request.user)
-    return render(request, 'users/profile.html', {'CTtable' : CTtable})
+    if request.user.profile.role == 1:
+        CDtable = clientDieter.objects.filter(dieter = request.user)
+    return render(request, 'users/profile.html', {'CTtable' : CTtable, 'CDtable' : CDtable})
 
 
 @login_required

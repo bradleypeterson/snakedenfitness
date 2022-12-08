@@ -26,14 +26,24 @@
         <p>you are a Client</p>
 
         {% if CTtable%}
-        <a class="btn btn-success" href="{% url 'update_client_form' %}">Change Trainer</a>
+            <a class="btn btn-success" href="{% url 'update_client_form' %}">Change Trainer</a>
+            {% for trainer in CTtable %}
+            <h3> Your trainer is <b>{{ trainer.trainer }}</b> </h3>
+            {% endfor %}
         {% else %}
-        <a class="btn btn-success" href="{% url 'add_client_form' %}">Request Trainer</a>
+            <a class="btn btn-success" href="{% url 'add_client_form' %}">Request Trainer</a>
         {% endif %}
 
-        {% for trainer in CTtable %}
-        <h3> Your trainer is <b>{{ trainer.trainer }}</b> </h3>
-        {% endfor %}
+        {% if CDtable%}
+            <a class="btn btn-success" href="{% url 'update_diet_form' %}">Change Dietician</a>
+            {% for diet in CDtable %}
+            <h3> Your trainer is <b>{{ diet.dieter }}</b> </h3>
+            {% endfor %}
+        {% else %}
+            <a class="btn btn-success" href="{% url 'request_dietician' %}">Request Dietician</a>
+        {% endif %}
+
+
     {% endif %}
 
 
