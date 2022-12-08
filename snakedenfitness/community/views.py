@@ -15,7 +15,6 @@ def room(request, slug):
     messages = Message.objects.filter(room=room)[0:25]
     return render(request, 'community/room.html', {'room': room, 'messageList': messages})
 
-
 @login_required
 def rooms(request):
     rooms = Room.objects.filter(users__id=request.user.id)
@@ -36,6 +35,7 @@ def groupForm(request):
 @login_required
 def edit_group(request, name):
     room_obj = Room.objects.get(name=name)
+    members = User.objects.all()
     if request.method == 'POST':
         member = request.POST.get('members', '')
         if User.objects.filter(username=member).exists():
@@ -46,7 +46,7 @@ def edit_group(request, name):
         else:
             messages.add_message(request, messages.INFO, "User not found")
 
-    return render(request, 'community/editGroup.html', {'room_obj': room_obj})
+    return render(request, 'community/editGroup.html', {'room_obj': room_obj, 'members': members})
 
 
 def accept_invite(request, group, id):

@@ -1,11 +1,13 @@
 from django import forms
 from django.forms import ModelForm
 from .models import Meal
+from users.models import clientDieter, Profile, User
 
 class MealForm(ModelForm):
     class Meta:
         model = Meal
         fields = ('meal_name', 'meal_type', 'calories', 'carbs', 'sugars', 'protein')
+
         MEAL_TYPES = [
             ('Breakfast', 'Breakfast'),
             ('Lunch', 'Lunch'),
@@ -30,3 +32,12 @@ class MealForm(ModelForm):
         }
 
 
+class clientDieterForm(forms.ModelForm):
+    class Meta:
+        model = clientDieter
+        fields = ('client', 'dieter')
+
+    def __init__(self, *args, **kwargs):
+        super(clientDieterForm, self).__init__(*args, **kwargs)
+        self.fields['client'].widget.attrs['readonly'] = True
+        pass

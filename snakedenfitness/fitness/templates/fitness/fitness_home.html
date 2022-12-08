@@ -2,13 +2,28 @@
 
 {% block body %}
     <h1 class="text-center mt-5">Fitness</h1>
+
     <div class="container p-0">
         <div class="row pb-1">
-            <div class="col-md-12 text-end">
-                <button class="btn btn-success text-light" href="{% url 'workout_form' %}" type="submit">New</button>
-                <button class="btn btn-info text-light" href="{% url 'request_trainer' %}" type="submit">Request Trainer</button>
+            <div class="col-md-12 h6">
+                <a class="btn btn-success" type=""  href="{% url 'workout_form' %}">Record New Workout</a>
+
+                {% if CTtable%}
+                    <a class="btn btn-info text-light" href="{% url 'update_client_form' %}">Change Trainer</a>
+                    <h6 class="d-inline btn justify-content-end bg-light">
+                        {% for trainer in CTtable %}
+                            Your trainer is <b>{{ trainer.trainer }}</b>
+                        {% endfor %}
+                    </h6>
+                {% else %}
+                    <a class="btn btn-info text-light" href="{% url 'add_client_form' %}">Request Trainer</a>
+                {% endif %}
             </div>
         </div>
+    </div>
+
+   <div class="container p-0">
+
         {% for workout in workout %}
             <div class="card">
               <div class="card-header">
@@ -60,12 +75,10 @@
      <div id="piechart" style="width: 900px; height: 500px; padding: 25px;"></div>
 </div>
 
-    <div class="container justify-content-end">
+    {% comment %} <div class="container justify-content-end">
         <div class="row pb-3">
             <div class="col-md-12">
                 <button class="btn btn-success" type="">New</button>
-                {% comment %} <a class="btn btn-info" href="{% url 'add_client_form' %}">Request Trainer</a> {% endcomment %}
-                {% comment %} <a href="{% url 'add_client_form' %}" class="nav-item"> Request </a> {% endcomment %}
 
                 {% if CTtable%}
 
@@ -82,5 +95,5 @@
             </div>
             <div class="col-md-8"></div>
         </div>
-    </div>
+    </div> {% endcomment %}
 {% endblock %}

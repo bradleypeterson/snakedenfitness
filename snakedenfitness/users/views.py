@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.db import transaction
-from django.db.models import Max
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -13,7 +11,7 @@ from django.contrib.auth.hashers import make_password
 
 from diet.models import Meal
 from fitness.models import Workout
-from users.models import Profile, User, clientTrainer
+from users.models import Profile, User, clientTrainer, clientDieter
 
 
 # Create your views here.
@@ -37,12 +35,10 @@ def register(request):
             profile.save()
 
             username = user_form.cleaned_data.get('username')
-
             messages.success(request, f'User {username} successfully created')
             return redirect('login')
         else:
             messages.error(request, ('Error on submit'))
-
     else:
         user_form = UserForm()
         profile_form = ProfileForm()
@@ -59,11 +55,15 @@ def profile(request):
     avatar_loc = request.user.profile.avatar.url
     split_avatar = avatar_loc.replace("avatars/", "")
     profile_avatar = split_avatar.replace("/media/", "")
-    #print(f"PROFILE AVATAR: {profile_avatar}")
-    CTtable = clientTrainer.objects.filter(client=request.user)
+    print(f"PROFILE AVATAR: {profile_avatar}")
+
+    CTtable = clientTrainer.objects.filter(client = request.user)
+    CDtable = clientDieter.objects.filter(client = request.user)
     if request.user.profile.role == 2:
-        CTtable = clientTrainer.objects.filter(trainer=request.user)
-    return render(request, 'users/profile.html', {'CTtable': CTtable, 'profile_avatar': profile_avatar})
+        CTtable = clientTrainer.objects.filter(trainer = request.user)
+    if request.user.profile.role == 1:
+        CDtable = clientDieter.objects.filter(dieter = request.user)
+    return render(request, 'users/profile.html', {'CTtable' : CTtable, 'CDtable' : CDtable, 'profile_avatar': profile_avatar})
 
 
 @login_required
@@ -106,5 +106,3 @@ def user_workout_data(request):
             prs.append(pr1.weight)
 
     return render(request, 'users/workout_log.html', {'workouts': workouts, 'prs': prs})
-
-
