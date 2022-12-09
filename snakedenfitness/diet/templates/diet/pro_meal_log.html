@@ -27,18 +27,43 @@
   </ul> -->
 
 
-<h1>Meal logs available: </h1>
+  {% comment %} <h1>Meal logs available: </h1>
 
-<div class="container">
+  <div class="container">
+      {% for meal in meals %}
+      <h3>{{ meal.user }} :</h3>
+        <h5>{{ meal.name }}</h5>
+        <h5>cal: {{ meal.calories }}</h5>
+        <h5>sugars: {{ meal.sugars }}</h5>
+        <h5>carbs: {{ meal.carbs }}</h5>
+        <h5>protein: {{ meal.protein }}</h5>
+
+        <p>__________________________________________________________ </p>
+      {% endfor %}
+  </div> {% endcomment %}
+
+  <h1>Meal logs available: </h1>
     {% for meal in meals %}
+      {% for CD in CDTable %}
+        {% if meal.user == CD.client  %}
+        <p>you ( {{user}} ) are ASSIGNED DIETITIAN for {{ CD.client }} </p>
+
         <h3>{{ meal.user }} :</h3>
         <h5>{{ meal.name }}</h5>
         <h5>cal: {{ meal.calories }}</h5>
         <h5>sugars: {{ meal.sugars }}</h5>
         <h5>carbs: {{ meal.carbs }}</h5>
         <h5>protein: {{ meal.protein }}</h5>
+
+        <p>__________________________________________________________ </p>
+
+        {% endif %}
+
+      {% endfor %}
     {% endfor %}
-</div>
+  </div>
+
+
 
 
 

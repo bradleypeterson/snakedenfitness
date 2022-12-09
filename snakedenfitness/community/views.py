@@ -1,15 +1,19 @@
+from django.http import HttpResponse, FileResponse
 from django.shortcuts import render, redirect
 from .models import Room, Message, User, Invitation
 from django.utils.text import slugify
 from django.contrib import messages
 from django.contrib.auth.decorators import permission_required, login_required
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+from .forms import Pic_Form
+from .models import pic
 
 @login_required
 def room(request, slug):
     room = Room.objects.get(slug=slug)
     messages = Message.objects.filter(room=room)[0:25]
     return render(request, 'community/room.html', {'room': room, 'messageList': messages})
-
 
 @login_required
 def rooms(request):
@@ -31,6 +35,7 @@ def groupForm(request):
 @login_required
 def edit_group(request, name):
     room_obj = Room.objects.get(name=name)
+    members = User.objects.all()
     if request.method == 'POST':
         member = request.POST.get('members', '')
         if User.objects.filter(username=member).exists():
@@ -41,7 +46,7 @@ def edit_group(request, name):
         else:
             messages.add_message(request, messages.INFO, "User not found")
 
-    return render(request, 'community/editGroup.html', {'room_obj': room_obj})
+    return render(request, 'community/editGroup.html', {'room_obj': room_obj, 'members': members})
 
 
 def accept_invite(request, group, id):
@@ -58,3 +63,23 @@ def decline_invite(request, id):
     invite.delete()
     messages.add_message(request, messages.INFO, "Invite Declined")
     return redirect('rooms')
+
+def guides(request):
+    form = Pic_Form()
+    #path that it is showing /media/avatars/media/ERD_d9DHlWj.pdf
+
+    if request.method == 'POST':
+        form = Pic_Form(request.POST, request.FILES)
+        if form.is_valid():
+            user_pr_form = form.save(commit=False)
+            user_pr_form.Upload = request.FILES['Upload']
+            user_pr = str(user_pr_form.Upload)
+            user_pr = user_pr.replace("avatars/", "")
+            user_pr_form.save()
+            return render(request, 'community/displayGuides.html', {'user_pr': user_pr})
+    context = {"form": form}
+    return render(request, 'community/guides.html', context)
+
+@login_required
+def displayGuides(request):
+    return render(request, 'community/displayGuides.html', {})

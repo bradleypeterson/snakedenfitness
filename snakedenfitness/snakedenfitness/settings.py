@@ -35,7 +35,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # Application definition
 
 INSTALLED_APPS = [
-    'daphne',
+    #'daphne',
     'community',
     'diet',
     'fitness',

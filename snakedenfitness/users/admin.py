@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
-from .models import Profile, clientTrainer
+from .models import Profile, clientTrainer, clientDieter
 
 # Register your models here.
 
@@ -28,3 +28,4 @@ admin.site.register(User, CustomUserAdmin)
 
 
 admin.site.register(clientTrainer)
+admin.site.register(clientDieter)

@@ -8,13 +8,6 @@ from django.contrib.auth.models import User, Group, AbstractUser
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-# Create your models here.
-### Can set user permissions user.has_perm('app.add/change/delete/view')
-
-# class User(AbstractUser):
-#     pass
-
-
 class Profile(models.Model):
     user = models.OneToOneField(User,
                                 on_delete=models.CASCADE,
@@ -38,13 +31,6 @@ class Profile(models.Model):
 
     role = models.SmallIntegerField(choices=ROLE_CHOICES, blank=True, null=False, default = 0)
 
-    # class Meta:
-    #     permissions = (
-    #         'is_trainer',
-    #         'is_dietician',
-    #         'is_client'
-    #     )
-
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -58,43 +44,26 @@ def has_group(user, group_name):
     group =  Group.objects.get(name=group_name)
     return group in user.groups.all()
 
+class clientDieter(models.Model):
+    client = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        unique=True,
+        related_name='D_assigned_client')
+
+    dieter = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='D_assigned_dietician')
 
 class clientTrainer(models.Model):
     client = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         unique=True,
-        related_name='assigned_client')
+        related_name='T_assigned_client')
 
     trainer = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='assigned_trainer')
-
-
-############################# Excess code graveyard #############################
-# @receiver(post_save, sender=User)
-# def create_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         Profile.objects.create(user=instance)
-# post_save.connect(create_user_profile, sender=User)
-
-# @receiver(post_save, sender=User)
-# def save_user_profile(sender, instance, **kwargs):
-#     instance.profile.save()
-
-
-# need to create CUSTOM PERMISSIONS
-
-# can create user groups to manage permissions
-# Dieticians, Trainers, and Clients. figure out family grouping laterrr
-# user_group.permissions.set([permission_list])
-# user_group.permissions.add(permission, permission, ...)
-# user_group.permissions.remove(permission, permission, ...)
-# user_group.permissions.clear()
-
-# client_group, created = Group.objects.get_or_create(name="Client")
-
-# diet_group, created = Group.objects.get_or_create(name="Dietician")
-
-# fit_group, created = Group.objects.get_or_create(name="Trainer")
+        related_name='T_assigned_trainer')

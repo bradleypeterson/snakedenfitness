@@ -5,10 +5,18 @@ from django.dispatch import receiver
 
 
 # Create your models here.
-class TrainerProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(max_length=500, blank=True)
 
+class clientTrainer(models.Model):
+    client = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        unique=True,
+        related_name='assigned_trainer_client')
+
+    trainer = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name='assigned_trainer')
 
 class Workout(models.Model):
     WORKOUT_TYPE = [

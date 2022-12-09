@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block body %}
     <h1>Welcome {{ user.username }}</h1>
     <img src="{% static profile_avatar %}" alt="Profile Image" width="150" height="150"/>
@@ -17,28 +16,35 @@
 
     {% if user.profile.role == 2 %}
         <p>you are a Trainer</p>
-        <h3> Your clients:  </h3>
+        <h3> Your clients: </h3>
         {% for trainer in CTtable %}
-        <h3> <b>{{ trainer.client }}</b> </h3>
+            <h3><b>{{ trainer.client }}</b></h3>
         {% endfor %}
 
     {% elif user.profile.role == 1 %}
-        <p>you are a Dietician</p>
+        <p>you are a Dietitian</p>
 
     {% elif user.profile.role == 0 %}
         <p>you are a Client</p>
 
         {% if CTtable%}
-        <a class="btn btn-success" href="{% url 'update_client_form' %}">Change Trainer</a>
+            <a class="btn btn-success" href="{% url 'update_client_form' %}">Change Trainer</a>
+            {% for trainer in CTtable %}
+            <h3> Your trainer is <b>{{ trainer.trainer }}</b> </h3>
+            {% endfor %}
         {% else %}
-        <a class="btn btn-success" href="{% url 'add_client_form' %}">Request Trainer</a>
+            <a class="btn btn-success" href="{% url 'add_client_form' %}">Request Trainer</a>
         {% endif %}
 
-        {% for trainer in CTtable %}
-        <h3> Your trainer is <b>{{ trainer.trainer }}</b> </h3>
-        {% endfor %}
+        {% if CDtable%}
+            <a class="btn btn-success" href="{% url 'update_diet_form' %}">Change Dietician</a>
+            {% for diet in CDtable %}
+            <h3> Your trainer is <b>{{ diet.dieter }}</b> </h3>
+            {% endfor %}
+        {% else %}
+            <a class="btn btn-success" href="{% url 'request_dietician' %}">Request Dietician</a>
+        {% endif %}
+
+
     {% endif %}
-
-
-
 {% endblock %}

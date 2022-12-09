@@ -25,7 +25,6 @@ class Migration(migrations.Migration):
                 ('carbs', models.IntegerField()),
                 ('sugars', models.IntegerField()),
                 ('protein', models.IntegerField()),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),

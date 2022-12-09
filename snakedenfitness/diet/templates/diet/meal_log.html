@@ -1,17 +1,38 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <h1>Meal log for {{ user.username }}</h1>
-    <div style="display: grid; grid-template-columns: auto auto auto;; padding: 10px;">
-    {% for meal in meals %}
-        <div style="margin-bottom: 20px;">
-            <div style="font-weight: bold;">{{ meal.meal_name }}</div>
-            <div>{{ meal.meal_type }}</div>
-            <div>Calories: {{ meal.calories }}</div>
-            <div>Carbs: {{ meal.carbs }}</div>
-            <div>Sugars: {{ meal.sugars }}</div>
-            <div>Protein: {{ meal.protein }}</div>
+    <h1 class="contianer text-center mt-2">Meal log for {{ user.username }}</h1>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped text-center">
+                    <thead class="bg-dark text-light">
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Meal Type</th>
+                            <th scope="col">Meal Name</th>
+                            <th scope="col">Calories</th>
+                            <th scope="col">Carbs</th>
+                            <th scope="col">Sugars</th>
+                            <th scope="col">Protein</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for meal in meals %}
+                            <tr>
+                                <td>{{ meal.created_at }}</td>
+                                <td>{{ meal.meal_type }}</td>
+                                <td>{{ meal.meal_name }}</td>
+                                <td>{{ meal.calories }}</td>
+                                <td>{{ meal.carbs }}</td>
+                                <td>{{ meal.sugars }}</td>
+                                <td>{{ meal.protein }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-    {% endfor %}
     </div>
 {% endblock %}
+

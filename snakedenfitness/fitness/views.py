@@ -16,25 +16,23 @@ from django.core.files.storage import FileSystemStorage
 
 
 # Create your views here.
-def fitness_home(request):
-    workout = Workout.objects.all()
-    return render(request, 'fitness/fitness_home.html', {'workout': workout})
 
 # Create your views here.
 
 # can restrict view here with permissions
 # @permission_required('x.y') or PermissionRequiredMixin
-
 @login_required
 def fitness_home(request):
     CTtable = CT.objects.filter(client = request.user)
+    workout = Workout.objects.all()
+    return render(request, 'fitness/fitness_home.html', {'workout': workout, 'CTtable' : CTtable})
 
-    return render(request, 'fitness/fitness_home.html', {'CTtable' : CTtable})
 
 @login_required
 def trainer_home(request):
-    CTtable = CT.objects.filter(trainer = request.user)
-    return render(request, 'fitness/trainer_home.html', {'CTtable' : CTtable})
+    CTtable = CT.objects.filter(trainer=request.user)
+    return render(request, 'fitness/trainer_home.html', {'CTtable': CTtable})
+
 
 @login_required
 def workout_form(request):
@@ -64,21 +62,23 @@ def workout_form(request):
 
     return render(request, 'fitness/workout_form.html', {'form': form})
 
-
 @login_required
 def update_profile(request, user_id):
     user = User.objects.get(pk=user_id)
     user.profile.bio = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...'
     user.save()
 
+
 def request_trainer(request):
     return render(request, 'fitness/request_trainer.html', {})
+
 
 def delete_workout(request, id):
     workout = Workout.objects.get(pk=id)
     workout.delete()
     return redirect('fitness_home')
     return render(request, 'fitness/delete_workout.html', {})
+
 
 @login_required
 def edit_workout(request, id):
@@ -103,8 +103,7 @@ def trainer_workout_data(request):
 
     return render(request, 'fitness/pro_workout_log.html', {'workouts': workouts, 'CTtable': CTtable})
 
-
-
+######## Client-Professional Relationship
 @login_required
 def add_client(request):
     trainerU = UUser.objects.all()
@@ -120,24 +119,26 @@ def add_client(request):
 
 @login_required
 def clientTrainer_form(request):
-    listUsers = UUser.objects.all()
-    listTrainersClients = CT.objects.all()
-    listTrainers = UProfile.objects.filter(role=2)
+    listUsers = UUser.objects.all()                                                         # Get list of users
+    listTrainersClients = CT.objects.all()                                                  # Get list of all trainer - client relationships
+    listTrainers = UProfile.objects.filter(role=2)                                          # Get list of all trainers
 
     if request.method == 'POST':
-        CTForm = clientTrainerForm(request.POST, initial={'client': request.user})
-        CTForm.fields['client'].disabled = True
+        CTForm = clientTrainerForm(request.POST, initial={'client': request.user})          # create django form for client-trainer, init client field to current user
+        CTForm.fields['client'].disabled = True                                             # forbid user from editing client field
+        CTForm.fields['trainer'].queryset = User.objects.filter(profile__in=listTrainers)   # dropdown selection of trainers
 
-        if CTForm.is_valid():
+        if CTForm.is_valid():                                                               # save form on valid
             CTForm.save()
-            messages.success(request, (' Trainer added'))
+            messages.success(request, (' Trainer added '))
             return redirect('/fitness/')
         else:
             messages.error(request, ('Error'))
 
     else:
-       CTForm = clientTrainerForm(initial={'client': request.user})
-       CTForm.fields['client'].disabled = True
+        CTForm = clientTrainerForm(initial={'client': request.user})                        # create django form for client-trainer, init client field to current user
+        CTForm.fields['client'].disabled = True                                             # forbid user from editing client field
+        CTForm.fields['trainer'].queryset = User.objects.filter(profile__in=listTrainers)   # dropdown selection of trainers
 
     return render(request, 'fitness/add_client_form.html', {
         'form': CTForm,
@@ -148,19 +149,20 @@ def clientTrainer_form(request):
 
 @login_required
 def clientTrainer_update(request):
-
-    if request.user.profile.role == 2:
+    if request.user.profile.role == 2:                                                      # check if user is type trainer
         listTrainersClients = CT.objects.get(trainer=request.user)
-    else:
-        listTrainersClients = CT.objects.get(client=request.user)
+    else:                                                                                   # else, user is client ( dietician is impossible )
+        listTrainersClients = CT.objects.get(client=request.user)                           # get client-trainer relations for curUser
 
-    listTrainers = UProfile.objects.filter(role=2)
+    listTrainers = UProfile.objects.filter(role=2)                                          # Get list of all trainers
 
     if request.method == 'POST':
-        CTForm = clientTrainerForm(request.POST, instance=listTrainersClients)
-        CTForm.fields['client'].disabled = True
+        CTForm = clientTrainerForm(request.POST, instance=listTrainersClients)              # create django form for client-trainer, initialize w curUser's relation
+        CTForm.fields['client'].disabled = True                                             # forbid user from editing client field
+        CTForm.fields['trainer'].queryset = User.objects.filter(profile__in=listTrainers)   # dropdown selection of trainers
 
-        if CTForm.is_valid():
+
+        if CTForm.is_valid():                                                               # save form on valid
             CTForm.save()
             messages.success(request, ('Trainer updated'))
             return redirect('/fitness/')
@@ -170,6 +172,7 @@ def clientTrainer_update(request):
     else:
        CTForm = clientTrainerForm(instance=listTrainersClients)
        CTForm.fields['client'].disabled = True
+       CTForm.fields['trainer'].queryset = User.objects.filter(profile__in=listTrainers)
 
     return render(request, 'fitness/update_client_form.html', {
         'form': CTForm,
@@ -180,20 +183,15 @@ def clientTrainer_update(request):
 
 @login_required
 def clientTrainer_delete(request, client_id):
-
-    cliTrain = CT.objects.get(id=client_id)
-
-
-    listTrainersClients = CT.objects.get(trainer=request.user, client=cliTrain.client)
-
+    cliTrain = CT.objects.get(id=client_id)                                                 # get client-trainer relations for curUser
+    listTrainersClients = CT.objects.get(trainer=request.user, client=cliTrain.client)      # get client-trainer relation for curUser & selected client
 
     if request.method == 'POST':
         CTForm = clientTrainerForm(request.POST, instance=listTrainersClients)
-        CTForm.fields['client'].disabled = True
-        CTForm.fields['trainer'].disabled = True
+        CTForm.fields['client'].disabled = True                                             # forbid user from editing client field
+        CTForm.fields['trainer'].disabled = True                                            # forbid user from editing trainer field
 
-
-        if CTForm.is_valid():
+        if CTForm.is_valid():                                                               # delete form model on valid
             cliTrain.delete()
             messages.success(request, ('Clients updated'))
             return redirect('/fitness/')
