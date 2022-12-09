@@ -154,3 +154,6 @@ STATICFILES_DIRS = (
 )
 
 ASGI_APPLICATION = 'snakedenfitness.asgi.application'
+
+USE_TZ = True
+TIME_ZONE="America/Denver"

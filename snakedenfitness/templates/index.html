@@ -3,5 +3,107 @@
 <!-- This is the site landing page -->
 
 {% block body %}
- <h1 class="contianer text-center mt-5">Welcome to the Snakeden</h1>
+<h1 class="text-center m-5">User Dashboard</h1>
+<div class="row">
+    <a class="col-md-4 bg-success text-white text-decoration-none text-center h1 border border-white rounded py-5 mb-0" href="{% url 'fitness_home' %}">Fitness</a>
+    <a class="col-md-4 bg-primary text-white text-decoration-none text-center h1 border border-white rounded py-5 mb-0" href="{% url 'diet_home' %}">Diet</a>
+    <a class="col-md-4 bg-danger text-white text-decoration-none text-center h1 border border-white rounded py-5 mb-0" href="{% url 'rooms' %}">Community</a>
+    <div class="col-md-4 border border-success border-top-0 border-end-0 border-bottom-0 py-2">
+        <div class="text-center fw-bold">Total Reps (Within Last Week)</div>
+        <div class="row">
+            <div id="workoutchart" class=""></div>
+        </div>
+    </div>
+    <div class="col-md-4 border border-primary border-top-0 border-end-0 border-bottom-0 py-2">
+        <div class="text-center fw-bold">Calories Today: {{ total_calories }}</div>
+        <div class="row">
+            <div id="dietchart" class=""></div>
+        </div>
+    </div>
+    <div class="col-md-4 border border-danger border-top-0 border-end-0 border-bottom-0 py-2">
+        {% for room in rooms %}
+            <div class="row border rounded p-2 m-2">
+                <div class="col-md-9 h3 d-flex justify-content-center">{{ room.name }}</div>
+                <div class="col-md-3 d-flex justify-content-center">
+                    <a href="{% url 'room' room.slug %}" class="btn btn-warning px-3">View</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div id="cardio" class="d-none">{{ cardio }}</div>
+    <div id="strength" class="d-none">{{ strength }}</div>
+    <div id="endurance" class="d-none">{{ endurance }}</div>
+    <div id="breakfast_cal" class="d-none">{{ breakfast_cal }}</div>
+    <div id="lunch_cal" class="d-none">{{ lunch_cal }}</div>
+    <div id="dinner_cal" class="d-none">{{ dinner_cal }}</div>
+    <div id="snack_cal" class="d-none">{{ snack_cal }}</div>
+</div>
 {% endblock %}
+
+
+{% block scripts %}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawWorkoutChart);
+        google.charts.setOnLoadCallback(drawDietChart);
+
+        let cardio = +document.getElementById('cardio').innerHTML;
+        let strength = +document.getElementById('strength').innerHTML;
+        let endurance = +document.getElementById('endurance').innerHTML;
+        let breakfast = +document.getElementById('breakfast_cal').innerHTML;
+        let lunch = +document.getElementById('lunch_cal').innerHTML;
+        let dinner = +document.getElementById('dinner_cal').innerHTML;
+        let snack = +document.getElementById('snack_cal').innerHTML;
+
+        function drawWorkoutChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Task', 'Workouts'],
+                ['Cardio', cardio],
+                ['Strength', strength],
+                ['Endurance', endurance],
+            ]);
+
+            var options = {
+                backgroundColor: { fill:'transparent' },
+                legend: {position: 'bottom'},
+                is3D: true,
+                chartArea: {
+                    width: '94%'
+                },
+                width: '100%',
+                colors: ['#ffa633', '#3b5a9d', '#4fb2aa']
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('workoutchart'));
+            chart.draw(data, options);
+        }
+
+        function drawDietChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Task', 'Workouts'],
+                ['Breakfast', breakfast],
+                ['Lunch', lunch],
+                ['Dinner', dinner],
+                ['Snack', snack]
+            ]);
+
+            var options = {
+                backgroundColor: { fill:'transparent' },
+                legend: {position: 'bottom'},
+                is3D: true,
+                chartArea: {
+                    width: '92%'
+                },
+                width: '100%',
+                colors: ['#003f5c', '#58508d', '#ff6361', '#ffa600']
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('dietchart'));
+            chart.draw(data, options);
+        }
+    </script>
+{% endblock %}
+
+
+
