@@ -22,13 +22,6 @@ from django.core.files.storage import FileSystemStorage
 # can restrict view here with permissions
 # @permission_required('x.y') or PermissionRequiredMixin
 @login_required
-def fitness_home(request):
-    CTtable = CT.objects.filter(client = request.user)
-    workout = Workout.objects.all()
-    return render(request, 'fitness/fitness_home.html', {'workout': workout, 'CTtable' : CTtable})
-
-
-@login_required
 def trainer_home(request):
     CTtable = CT.objects.filter(trainer=request.user)
     return render(request, 'fitness/trainer_home.html', {'CTtable': CTtable})
@@ -69,14 +62,11 @@ def update_profile(request, user_id):
     user.save()
 
 
-def request_trainer(request):
-    return render(request, 'fitness/request_trainer.html', {})
-
-
 def delete_workout(request, id):
     workout = Workout.objects.get(pk=id)
     workout.delete()
-    return redirect('fitness_home')
+    messages.success(request, "Record Deleted Successfully")
+    return redirect('user_workout_data')
     return render(request, 'fitness/delete_workout.html', {})
 
 
@@ -87,14 +77,16 @@ def edit_workout(request, id):
 
     if form.is_valid():
         form.save()
-        return redirect('fitness_home')
+        messages.success(request, "Record Saved Successfully")
+        return redirect('user_workout_data')
 
     return render(request, 'fitness/edit_workout.html', {'workout': workout, 'form': form})
 
 @login_required
 def user_workout_data(request):
+    CTtable = CT.objects.filter(client=request.user)
     workouts = Workout.objects.filter(user=request.user)
-    return render(request, 'fitness/workout_log.html', {'workouts': workouts})
+    return render(request, 'fitness/workout_log.html', {'workouts': workouts, 'CTtable': CTtable})
 
 @login_required
 def trainer_workout_data(request):
@@ -131,7 +123,7 @@ def clientTrainer_form(request):
         if CTForm.is_valid():                                                               # save form on valid
             CTForm.save()
             messages.success(request, (' Trainer added '))
-            return redirect('/fitness/')
+            return redirect('user_workout_data')
         else:
             messages.error(request, ('Error'))
 
@@ -161,11 +153,10 @@ def clientTrainer_update(request):
         CTForm.fields['client'].disabled = True                                             # forbid user from editing client field
         CTForm.fields['trainer'].queryset = User.objects.filter(profile__in=listTrainers)   # dropdown selection of trainers
 
-
         if CTForm.is_valid():                                                               # save form on valid
             CTForm.save()
             messages.success(request, ('Trainer updated'))
-            return redirect('/fitness/')
+            return redirect('user_workout_data')
         else:
             messages.error(request, ('Error'))
 
@@ -194,7 +185,7 @@ def clientTrainer_delete(request, client_id):
         if CTForm.is_valid():                                                               # delete form model on valid
             cliTrain.delete()
             messages.success(request, ('Clients updated'))
-            return redirect('/fitness/')
+            return redirect('trainer_home')
         else:
             messages.error(request, ('Error'))
 

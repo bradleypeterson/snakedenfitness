@@ -32,7 +32,7 @@ class WorkoutForm(ModelForm):
         labels = {
             'workout_type': 'Workout Type',
             'muscle_group': 'Muscle Group',
-            'exercise_name': '',
+            'exercise_name': 'Exercise Name',
             'reps': 'Reps',
             'sets': 'Sets',
             'weight': 'Weight',

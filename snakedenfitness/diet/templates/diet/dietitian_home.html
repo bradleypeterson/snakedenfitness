@@ -1,53 +1,24 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<h1>Dietitian Home</h1>
-<h1 style="text-align: center; margin-top: 50px">Clients</h1>
-
-<div class="container p-0" style="margin-left: 3px">
-
-    <div class="row pb-1" style="text-align: center">
-            <div class="col-md-6 text-center h4" >
-                My Clients
+<div class="container py-2 my-3" style="max-width: 50%;">
+    <h1 class="text-center">Dietitian Home</h1>
+    <div class="text-center h4 py-2">
+            My Clients
+    </div>
+    <div class="my-2">
+        {% for d in CDtable %}
+            <div class="row">
+                <div class="col-md-6 text-center">{{ d.client }}</div>
+                <div class="col-md-6 text-center">
+                    <a class="btn btn-warning text-light" href="{% url 'delete_diet_form' d.id %}">Remove Client</a>
+                </div>
             </div>
-            {% comment %} <div class="col-md-3 text-center h4">
-                Client Requests
-            </div> {% endcomment %}
+            <hr>
+        {% endfor %}
+        <div class="text-center py-2">
+            <a href="{% url 'trainer_meal_data' %}" class="btn btn-success">Meal logs</a>
+        </div>
     </div>
 </div>
-
-<div class="container p-0">
-
-    <h2>Name: {{ user.get_full_name }}</h2>
-    <h3>Username: {{ user.username }}</h3>
-
-        <div class="col-md-3 text-center h6" style=" margin-top: 20px">
-            John Joseph
-            {#<a href="{% url 'groups' %}">#}
-            <button class="btn btn-success" style="color: white; margin-left: 20px;" type="submit">Accept</button>
-            <button class="btn btn-danger" style="color: white; margin-left: 10px;" type="submit">Decline</button>
-            </a>
-        </div>
-
-        {% if user.is_authenticated %}
-        <p>you are authenticated</p>
-        {% endif %}
-        {% if user.profile.role == 1 %}
-        <p>you are a Dietitian</p>
-        {% endif %}
-
-    <h4> Your clients:  </h4>
-        {% for d in CDtable %}
-            <div> {{ d.client }} </div>
-
-            <a class="btn btn-sm btn-warning" href="{% url 'delete_diet_form' d.id %}">Remove Client</a>
-
-            <p></p>
-        {% endfor %}
-
-        <br>
-        <a href="{% url 'trainer_meal_data' %}" class="btn btn-success"> Available Meal logs </a>
-</div>
-
-
 {% endblock %}

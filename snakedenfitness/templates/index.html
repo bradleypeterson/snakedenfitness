@@ -5,8 +5,8 @@
 {% block body %}
 <h1 class="text-center m-5">User Dashboard</h1>
 <div class="row">
-    <a class="col-md-4 bg-success text-white text-decoration-none text-center h1 border border-white rounded py-5 mb-0" href="{% url 'fitness_home' %}">Fitness</a>
-    <a class="col-md-4 bg-primary text-white text-decoration-none text-center h1 border border-white rounded py-5 mb-0" href="{% url 'diet_home' %}">Diet</a>
+    <a class="col-md-4 bg-success text-white text-decoration-none text-center h1 border border-white rounded py-5 mb-0" href="{% url 'user_workout_data' %}">Fitness</a>
+    <a class="col-md-4 bg-primary text-white text-decoration-none text-center h1 border border-white rounded py-5 mb-0" href="{% url 'user_meal_data' %}">Diet</a>
     <a class="col-md-4 bg-danger text-white text-decoration-none text-center h1 border border-white rounded py-5 mb-0" href="{% url 'rooms' %}">Community</a>
     <div class="col-md-4 border border-success border-top-0 border-end-0 border-bottom-0 py-2">
         <div class="text-center fw-bold">Total Reps (Within Last Week)</div>

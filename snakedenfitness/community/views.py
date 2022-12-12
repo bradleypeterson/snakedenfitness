@@ -8,6 +8,7 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from .forms import Pic_Form
 from .models import pic
+from django.db import IntegrityError
 
 @login_required
 def room(request, slug):
@@ -25,10 +26,14 @@ def rooms(request):
 @login_required
 def groupForm(request):
     if request.method == 'POST':
-        group_name = request.POST.get('group_name')
-        room_obj = Room.objects.create(name=group_name, slug=slugify(group_name))
-        room_members = request.user.id
-        room_obj.users.add(room_members)
+        try:
+            group_name = request.POST.get('group_name')
+            room_obj = Room.objects.create(name=group_name, slug=slugify(group_name))
+            room_members = request.user.id
+            room_obj.users.add(room_members)
+        except IntegrityError:
+            messages.add_message(request, messages.INFO, "Group name is taken")
+            return render(request, 'community/groupForm.html', {})
         return redirect('rooms')
     return render(request, 'community/groupForm.html', {})
 

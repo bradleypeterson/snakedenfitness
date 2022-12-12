@@ -1,13 +1,32 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <h1 class="contianer text-center mt-2">Meal log for {{ user.username }}</h1>
     <div class="container mt-4">
+        <h1 class="text-center py-2">Meal log for {{ user.username }}</h1>
+        <div class="row">
+            <div class="h6">
+                <a class="btn btn-success" href="{% url 'meal_form' %}">Record New Meal</a>
+
+                {% if CDtable%}
+                    <a class="btn btn-info text-light" href="{% url 'update_diet_form' %}">Change Dietician</a>
+                    <h6 class="d-inline btn justify-content-end bg-light">
+                        {% for diet in CDtable %}
+                            Your dietician is <b>{{ diet.dieter }}</b>
+                        {% endfor %}
+                    </h6>
+                {% else %}
+                    <a class="btn btn-info text-light" href="{% url 'request_dietician' %}">Request Dietician</a>
+                {% endif %}
+                <h6 class="d-inline btn justify-content-end bg-light">Today's Calories: {{ total_sum }}</h6>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-12">
                 <table class="table table-striped text-center">
                     <thead class="bg-dark text-light">
                         <tr>
+                            <th scope="col">Actions</th>
                             <th scope="col">Date</th>
                             <th scope="col">Meal Type</th>
                             <th scope="col">Meal Name</th>
@@ -20,6 +39,10 @@
                     <tbody>
                         {% for meal in meals %}
                             <tr>
+                                <td>
+                                    <a href="{% url 'edit_meal' meal.id %}" class="btn btn-warning text-light">Edit</a>
+                                    <a href="{% url 'delete_meal' meal.id %}" class="btn btn-danger">Delete</a>
+                                </td>
                                 <td>{{ meal.created_at }}</td>
                                 <td>{{ meal.meal_type }}</td>
                                 <td>{{ meal.meal_name }}</td>

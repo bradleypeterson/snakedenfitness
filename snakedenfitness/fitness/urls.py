@@ -2,11 +2,9 @@ from . import views
 from django.urls import path
 
 urlpatterns = [
-    path('', views.fitness_home, name="fitness_home"),
     path('trainer/', views.trainer_home, name="trainer_home"),
 
     path('workout_form/', views.workout_form, name="workout_form"),
-    path('request_trainer/', views.request_trainer, name="request_trainer"),
     path('delete_workout/<int:id>', views.delete_workout, name="delete_workout"),
     path('edit_workout/<int:id>', views.edit_workout, name="edit_workout"),
     path('workout_log/', views.user_workout_data, name="user_workout_data"),
