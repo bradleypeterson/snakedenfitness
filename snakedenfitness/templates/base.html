@@ -15,33 +15,29 @@
 
             {% if user.is_authenticated %}
                 {% if user.profile.role == 2 %}
-                    <a href="{% url 'trainer_home' %}" class="nav-item nav-link"> Trainer Home </a>
+                    <a href="{% url 'trainer_home' %}" class="nav-item nav-link text-light"> Trainer Home </a>
                 {% elif user.profile.role == 1 %}
-                    <a href="{% url 'dietitian_home' %}" class="nav-item nav-link"> Dietician Home </a>
+                    <a href="{% url 'dietitian_home' %}" class="nav-item nav-link text-light"> Dietician Home </a>
                 {% else %}
                     <div class="dropdown">
-                        <button class="btn btn-dark dropdown-toggle text-light" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">Community</button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <button class="btn btn-dark dropdown-toggle text-light" type="button" id="dropdownMenuButtonCommunity" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">Community</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonCommunity">
                             <a href="{% url 'rooms' %}" class="dropdown-item">Community</a>
                             <a href="{% url 'guides' %}" class="dropdown-item">Guides</a>
                         </div>
                     </div>
 
                     <div class="dropdown">
-                        <button class="btn btn-dark dropdown-toggle text-light" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">Fitness</button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-                            <a href="{% url 'fitness_home' %}" class="dropdown-item "> Fitness home </a>
+                        <button class="btn btn-dark dropdown-toggle text-light" type="button" id="dropdownMenuButtonFitness" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">Fitness</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonFitness">
                             <a href="{% url 'user_workout_data' %}" class="dropdown-item "> Workout data </a>
                             <a href="{% url 'workout_form' %}" class="dropdown-item "> Log new workout </a>
                         </div>
                     </div>
 
                     <div class="dropdown">
-                        <button class="btn btn-dark dropdown-toggle text-light" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">Diet</button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-                            <a href="{% url 'diet_home' %}" class="dropdown-item "> Diet home </a>
+                        <button class="btn btn-dark dropdown-toggle text-light" type="button" id="dropdownMenuButtonDiet" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">Diet</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonDiet">
                             <a href="{% url 'user_meal_data' %}" class="dropdown-item "> Meal data </a>
                             <a href="{% url 'meal_form' %}" class="dropdown-item "> Log new meal </a>
                         </div>

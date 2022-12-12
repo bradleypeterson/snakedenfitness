@@ -2,27 +2,24 @@
 {% block body %}
 {% load crispy_forms_tags %}
 
-<div class="container py-5" style="max-width: 50%;" >
+<div class="container py-2 my-3" style="max-width: 50%;" >
     <h1>Update trainer</h1>
     <form method="POST">
         {% csrf_token %}
         {{form|crispy}}
-
-        <button class="btn btn-primary" style="margin-left: 100px; margin-top: 30px" type="submit">Confirm</button>
+        <button class="btn btn-primary my-2" type="submit">Confirm</button>
     </form>
-
 </div>
 
-<div class="container py-5" style="max-width: 50%;" >
+<div class="container py-2 my-3" style="max-width: 50%;" >
 
-    <h2> <u>Available Trainers:</u> </h2>
-
+    <h1>Available Trainers:</h1>
+    <hr>
     {% for trainer in listTrainers %}
-        <h3> <b>{{ trainer.user }}</b> : {{ trainer.user.get_full_name }}</h3>
-        <p> <b> Bio:</b> {{ trainer.bio }}</p>
-
-        <p> ______________________________________________________________</p>
+        <h5><b>{{ trainer.user }}</b> : {{ trainer.user.get_full_name }}</h5>
+        <p>{{ trainer.bio }}</p>
+        <hr>
     {% endfor %}
-
-    {% endblock %}
 </div>
+{% endblock %}
+

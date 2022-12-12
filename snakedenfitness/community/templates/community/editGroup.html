@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<div class="container text-center p-3">
+<div class="container py-2 my-3">
     <form method="POST">
         {% csrf_token %}
 
-        <h3>Invite Members to {{ room_obj.name }}</h3>
+        <h3 class="text-center">Invite Members to {{ room_obj.name }}</h3>
 
         <select class="form-select form-select-sm mb-2" aria-label="Default select example" id="members" name="members">
             <option selected>Select a Member</option>
@@ -16,8 +16,9 @@
 
 <!--        <label for="group_description" class="pt-1">Group Description:</label>-->
 <!--        <textarea class="" id="group_description" name="group_description"></textarea>-->
-
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="text-center py-2">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
     </form>
 </div>
 {% endblock %}

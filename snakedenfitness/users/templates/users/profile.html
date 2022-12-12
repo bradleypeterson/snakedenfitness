@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body %}
+<div class="contain py-2 my-3">
     <h1>Welcome {{ user.username }}</h1>
     <img src="{% static profile_avatar %}" alt="Profile Image" width="150" height="150"/>
     <ul>
@@ -10,22 +11,23 @@
     </ul>
 
     {% if user.is_authenticated %}
-        <p>you are authenticated</p>
-        <a class="btn btn-warning" href="{% url 'update_profile' %}">Edit Profile</a>
+<!--        <p>you are authenticated</p>-->
+        <a class="btn btn-warning my-2" href="{% url 'update_profile' %}">Edit Profile</a>
+        <br>
     {% endif %}
 
-    {% if user.profile.role == 2 %}
-        <p>you are a Trainer</p>
-        <h3> Your clients: </h3>
-        {% for trainer in CTtable %}
-            <h3><b>{{ trainer.client }}</b></h3>
-        {% endfor %}
+<!--    {% if user.profile.role == 2 %}-->
+<!--        <p>you are a Trainer</p>-->
+<!--        <h3> Your clients: </h3>-->
+<!--        {% for trainer in CTtable %}-->
+<!--            <h3><b>{{ trainer.client }}</b></h3>-->
+<!--        {% endfor %}-->
 
-    {% elif user.profile.role == 1 %}
-        <p>you are a Dietitian</p>
+<!--    {% elif user.profile.role == 1 %}-->
+<!--        <p>you are a Dietitian</p>-->
 
-    {% elif user.profile.role == 0 %}
-        <p>you are a Client</p>
+<!--    {% elif user.profile.role == 0 %}-->
+<!--        <p>you are a Client</p>-->
 
         {% if CTtable%}
             <a class="btn btn-success" href="{% url 'update_client_form' %}">Change Trainer</a>
@@ -45,6 +47,6 @@
             <a class="btn btn-success" href="{% url 'request_dietician' %}">Request Dietician</a>
         {% endif %}
 
-
+</div>
     {% endif %}
 {% endblock %}

@@ -2,27 +2,23 @@
 {% block body %}
 {% load crispy_forms_tags %}
 
-<div class="container py-5" style="max-width: 50%;" >
+<div class="container py-2 my-3" style="max-width: 50%;" >
     <h1>Change Dietitian</h1>
     <form method="POST">
         {% csrf_token %}
         {{form|crispy}}
-
-        <button class="btn btn-primary" style="margin-left: 100px; margin-top: 30px" type="submit">Confirm</button>
+        <button class="btn btn-primary my-2" type="submit">Confirm</button>
     </form>
-
 </div>
 
-<div class="container py-5" style="max-width: 50%;" >
+<div class="container py-2 my-3" style="max-width: 50%;">
 
-    <h2> <u>Available Dietitians:</u> </h2>
-
+    <h1>Available Dietitians:</h1>
+    <hr>
     {% for dietitian in listAllDieticians %}
-        <h3> <b>{{ dietitian.user }}</b> : {{ dietitian.user.get_full_name }}</h3>
-        <p> {{ dietitian.bio }}</p>
-
-        <p> ______________________________________________________________</p>
+        <h5><b>{{ dietitian.user }}</b> : {{ dietitian.user.get_full_name }}</h5>
+        <p>{{ dietitian.bio }}</p>
+        <hr>
     {% endfor %}
-
 </div>
 {% endblock %}

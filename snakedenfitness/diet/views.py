@@ -12,27 +12,6 @@ from .forms import MealForm, clientDieterForm
 from .models import Meal
 from users.models import Profile as UProfile, User as UUser, clientDieter as ClientDiet
 
-@login_required
-def diet_home(request):
-    today = datetime.today()
-
-    year = today.year
-    month = today.month
-    day = today.day
-
-    filter = Meal.objects.filter(created_at__year=year,
-                               created_at__month=month, created_at__day=day)
-
-    meal = Meal.objects.all()
-
-    total_sum = 0
-
-    for item in filter:
-        total_sum += item.calories
-
-    CDtable = ClientDiet.objects.filter(client = request.user)
-    return render(request, 'diet/diet_home.html', {'meal': meal, 'total_sum': total_sum, 'filter': filter, 'CDtable' : CDtable})
-
 
 @login_required
 def dietitian_home(request):
@@ -73,14 +52,11 @@ def update_profile(request, user_id):
     user.save()
 
 
-def request_dietician(request):
-    return render(request, 'diet/request_dietician.html', {})
-
-
 def delete_meal(request, id):
-        meal = Meal.objects.get(pk=id)
-        meal.delete()
-        return redirect('diet_home')
+    meal = Meal.objects.get(pk=id)
+    meal.delete()
+    messages.success(request, "Record Deleted Successfully")
+    return redirect('user_meal_data')
 
 
 @login_required
@@ -90,15 +66,27 @@ def edit_meal(request, id):
 
     if form.is_valid():
         form.save()
-        return redirect('diet_home')
+        messages.success(request, "Record Saved Successfully")
+        return redirect('user_meal_data')
 
     return render(request, 'diet/edit_meal.html', {'meal': meal, 'form': form})
 
 
 @login_required
 def user_meal_data(request):
+    today = datetime.today()
+    year = today.year
+    month = today.month
+    day = today.day
+    total_sum = 0
+    filter = Meal.objects.filter(created_at__year=year, created_at__month=month, created_at__day=day, user=request.user)
+
+    for item in filter:
+        total_sum += item.calories
+
+    CDtable = ClientDiet.objects.filter(client=request.user)
     meals = Meal.objects.filter(user=request.user)
-    return render(request, 'diet/meal_log.html', {'meals': meals})
+    return render(request, 'diet/meal_log.html', {'meals': meals, 'CDtable': CDtable, 'total_sum': total_sum})
 
 
 @login_required
@@ -122,7 +110,7 @@ def request_dietician(request):
         if CDForm.is_valid():                                                                                   # save form on valid
                 CDForm.save()
                 messages.success(request, (' Dietitian added '))
-                return redirect('/diet/')
+                return redirect('user_meal_data')
         else:
             messages.error(request, ('Error adding dietician'))
 
@@ -131,13 +119,12 @@ def request_dietician(request):
         CDForm.fields['client'].disabled = True
         CDForm.fields['dieter'].queryset = User.objects.filter(profile__in=listAllDieticians)
 
-
     return render(request, 'diet/add_diet_form.html', {
         'form': CDForm,
         'listAllUsers' : listAllUsers,
         'listCliDies' : listCliDies,
         'listAllDieticians' : listAllDieticians
-        })
+    })
 
 
 @login_required
@@ -159,7 +146,7 @@ def update_dietician(request):
         if CTForm.is_valid():                                                                   # save form on valid
             CTForm.save()
             messages.success(request, ('dieter updated'))
-            return redirect('/diet/')
+            return redirect('user_meal_data')
         else:
             messages.error(request, ('Error'))
 
@@ -188,7 +175,7 @@ def delete_dietician(request, client_id):
         if CTForm.is_valid():
             cliDie.delete()
             messages.success(request, ('Clients updated'))
-            return redirect('/diet/')
+            return redirect('dietitian_home')
         else:
             messages.error(request, ('Error'))
 

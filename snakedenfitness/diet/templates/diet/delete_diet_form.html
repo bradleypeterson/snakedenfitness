@@ -2,15 +2,12 @@
 {% block body %}
 {% load crispy_forms_tags %}
 
-<div class="container py-5" style="max-width: 50%;" >
+<div class="container py-2 my-3" style="max-width: 50%;" >
     <h1>Remove client</h1>
     <form action="" method="POST">
         {% csrf_token %}
         {{form|crispy}}
-
-        <button class="btn btn-danger" style="margin-left: 100px; margin-top: 30px" type="submit" value='delete'>Remove Client</button>
+        <button class="btn btn-danger my-2" type="submit" value='delete'>Remove Client</button>
     </form>
-
 </div>
-
-    {% endblock %}
+{% endblock %}

@@ -3,10 +3,11 @@ from fitness.models import Workout
 from diet.models import Meal
 from community.models import Room
 from datetime import datetime, timedelta
-import pytz
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
+@login_required
 def index(request):
     today = datetime.today()
     year = today.year
@@ -15,7 +16,7 @@ def index(request):
     one_week_ago = datetime.today() - timedelta(days=7)
     cardio, strength, endurance, total_calories, breakfast_cal, lunch_cal, dinner_cal, snack_cal = 0, 0, 0, 0, 0, 0, 0, 0
     workouts = Workout.objects.filter(created_at__gte=one_week_ago, user=request.user)
-    daily_meals = Meal.objects.filter(created_at__year=year, created_at__month=month, created_at__day=day)
+    daily_meals = Meal.objects.filter(created_at__year=year, created_at__month=month, created_at__day=day, user=request.user)
     rooms = Room.objects.filter(users__id=request.user.id)
 
     for workout in workouts:
