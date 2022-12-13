@@ -1,33 +1,48 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<div class="container mt-4">
+<div class="container py-2 my-3">
     <h1 class="text-center py-2">Workout logs available:</h1>
 
-    {% for workout in workouts %}
-        {% for CT in CTtable %}
-            {% comment %} <h3>{{ CT }} :</h3>
-            <h5>client: {{ CT.client }}</h5>
-            <h5>trainer: {{ CT.trainer}}</h5> {% endcomment %}
-
-            {% if workout.user == CT.client  %}
-                <p>you ( {{user}} ) are ASSIGNED TRAINER for {{ CT.client }} </p>
-                <h3>{{ workout.user }} :</h3>
-                <h5>{{ workout.name }}</h5>
-
-                <div>Workout Type: {{ workout.workout_type }}</div>
-                <div>Muscle Group: {{ workout.muscle_group }}</div>
-                <div>Exercise Name: {{ workout.exercise_name }}</div>
-                <div>Reps: {{ workout.reps }}</div>
-                <div>Sets: {{ workout.sets }}</div>
-                <div>Weight: {{ workout.weight }}</div>
-
-                <hr>
-
-            {% endif %}
-        {% endfor %}
-    {% endfor %}
-
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped text-center">
+                <thead class="bg-dark text-light">
+                    <tr>
+                        <th scope="col">Client</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Exercise Name</th>
+                        <th scope="col">Workout Type</th>
+                        <th scope="col">Muscle Group</th>
+                        <th scope="col">Reps</th>
+                        <th scope="col">Sets</th>
+                        <th scope="col">Weight</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for workout in workouts %}
+                        {% for CT in CTtable %}
+                            {% if workout.user == CT.client  %}
+                                <tr>
+<!--                                <p>you ( {{user}} ) are ASSIGNED TRAINER for {{ CT.client }} </p>-->
+                                    <td>{{ workout.user }}</td>
+                                    <td>{{ workout.created_at }}</td>
+                                    <td>{{ workout.exercise_name }}</td>
+                                    <td>{{ workout.workout_type }}</td>
+                                    <td>{{ workout.muscle_group }}</td>
+                                    <td>{{ workout.reps }}</td>
+                                    <td>{{ workout.sets }}</td>
+                                    <td>{{ workout.weight }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="text-center py-2">
+        <a href="{% url 'trainer_home' %}" class="btn btn-danger">Go Back</a>
+    </div>
 </div>
-
 {% endblock %}

@@ -110,7 +110,7 @@ def request_dietician(request):
         if CDForm.is_valid():                                                                                   # save form on valid
                 CDForm.save()
                 messages.success(request, (' Dietitian added '))
-                return redirect('user_meal_data')
+                return redirect('profile')
         else:
             messages.error(request, ('Error adding dietician'))
 
@@ -145,8 +145,8 @@ def update_dietician(request):
 
         if CTForm.is_valid():                                                                   # save form on valid
             CTForm.save()
-            messages.success(request, ('dieter updated'))
-            return redirect('user_meal_data')
+            messages.success(request, ('Dietitian updated'))
+            return redirect('profile')
         else:
             messages.error(request, ('Error'))
 

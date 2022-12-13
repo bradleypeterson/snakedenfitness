@@ -8,14 +8,14 @@
                 <a class="btn btn-success" href="{% url 'meal_form' %}">Record New Meal</a>
 
                 {% if CDtable%}
-                    <a class="btn btn-info text-light" href="{% url 'update_diet_form' %}">Change Dietician</a>
+                    <a class="btn btn-info text-light" href="{% url 'update_diet_form' %}">Change Dietitian</a>
                     <h6 class="d-inline btn justify-content-end bg-light">
                         {% for diet in CDtable %}
-                            Your dietician is <b>{{ diet.dieter }}</b>
+                            Your dietitian is <b>{{ diet.dieter }}</b>
                         {% endfor %}
                     </h6>
                 {% else %}
-                    <a class="btn btn-info text-light" href="{% url 'request_dietician' %}">Request Dietician</a>
+                    <a class="btn btn-info text-light" href="{% url 'request_dietician' %}">Request Dietitian</a>
                 {% endif %}
                 <h6 class="d-inline btn justify-content-end bg-light">Today's Calories: {{ total_sum }}</h6>
             </div>

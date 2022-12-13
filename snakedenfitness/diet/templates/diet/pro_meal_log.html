@@ -1,48 +1,47 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<!--
-<div class="container">
-    {% for meal in meals %}
-        <h3>{{ meal.user }} : </h3>
-    {% endfor %}
-</div> -->
-
-<!--
-
-
-<ul class="nav flex-column">
-    <li class="nav-item">
-      <a class="nav-link active" href="#">Active</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link disabled" href="#">Disabled</a>
-    </li>
-  </ul> -->
-<div class="container mt-4">
-  <h1 class="text-center py-2">Meal logs available:</h1>
-    {% for meal in meals %}
-      {% for CD in CDTable %}
-        {% if meal.user == CD.client  %}
-        <p>you ( {{user}} ) are ASSIGNED DIETITIAN for {{ CD.client }} </p>
-
-        <h3>{{ meal.user }} :</h3>
-        <h5>{{ meal.name }}</h5>
-        <h5>cal: {{ meal.calories }}</h5>
-        <h5>sugars: {{ meal.sugars }}</h5>
-        <h5>carbs: {{ meal.carbs }}</h5>
-        <h5>protein: {{ meal.protein }}</h5>
-        <hr>
-
-        {% endif %}
-
-      {% endfor %}
-    {% endfor %}
+<div class="container py-2 my-3">
+    <h1 class="text-center py-2">Meal logs available:</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped text-center">
+                <thead class="bg-dark text-light">
+                    <tr>
+                        <th scope="col">Client</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Meal Name</th>
+                        <th scope="col">Meal Type</th>
+                        <th scope="col">Calories</th>
+                        <th scope="col">Sugars</th>
+                        <th scope="col">Carbs</th>
+                        <th scope="col">Protein</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for meal in meals %}
+                        {% for CD in CDTable %}
+                            {% if meal.user == CD.client  %}
+                <!--        <p>you ( {{user}} ) are ASSIGNED DIETITIAN for {{ CD.client }} </p>-->
+                                <tr>
+                                    <td>{{ meal.user }}</td>
+                                    <td>{{ meal.created_at }}</td>
+                                    <td>{{ meal.meal_name }}</td>
+                                    <td>{{ meal.meal_type }}</td>
+                                    <td>{{ meal.calories }}</td>
+                                    <td>{{ meal.sugars }}</td>
+                                    <td>{{ meal.carbs }}</td>
+                                    <td>{{ meal.protein }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="text-center py-2">
+        <a href="{% url 'dietitian_home' %}" class="btn btn-danger">Go Back</a>
+    </div>
 </div>
 {% endblock %}
