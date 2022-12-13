@@ -21,4 +21,4 @@ class ProfileForm(forms.ModelForm):
     def save(self, commit=True):
         if not self.cleaned_data.get('avatar'):
             self.instance.avatar = 'generic-avatar.png'
-        super().save(commit)
+        return super().save(commit)
