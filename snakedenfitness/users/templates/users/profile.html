@@ -1,19 +1,30 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body %}
-<div class="contain py-2 my-3">
-    <h1>Welcome {{ user.username }}</h1>
-    <img src="{% static profile_avatar %}" alt="Profile Image" width="150" height="150"/>
-    <ul>
-        <li>Name: {{ user.get_full_name }}</li>
-        <li>Birth Date: {{ user.profile.birth_date }}</li>
-        <li>Bio: {{ user.profile.bio }}</li>
-    </ul>
+<div class="container py-2 my-3" style="max-width: 50%;">
+    <h1 class="text-center">Welcome {{ user.username }}</h1>
+    <div class="row">
+        <div class="col-md-6 py-2">
+            <img src="{% static profile_avatar %}" alt="Profile Image" max-width="100%" height="150"/>
+        </div>
+        <div class="col-md-6 h4">
+            <div class="row py-3">
+                Name: {{ user.get_full_name }}
+            </div>
+            <div class="row pb-3">
+                Birth Date: {{ user.profile.birth_date }}
+            </div>
+            <div class="row pb-3">
+                Bio: {{ user.profile.bio }}
+            </div>
+        </div>
+    </div>
 
     {% if user.is_authenticated %}
 <!--        <p>you are authenticated</p>-->
-        <a class="btn btn-warning my-2" href="{% url 'update_profile' %}">Edit Profile</a>
-        <br>
+        <div class="row">
+            <div><a class="btn btn-warning text-light" href="{% url 'update_profile' %}">Edit Profile</a></div>
+        </div>
     {% endif %}
 
 <!--    {% if user.profile.role == 2 %}-->
@@ -30,21 +41,35 @@
 <!--        <p>you are a Client</p>-->
 
         {% if CTtable%}
-            <a class="btn btn-success" href="{% url 'update_client_form' %}">Change Trainer</a>
-            {% for trainer in CTtable %}
-            <h3> Your trainer is <b>{{ trainer.trainer }}</b> </h3>
-            {% endfor %}
+            <div class="row py-2">
+                <div class="col-md-4"><a class="btn btn-success" href="{% url 'update_client_form' %}">Change Trainer</a></div>
+                {% for trainer in CTtable %}
+                <div class="col-md-8">
+                    <h4> Your trainer is <b>{{ trainer.trainer }}</b> </h4>
+                </div>
+                {% endfor %}
+            </div>
         {% else %}
-            <a class="btn btn-success" href="{% url 'add_client_form' %}">Request Trainer</a>
+            <div class="row py-2">
+                <div><a class="btn btn-success" href="{% url 'add_client_form' %}">Request Trainer</a></div>
+            </div>
         {% endif %}
 
         {% if CDtable%}
-            <a class="btn btn-success" href="{% url 'update_diet_form' %}">Change Dietician</a>
-            {% for diet in CDtable %}
-            <h3> Your trainer is <b>{{ diet.dieter }}</b> </h3>
-            {% endfor %}
+            <div class="row">
+                <div class="col-md-4">
+                    <a class="btn btn-success" href="{% url 'update_diet_form' %}">Change Dietitian</a>
+                </div>
+                {% for diet in CDtable %}
+                <div class="col-md-8">
+                    <h4> Your dietitian is <b>{{ diet.dieter }}</b> </h4>
+                </div>
+                {% endfor %}
+            </div>
         {% else %}
-            <a class="btn btn-success" href="{% url 'request_dietician' %}">Request Dietician</a>
+            <div class="row">
+                <div><a class="btn btn-success" href="{% url 'request_dietician' %}">Request Dietitian</a></div>
+            </div>
         {% endif %}
 
 </div>

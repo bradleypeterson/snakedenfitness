@@ -123,7 +123,7 @@ def clientTrainer_form(request):
         if CTForm.is_valid():                                                               # save form on valid
             CTForm.save()
             messages.success(request, (' Trainer added '))
-            return redirect('user_workout_data')
+            return redirect('profile')
         else:
             messages.error(request, ('Error'))
 
@@ -156,7 +156,7 @@ def clientTrainer_update(request):
         if CTForm.is_valid():                                                               # save form on valid
             CTForm.save()
             messages.success(request, ('Trainer updated'))
-            return redirect('user_workout_data')
+            return redirect('profile')
         else:
             messages.error(request, ('Error'))
 

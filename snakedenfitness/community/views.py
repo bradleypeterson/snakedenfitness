@@ -29,6 +29,7 @@ def groupForm(request):
         try:
             group_name = request.POST.get('group_name')
             room_obj = Room.objects.create(name=group_name, slug=slugify(group_name))
+            messages.add_message(request, messages.SUCCESS, "Group Created")
             room_members = request.user.id
             room_obj.users.add(room_members)
         except IntegrityError:
@@ -48,6 +49,7 @@ def edit_group(request, name):
             receiver = member
             group = name
             Invitation.objects.create(sender=sender, receiver=receiver, group=group)
+            messages.add_message(request, messages.SUCCESS, "Invitation Sent")
         else:
             messages.add_message(request, messages.INFO, "User not found")
 

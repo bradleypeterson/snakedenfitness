@@ -15,7 +15,7 @@ class MealForm(ModelForm):
             ('Snack', 'Snack'),
         ]
         labels = {
-            'meal_name': '',
+            'meal_name': 'Meal Name',
             'meal_type': 'Meal Type',
             'calories': 'Calories',
             'carbs': 'Carbs',

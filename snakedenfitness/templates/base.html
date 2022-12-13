@@ -17,7 +17,7 @@
                 {% if user.profile.role == 2 %}
                     <a href="{% url 'trainer_home' %}" class="nav-item nav-link text-light"> Trainer Home </a>
                 {% elif user.profile.role == 1 %}
-                    <a href="{% url 'dietitian_home' %}" class="nav-item nav-link text-light"> Dietician Home </a>
+                    <a href="{% url 'dietitian_home' %}" class="nav-item nav-link text-light"> Dietitian Home </a>
                 {% else %}
                     <div class="dropdown">
                         <button class="btn btn-dark dropdown-toggle text-light" type="button" id="dropdownMenuButtonCommunity" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">Community</button>
