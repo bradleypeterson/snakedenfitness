@@ -17,3 +17,8 @@ class ProfileForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        if not self.cleaned_data.get('avatar'):
+            self.instance.avatar = 'generic-avatar.png'
+        super().save(commit)
